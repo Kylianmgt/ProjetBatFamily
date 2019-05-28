@@ -1,4 +1,4 @@
-package element;
+package Behaviors;
 
 public interface IElement extends IBehavior{
 

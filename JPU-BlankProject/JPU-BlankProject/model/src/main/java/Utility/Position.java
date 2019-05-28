@@ -1,4 +1,4 @@
-package element;
+package Utility;
 
 public class Position {
 	boolean isTaken;

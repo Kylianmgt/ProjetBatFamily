@@ -4,10 +4,16 @@ import java.util.ArrayList;
 import java.lang.Class;
 import java.util.Arrays;
 
+import Behaviors.IBlock;
+import Behaviors.IExplode;
+import Behaviors.IMotion;
+import Utility.Direction;
+import Utility.Position;
+
 public class Player extends Element implements IMotion, IExplode{
 	Nothing nothing=new Nothing();
 	int score = 0;
-	
+
 
 	public int getScore() {
 		return score;
@@ -19,11 +25,7 @@ public class Player extends Element implements IMotion, IExplode{
 	}
 
 
-	@Override
-	public ArrayList<Position> explode(Map map, ArrayList<Position> position) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 
 	@Override
@@ -39,7 +41,7 @@ public class Player extends Element implements IMotion, IExplode{
 
 		}else{
 			if (!amIOnALedge.contains(direction)){
-				if(map.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]].interaction(this, direction)){
+				if(map.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]].interaction(direction,map, position)){
 					map.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
 					map.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
 				}
@@ -61,9 +63,9 @@ public class Player extends Element implements IMotion, IExplode{
 		if (positionElement.getY()-1>=0){
 			for (int i = -1; i<=1;i++){
 				if (positionElement.getX()+i>=0 && positionElement.getX()+i< map.getX()){
-				
-						map.getNiveau()[positionElement.getY()-1][positionElement.getX()+i].tryToFall(position);
-					
+
+					map.getNiveau()[positionElement.getY()-1][positionElement.getX()+i].tryToFall(position);
+
 				}
 
 			}
@@ -73,16 +75,16 @@ public class Player extends Element implements IMotion, IExplode{
 		int dirX = 0;
 		int dirY = 0;
 		switch (direction){
-		case DROITE:
+		case RIGHT:
 			dirX=1;
 			break;
-		case GAUCHE:
+		case LEFT:
 			dirX=-1;
 			break;
-		case HAUT:
+		case UP:
 			dirY=-1;
 			break;
-		case BAS:
+		case DOWN:
 			dirY=1;
 			break;
 		default:
@@ -95,17 +97,17 @@ public class Player extends Element implements IMotion, IExplode{
 	public ArrayList<Direction> amIOnALedge(Position position, Map map){
 		ArrayList<Direction> ledges=new ArrayList<Direction>();
 		if (position.getX()==0 ){
-			ledges.add(Direction.GAUCHE);
+			ledges.add(Direction.LEFT);
 		}
 		if (position.getX()==map.getX()-1){
-			ledges.add(Direction.DROITE);
+			ledges.add(Direction.RIGHT);
 		}
 		if (position.getY()==0){
-			ledges.add(Direction.HAUT);
+			ledges.add(Direction.UP);
 
 		}
 		if (position.getY()==map.getY()-1){
-			ledges.add(Direction.BAS);
+			ledges.add(Direction.DOWN);
 		}
 		return ledges;
 
@@ -124,14 +126,25 @@ public class Player extends Element implements IMotion, IExplode{
 
 		}else{
 			return !(map.getNiveau()[position.getX()+intDir[0]][position.getY()+intDir[1]] instanceof IBlock);
-			
-		
-			
-			
+
+
+
+
 
 		}
 
 	}
+
+
+	@Override
+	public void interaction(Direction direction, Map map, ArrayList<Position> position) {
+
+	
+
+	}
+
+
+
 
 
 

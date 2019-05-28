@@ -1,4 +1,4 @@
-package element;
+package Behaviors;
 
 public interface IBePushed extends IBehavior{
 	

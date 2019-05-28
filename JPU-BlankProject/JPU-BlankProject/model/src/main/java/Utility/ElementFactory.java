@@ -1,4 +1,12 @@
-package element;
+package Utility;
+
+import element.Block;
+import element.Diamond;
+import element.Dirt;
+import element.Monster;
+import element.Nothing;
+import element.Player;
+import element.Rock;
 
 public class ElementFactory {
 	public Dirt createDirt(){

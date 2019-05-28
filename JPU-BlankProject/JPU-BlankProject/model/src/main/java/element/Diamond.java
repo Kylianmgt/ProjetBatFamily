@@ -1,5 +1,5 @@
 package element;
 
-public class Diamond {
+public class Diamond extends Element{
 
 }
