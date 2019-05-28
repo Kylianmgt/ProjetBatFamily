@@ -1,6 +1,4 @@
-package model;
-
-import element.Element;
+package element;
 
 public class Dirt extends Element {
 
