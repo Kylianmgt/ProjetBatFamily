@@ -136,12 +136,8 @@ public class Player extends Element implements IMotion, IExplode{
 	}
 
 
-	@Override
-	public void interaction(Direction direction, Map map, ArrayList<Position> position) {
-
 	
-
-	}
+	
 
 
 

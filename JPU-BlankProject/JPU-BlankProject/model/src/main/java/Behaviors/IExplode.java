@@ -9,7 +9,10 @@ import element.Map;
 
 public interface IExplode extends IBehavior{
 
-	public void interaction(Direction direction, Map map, ArrayList<Position> position);
+	
+	public void explode (Direction direction, Map map, ArrayList<Position> position) ;
+	
+
 
 	
 
