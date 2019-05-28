@@ -7,12 +7,14 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import element.Block;
 import element.Direction;
 import element.Dirt;
 import element.Map;
 import element.Nothing;
 import element.Player;
 import element.Position;
+import element.Rock;
 
 public class PlayerTest {
 	Map map = new Map();
@@ -22,8 +24,21 @@ public class PlayerTest {
 	Direction direction;
 	@Before
 	public void setUp(){
+
+
+	}
+
+	@Test
+	public void testMoveGauche() {
+		map.getNiveau()[1][0]=player;
+		positionJoueur.setX(1);
+		positionJoueur.setY(0);
+		player.move(position, map, Direction.GAUCHE, positionJoueur);
+		assertEquals( Nothing.class, map.getNiveau()[1][0].getClass());
+		assertEquals(player.getClass(), map.getNiveau()[0][0].getClass());
 		
-		
+
+
 	}
 
 	@Test
@@ -32,17 +47,25 @@ public class PlayerTest {
 		positionJoueur.setX(0);
 		positionJoueur.setY(0);
 		player.move(position, map, Direction.DROITE, positionJoueur);
+		assertEquals(map.getNiveau()[0][0].getClass(), Nothing.class);
+		assertEquals(map.getNiveau()[1][0].getClass(), player.getClass());
+
+
+	}
+	@Test
+	public void testMoveDroiteWithBlockedPlayer() {
+		map.getNiveau()[0][0]=player;
+		map.getNiveau()[1][0]=new Block();
+		positionJoueur.setX(0);
+		positionJoueur.setY(0);
+		player.move(position, map, Direction.DROITE, positionJoueur);
+		assertEquals(false, player.canIMove(Direction.DROITE, map, positionJoueur));
+		assertEquals( player.getClass(), map.getNiveau()[0][0].getClass());
+		assertEquals( Block.class, map.getNiveau()[1][0].getClass());
+		map.getNiveau()[1][0]=new Nothing();
 		
-		if  (player.canIMove( Direction.DROITE, map, positionJoueur)){
-			assertEquals(map.getNiveau()[0][0].getClass(), Nothing.class);
-			assertEquals(map.getNiveau()[1][0].getClass(), player.getClass());
-		
-		}else{
-			assertEquals(map.getNiveau()[0][0].getClass(), player.getClass());
-			assertEquals(map.getNiveau()[1][0].getClass(), Nothing.class);
-			
-		}
-		
+
+
 	}
 	@Test
 	public void testCanIMoveDroiteWhenIAmFullDroite(){
@@ -79,8 +102,8 @@ public class PlayerTest {
 		positionJoueur.setX(1);
 		positionJoueur.setY(0);
 		assertEquals(player.canIMove(Direction.GAUCHE,map,positionJoueur), true);
-		
-	
+
+
 	}
 	@Test
 	public void testCanIMoveGaucheWhenGaucheIsDirt(){
@@ -88,9 +111,9 @@ public class PlayerTest {
 		this.map.getNiveau()[1][0]=new Player();
 		positionJoueur.setX(1);
 		positionJoueur.setY(0);
-		assertEquals(player.canIMove(Direction.GAUCHE,map,positionJoueur), true);
-		
-	
+		assertEquals(true,player.canIMove(Direction.GAUCHE,map,positionJoueur));
+
+
 	}
 	@Test
 	public void testCanIMoveDroiteWhenDroiteIsEmpty(){
@@ -99,8 +122,8 @@ public class PlayerTest {
 		positionJoueur.setX(0);
 		positionJoueur.setY(0);
 		assertEquals(player.canIMove(Direction.DROITE,map,positionJoueur), true);
-		
-	
+
+
 	}
 	@Test
 	public void testCanIMoveDroiteWhenDroiteIsDirt(){
@@ -109,8 +132,8 @@ public class PlayerTest {
 		positionJoueur.setX(0);
 		positionJoueur.setY(0);
 		assertEquals(player.canIMove(Direction.DROITE,map,positionJoueur), true);
-		
-	
+
+
 	}
 	@Test
 	public void testCanIMoveHautWhenHautIsEmpty(){
@@ -119,8 +142,8 @@ public class PlayerTest {
 		positionJoueur.setX(0);
 		positionJoueur.setY(1);
 		assertEquals(player.canIMove(Direction.HAUT,map,positionJoueur), true);
-		
-	
+
+
 	}
 	@Test
 	public void testCanIMoveHautWhenHautIsDirt(){
@@ -129,8 +152,8 @@ public class PlayerTest {
 		positionJoueur.setX(0);
 		positionJoueur.setY(1);
 		assertEquals(player.canIMove(Direction.HAUT,map,positionJoueur), true);
-		
-	
+
+
 	}
 	@Test
 	public void testCanIMoveBasWhenBasIsEmpty(){
@@ -139,8 +162,8 @@ public class PlayerTest {
 		positionJoueur.setX(0);
 		positionJoueur.setY(0);
 		assertEquals(player.canIMove(Direction.BAS,map,positionJoueur), true);
-		
-	
+
+
 	}
 	@Test
 	public void testCanIMoveBasWhenBasIsDirt(){
@@ -148,9 +171,9 @@ public class PlayerTest {
 		this.map.getNiveau()[0][0]=new Player();
 		positionJoueur.setX(0);
 		positionJoueur.setY(0);
-		assertEquals(player.canIMove(Direction.BAS,map,positionJoueur), true);
-		
-	
+		assertEquals(true, player.canIMove(Direction.BAS,map,positionJoueur));
+
+
 	}
 
 }
