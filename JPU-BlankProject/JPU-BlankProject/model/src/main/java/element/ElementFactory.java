@@ -20,4 +20,7 @@ public class ElementFactory {
 	public Monster createMonster(){
 		return new Monster();		
 	}
+	public Diamond createDiamond(){
+		return new Diamond();
+	}
 }
