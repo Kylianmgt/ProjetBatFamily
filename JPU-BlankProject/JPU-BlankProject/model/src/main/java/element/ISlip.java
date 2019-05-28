@@ -1,5 +1,5 @@
 package element;
 
-public interface ISlip {
+public interface ISlip extends IBehavior{
 
 }

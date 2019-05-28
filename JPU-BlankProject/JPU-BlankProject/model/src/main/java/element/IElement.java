@@ -1,5 +1,5 @@
 package element;
 
-public interface IElement {
+public interface IElement extends IBehavior{
 
 }

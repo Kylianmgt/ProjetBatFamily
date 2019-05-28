@@ -6,6 +6,18 @@ import java.util.Arrays;
 
 public class Player extends Element implements IMotion, IExplode{
 	Nothing nothing=new Nothing();
+	int score = 0;
+	
+
+	public int getScore() {
+		return score;
+	}
+
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
 
 	@Override
 	public ArrayList<Position> explode(Map map, ArrayList<Position> position) {
@@ -49,9 +61,9 @@ public class Player extends Element implements IMotion, IExplode{
 		if (positionElement.getY()-1>=0){
 			for (int i = -1; i<=1;i++){
 				if (positionElement.getX()+i>=0 && positionElement.getX()+i< map.getX()){
-					if (map.getNiveau()[positionElement.getY()-1][positionElement.getX()+i].getClass()==IFall.class){
+				
 						map.getNiveau()[positionElement.getY()-1][positionElement.getX()+i].tryToFall(position);
-					}
+					
 				}
 
 			}
