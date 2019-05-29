@@ -1,9 +1,12 @@
 package model;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Observable;
 
 import contract.IModel;
+import entity.EntityPosition;
+import entity.EntityPosition;
 import entity.HelloWorld;
 
 /**
@@ -12,15 +15,24 @@ import entity.HelloWorld;
  * @author Jean-Aymeric Diet
  */
 public final class Model extends Observable implements IModel {
+	
+	
+	
 
-	/** The helloWorld. */
-	private HelloWorld helloWorld;
+	private int level= 1;
+	private ArrayList<EntityPosition> Tab;
+	private String Map[][];
 
 	/**
 	 * Instantiates a new model.
 	 */
 	public Model() {
-		this.helloWorld = new HelloWorld();
+		loadEntityPosition(level);
+		creationMap(Tab);
+		//System.out.println(Map);
+		
+		//System.out.println(Tab);
+		//System.out.println(Tab.get(0)[0];
 	}
 
 	/**
@@ -33,8 +45,8 @@ public final class Model extends Observable implements IModel {
 	 *
 	 * @see contract.IModel#getMessage()
 	 */
-	public HelloWorld getHelloWorld() {
-		return this.helloWorld;
+	public ArrayList<EntityPosition> getTab() {
+		return this.Tab;
 	}
 
 	/**
@@ -43,8 +55,8 @@ public final class Model extends Observable implements IModel {
      * @param helloWorld
      *            the new hello world
      */
-	private void setHelloWorld(final HelloWorld helloWorld) {
-		this.helloWorld = helloWorld;
+	private void setEntityPosition(final ArrayList<EntityPosition> Tab) {
+		this.Tab = Tab;
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -60,10 +72,10 @@ public final class Model extends Observable implements IModel {
 	 *
 	 * @see contract.IModel#getMessage(java.lang.String)
 	 */
-	public void loadHelloWorld(final String code) {
+	public void loadEntityPosition(final int level) {
 		try {
-			final DAOHelloWorld daoHelloWorld = new DAOHelloWorld(DBConnection.getInstance().getConnection());
-			this.setHelloWorld(daoHelloWorld.find(code));
+			final DAOLevel daolevel = new DAOLevel(DBConnection.getInstance().getConnection());
+			this.setEntityPosition(daolevel.find(level));
 		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
@@ -81,5 +93,38 @@ public final class Model extends Observable implements IModel {
 	 */
 	public Observable getObservable() {
 		return this;
+	}
+
+	@Override
+	public EntityPosition getEntityPosition() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void loadEntityPosition(String code) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void creationMap(ArrayList<EntityPosition> Tab){
+		int i =1;
+		for (EntityPosition t:Tab){
+			if(t.getElement() != null){
+				int x = t.getCoordX();
+				int y = t.getCoordY();
+				String element = t.getElement();
+				setOntheMap(x, y, element);
+				System.out.println(x + "    " +y + "   " + element + "     "+i);
+				i++;
+			}
+			
+		}
+		
+	}
+	
+	private final void setOntheMap(int x, int y, String element){
+		
+		this.Map[x][y] = element;
 	}
 }

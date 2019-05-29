@@ -74,7 +74,7 @@ class DAOHelloWorld extends DAOEntity<HelloWorld> {
 			call.setInt(1, id);
 			call.execute();
 			final ResultSet resultSet = call.getResultSet();
-			if (resultSet.first()) {
+			if (resultSet()) {
 				helloWorld = new HelloWorld(id, resultSet.getString("code"), resultSet.getString("message"));
 			}
 			return helloWorld;

@@ -10,26 +10,23 @@ public class HelloWorld extends Entity {
 	/** The id. */
 	private int			id;
 
-	/** The key. */
-	private String	key;
 
-	/** The message. */
-	private String	message;
+
+	/** The content. */
+	private String	content;
 
 	/**
 	 * Instantiates a new hello world.
 	 *
 	 * @param id
 	 *          the id
-	 * @param key
-	 *          the key
-	 * @param message
-	 *          the message
+
+	 * @param content
+	 *          the content
 	 */
-	public HelloWorld(final int id, final String key, final String message) {
+	public HelloWorld(final int id, final String content) {
 		this.setId(id);
-		this.setKey(key);
-		this.setMessage(message);
+        this.setContent(content);
 	}
 
 	/**

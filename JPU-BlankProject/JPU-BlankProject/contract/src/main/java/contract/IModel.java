@@ -2,6 +2,7 @@ package contract;
 
 import java.util.Observable;
 
+import entity.EntityPosition;
 import entity.HelloWorld;
 
 /**
@@ -16,7 +17,7 @@ public interface IModel {
 	 *
 	 * @return the helloworld entity
 	 */
-	HelloWorld getHelloWorld();
+	EntityPosition getEntityPosition();
 
 	/**
 	 * Load the message.
@@ -24,7 +25,7 @@ public interface IModel {
 	 * @param code
 	 *          the code
 	 */
-	void loadHelloWorld(String code);
+	void loadEntityPosition(String code);
 
 	/**
 	 * Gets the observable.
