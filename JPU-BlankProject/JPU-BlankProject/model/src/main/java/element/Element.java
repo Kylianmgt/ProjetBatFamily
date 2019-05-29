@@ -11,7 +11,7 @@ import Utility.Position;
 public class Element implements IElement{
 	protected Path cheminSprite;
 	protected char Sprite;
-	protected Position positionElement;
+	protected Position positionElement=new Position();
 	public Path getCheminSprite() {
 		return cheminSprite;
 	}

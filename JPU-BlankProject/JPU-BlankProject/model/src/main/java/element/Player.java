@@ -44,6 +44,8 @@ public class Player extends Element implements IMotion, IExplode{
 				if(map.getNiveau()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]].interaction(direction,map, position)){
 					map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
 					map.getNiveau()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]]=this;
+				}else{
+					return;
 				}
 
 
@@ -127,6 +129,7 @@ public class Player extends Element implements IMotion, IExplode{
 			return false;
 
 		}else{
+
 			return !(map.getNiveau()[this.getPositionElement().getX()+intDir[0]][this.getPositionElement().getY()+intDir[1]] instanceof IBlock);
 
 
