@@ -136,6 +136,13 @@ public class Player extends Element implements IMotion, IExplode{
 	}
 
 
+	@Override
+	public void explode(Direction direction, Map map, ArrayList<Position> position) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 	
 	
 
