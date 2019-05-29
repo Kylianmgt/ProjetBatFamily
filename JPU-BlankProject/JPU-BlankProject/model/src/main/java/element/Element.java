@@ -12,6 +12,18 @@ public class Element implements IElement{
 	protected Path cheminSprite;
 	protected char Sprite;
 	protected Position positionElement;
+	public Path getCheminSprite() {
+		return cheminSprite;
+	}
+	public void setCheminSprite(Path cheminSprite) {
+		this.cheminSprite = cheminSprite;
+	}
+	public char getSprite() {
+		return Sprite;
+	}
+	public void setSprite(char sprite) {
+		Sprite = sprite;
+	}
 	public Position getPositionElement() {
 		return positionElement;
 	}
