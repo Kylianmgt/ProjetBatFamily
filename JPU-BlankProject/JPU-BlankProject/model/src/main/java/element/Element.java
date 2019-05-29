@@ -14,7 +14,7 @@ public class Element implements IElement{
 	protected Position positionElement=new Position();
 	
 	
-	public boolean canIFall(){
+	public boolean canIFall(Position position){
 		return false;
 		
 	}

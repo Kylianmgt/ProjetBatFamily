@@ -34,12 +34,14 @@ public class Monster extends Element implements IMotion, IExplode{
 		refreshArrayArrayPos(bag, map);
 		return arrayArrayPos;
 	}
+	
+	
 	private void refreshArrayArrayPos(BagOfPossiblePositions bag, Map map) {
 		this.arrayArrayPos.clear();
 		for (int k =-1; k<=1; k++){
 			for (int l = -1; l<=1; l++){		
 				if (isNotOutOfBounds(map,k, l)){
-					if (map.getNiveau()[this.getPositionElement().getX()+k][this.getPositionElement().getX()+l].canIFall()&&
+					if (map.getNiveau()[this.getPositionElement().getX()+k][this.getPositionElement().getX()+l].canIFall(null)&&
 							!(bag.getPosition()[k][l].isTaken())){
 						ArrayList<Position> pos = new ArrayList<Position>();
 						pos.add(bag.getPosition()[k][l]);
@@ -48,9 +50,6 @@ public class Monster extends Element implements IMotion, IExplode{
 						
 
 					}
-
-
-
 				}
 			}
 		}

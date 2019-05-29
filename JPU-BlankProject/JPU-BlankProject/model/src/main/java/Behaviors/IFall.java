@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import Utility.Position;
 
 public interface IFall extends IBehavior{
-	public default boolean canIFall(){
+	public default boolean canIFall(Position positionElement){
+		
 		return false;
 		
 	}
