@@ -19,7 +19,7 @@ import contract.IView;
  */
 public final class View implements IView, Runnable {
 
-	private static final int roadView = 10;
+	private static final int mapView = 10;
 
 	private static final int squareSize = 50;
 
@@ -31,16 +31,16 @@ public final class View implements IView, Runnable {
 	 */
 	protected static ControllerOrder keyCodeToControllerOrder(final int keyCode) {
 		switch (keyCode) {
-		case KeyEvent.VK_G:
-			return ControllerOrder.English;
-		case KeyEvent.VK_F:
-			return ControllerOrder.Francais;
+		case KeyEvent.VK_Z:
+			return ControllerOrder.Forward;
+		case KeyEvent.VK_S:
+			return ControllerOrder.Backward;
+		case KeyEvent.VK_Q:
+			return ControllerOrder.Left;
 		case KeyEvent.VK_D:
-			return ControllerOrder.Deutsch;
-		case KeyEvent.VK_I:
-			return ControllerOrder.Indonesia;
+			return ControllerOrder.Right;
 		default:
-			return ControllerOrder.English;
+			return ControllerOrder.Stay;
 		}
 	}
 
