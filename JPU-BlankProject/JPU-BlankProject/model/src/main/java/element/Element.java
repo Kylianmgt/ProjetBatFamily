@@ -12,6 +12,22 @@ public class Element implements IElement{
 	protected Path cheminSprite;
 	protected char Sprite;
 	protected Position positionElement=new Position();
+	
+	
+	public boolean canIFall(){
+		return false;
+		
+	}
+	@Override
+	public boolean tryToFall(ArrayList<Position> position) {
+		// TODO Auto-generated method stub
+		return false;
+		
+	}
+
+	
+	
+	
 	public Path getCheminSprite() {
 		return cheminSprite;
 	}

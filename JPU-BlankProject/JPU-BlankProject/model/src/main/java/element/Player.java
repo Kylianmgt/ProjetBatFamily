@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import Behaviors.IBlock;
 import Behaviors.IExplode;
 import Behaviors.IMotion;
+import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import Utility.Position;
 
@@ -41,7 +42,7 @@ public class Player extends Element implements IMotion, IExplode{
 
 		}else{
 			if (!amIOnALedge.contains(direction)){
-				if(map.getNiveau()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]].interaction(direction,map, position)){
+				if(map.getNiveau()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]].interaction(direction,map, null)){
 					map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
 					map.getNiveau()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]]=this;
 				}else{
@@ -141,14 +142,14 @@ public class Player extends Element implements IMotion, IExplode{
 	}
 
 	@Override
-	public boolean interaction(Direction direction, Map map, ArrayList<Position> position){
-		this.explode(map, position);
+	public boolean interaction(Direction direction, Map map, BagOfPossiblePositions bag){
+		this.explode(bag, map);
 		return true;
 	}
 
 
 	@Override
-	public void explode(Map map, ArrayList<Position> position) {
+	public ArrayList<ArrayList<Position>> explode(BagOfPossiblePositions bag, Map map) {
 		map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
 		try {
 			Thread.sleep(1500);
@@ -157,6 +158,7 @@ public class Player extends Element implements IMotion, IExplode{
 			e.printStackTrace();
 		}
 		System.exit(0);
+		return new ArrayList<ArrayList<Position>>();
 		// TODO Auto-generated method stub
 
 	}

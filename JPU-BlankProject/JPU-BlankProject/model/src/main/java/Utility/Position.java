@@ -1,7 +1,7 @@
 package Utility;
 
 public class Position {
-	boolean isTaken;
+	boolean isTaken = false;
 	int X;
 	int Y;
 
