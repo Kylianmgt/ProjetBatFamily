@@ -38,7 +38,7 @@ public final class Model extends Observable implements IModel {
 		
 		loadEntityPosition(level);
 		creationMap(Tab);
-		System.out.println(Arrays.deepToString(Map2));
+		System.out.println(Arrays.deepToString(Map));
 		
 		//System.out.println(Tab);
 		//System.out.println(Tab.get(0)[0];
@@ -121,12 +121,11 @@ public final class Model extends Observable implements IModel {
 			//for(i=0; i<625; i++)
 		for (EntityPosition t:Tab){
 			//if(t.getElement() != null){
-				int x = t.getCoordX();
-				int y = t.getCoordY();
-				
+				int x = t.getCoordX()-1;
+				int y = t.getCoordY()-1;				
 				String element = t.getElement();
-				//setOntheMap(x, y, element);
-				 this.Map2[x-1][y-1] = t.getElement();
+				setOntheMap(x, y, element);
+				// this.Map2[x-1][y-1] = t.getElement();
 				//i++;
 				// System.out.println(x + "    " +y + "   " + element + "     "+i);
 				
