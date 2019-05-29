@@ -6,6 +6,7 @@ import element.Dirt;
 import element.Monster;
 import element.Nothing;
 import element.Player;
+import element.Portal;
 import element.Rock;
 
 public class ElementFactory {
@@ -31,4 +32,8 @@ public class ElementFactory {
 	public Diamond createDiamond(){
 		return new Diamond();
 	}
+	public Portal createPortal(){
+		return new Portal();
+	}
+	
 }

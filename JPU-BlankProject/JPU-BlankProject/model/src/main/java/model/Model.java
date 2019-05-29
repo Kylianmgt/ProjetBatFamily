@@ -2,9 +2,12 @@ package model;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Observable;
 
+import Utility.ElementFactory;
 import contract.IModel;
+import element.Element;
 import entity.EntityPosition;
 import entity.EntityPosition;
 import entity.HelloWorld;
@@ -21,15 +24,21 @@ public final class Model extends Observable implements IModel {
 
 	private int level= 1;
 	private ArrayList<EntityPosition> Tab;
-	private String Map[][];
+	private Element Map[][];
+	private String Map2[][];
+	private ElementFactory factory;
 
 	/**
 	 * Instantiates a new model.
 	 */
 	public Model() {
+		Map = new Element[25][25];
+		Map2 = new String[25][25];
+		factory = new ElementFactory();
+		
 		loadEntityPosition(level);
 		creationMap(Tab);
-		//System.out.println(Map);
+		System.out.println(Arrays.deepToString(Map2));
 		
 		//System.out.println(Tab);
 		//System.out.println(Tab.get(0)[0];
@@ -108,23 +117,66 @@ public final class Model extends Observable implements IModel {
 	}
 	
 	public void creationMap(ArrayList<EntityPosition> Tab){
-		int i =1;
+		//int i =0;
+			//for(i=0; i<625; i++)
 		for (EntityPosition t:Tab){
-			if(t.getElement() != null){
+			//if(t.getElement() != null){
 				int x = t.getCoordX();
 				int y = t.getCoordY();
+				
 				String element = t.getElement();
-				setOntheMap(x, y, element);
-				System.out.println(x + "    " +y + "   " + element + "     "+i);
-				i++;
+				//setOntheMap(x, y, element);
+				 this.Map2[x-1][y-1] = t.getElement();
+				//i++;
+				// System.out.println(x + "    " +y + "   " + element + "     "+i);
+				
+				
+					
+				
+						
 			}
-			
-		}
+		
+		//}
 		
 	}
 	
-	private final void setOntheMap(int x, int y, String element){
+	private void setOntheMap(int x, int y, String element){
 		
-		this.Map[x][y] = element;
+		switch ("element"){
+        case "O":
+        	this.Map[x][y] = this.factory.createRock();
+        break;
+        
+        case "D":
+        	this.Map[x][y] = this.factory.createDiamond();
+        break;
+        
+        case "t":
+        	this.Map[x][y] = this.factory.createDirt();	
+        break;
+            
+        case "M":
+        	this.Map[x][y] = this.factory.createBlock();
+        break;
+            
+        case "V":
+        	this.Map[x][y] = this.factory.createNothing();
+        break;
+        
+        case "S":
+        	this.Map[x][y] = this.factory.createPlayer();
+        break;
+        
+        case "P":
+        	this.Map[x][y] = this.factory.createPortal();
+        break;
+        case "N":
+        	this.Map[x][y] = this.factory.createBlock();
+        break;
+        case "X":
+        	this.Map[x][y] = this.factory.createMonster();
+        break;
+         
+        }
 	}
 }
