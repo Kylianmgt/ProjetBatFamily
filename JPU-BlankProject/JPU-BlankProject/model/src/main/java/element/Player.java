@@ -1,8 +1,7 @@
 package element;
 
 import java.util.ArrayList;
-import java.lang.Class;
-import java.util.Arrays;
+
 
 import Behaviors.IBlock;
 import Behaviors.IExplode;
@@ -30,42 +29,44 @@ public class Player extends Element implements IMotion, IExplode{
 
 
 	@Override
-	public void move(ArrayList<Position> position, Map map, Direction direction, Position positionElement) {
+	public void move(ArrayList<Position> position, Map map, Direction direction) {
 		// TODO Auto-generated method stub
-		int [] intDir=convertDirectionIntoInt(direction);
+		int [] vecteurDir=convertDirectionIntoInt(direction);
 		ArrayList<Direction> amIOnALedge = amIOnALedge(map);
 
 
 		if (this.canIMove(direction, map)){
-			map.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
-			map.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
+			map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
+			map.getNiveau()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]]=this;
 
 		}else{
 			if (!amIOnALedge.contains(direction)){
-				if(map.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]].interaction(direction,map, position)){
-					map.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
-					map.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
+				if(map.getNiveau()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]].interaction(direction,map, position)){
+					map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
+					map.getNiveau()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]]=this;
 				}
 
 
 
 			}else{
 				return;
-			}
-
-
+			}		
 		}
-		tellRocksToFall(position, map, positionElement);
+		tellRocksToFall(position, map);
+		this.getPositionElement().setX(this.getPositionElement().getX()+vecteurDir[0]);
+		this.getPositionElement().setY(this.getPositionElement().getY()+vecteurDir[1]);
+		
+
 
 	}
 
 
-	private void tellRocksToFall(ArrayList<Position> position, Map map, Position positionElement) {
-		if (positionElement.getY()-1>=0){
+	private void tellRocksToFall(ArrayList<Position> position, Map map) {
+		if (this.getPositionElement().getY()-1>=0){
 			for (int i = -1; i<=1;i++){
-				if (positionElement.getX()+i>=0 && positionElement.getX()+i< map.getX()){
+				if (this.getPositionElement().getX()+i>=0 && this.getPositionElement().getX()+i< map.getX()){
 
-					map.getNiveau()[positionElement.getY()-1][positionElement.getX()+i].tryToFall(position);
+					map.getNiveau()[this.getPositionElement().getY()-1][this.getPositionElement().getX()+i].tryToFall(position);
 
 				}
 
@@ -135,16 +136,16 @@ public class Player extends Element implements IMotion, IExplode{
 		}
 
 	}
-	
+
 	@Override
 	public boolean interaction(Direction direction, Map map, ArrayList<Position> position){
-		this.explode(map, position, this.getPositionElement());
+		this.explode(map, position);
 		return true;
 	}
 
 
 	@Override
-	public void explode(Map map, ArrayList<Position> position, Position positionElement) {
+	public void explode(Map map, ArrayList<Position> position) {
 		map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
 		try {
 			Thread.sleep(1500);
@@ -154,12 +155,12 @@ public class Player extends Element implements IMotion, IExplode{
 		}
 		System.exit(0);
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
-	
-	
+
+
 
 
 

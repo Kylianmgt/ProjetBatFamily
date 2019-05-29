@@ -12,10 +12,10 @@ public class Monster extends Element implements IMotion, IExplode{
 
 
 	public boolean interaction( Direction direction, Map map, ArrayList<Position> position){
-		this.explode(map, position, this.getPositionElement());
+		this.explode(map, position);
 		return true;		
 	}
-	public void explode(Map map, ArrayList<Position> position, Position positionElement) {
+	public void explode(Map map, ArrayList<Position> position) {
 		for (int i =-1; i<=1; i++){
 			for (int j = -1; j<=1; j++){
 				if(this.getPositionElement().getX()+i >=0 &&
@@ -37,9 +37,10 @@ public class Monster extends Element implements IMotion, IExplode{
 	}
 
 	@Override
-	public void move(ArrayList<Position> position, Map map, Direction direction, Position positionElement) {
+	public void move(ArrayList<Position> position, Map map, Direction direction) {
 		// TODO Auto-generated method stub
 		
 	}
+
 	
 }
