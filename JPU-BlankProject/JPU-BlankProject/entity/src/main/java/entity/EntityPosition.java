@@ -16,9 +16,7 @@ public class EntityPosition extends Entity{
 		this.setElement(element);
 	}
 
-	public EntityPosition(){
-		this("",0,0);
-	}
+
 
 
 	public int getCoordX() {

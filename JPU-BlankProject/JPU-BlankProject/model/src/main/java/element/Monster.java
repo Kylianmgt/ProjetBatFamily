@@ -7,7 +7,23 @@ import Behaviors.IMotion;
 import Utility.Direction;
 import Utility.Position;
 
+
+
+
+
 public class Monster extends Element implements IMotion, IExplode{
+
+	
+private Nothing nothing  = new Nothing();
+private String[] directionmonstre = {"LEFT","UP","RIGHT","DOWN"};
+private String  directionactuel = directionmonstre[0];
+
+
+
+
+
+
+
 
 
 
@@ -38,7 +54,71 @@ public class Monster extends Element implements IMotion, IExplode{
 
 	@Override
 	public void move(ArrayList<Position> position, Map map, Direction direction, Position positionElement) {
-		// TODO Auto-generated method stub
+		
+		
+		
+		
+		int [] intDir=convertDirectionIntoInt(directionactuel);
+		if (this.canImove(directionactuel, map, positionElement)){
+			map.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
+			map.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
+		}
+		
+		else{
+			rotationTab();
+			this.directionactuel = directionmonstre[0];
+		}
+		
+	
+	}
+	
+	
+	public int[] convertDirectionIntoInt(String directionactuel){
+		int dirX = 0;
+		int dirY = 0;
+		
+		switch (directionactuel){
+		case "RIGHT":
+			dirX=1;
+			break;
+		case "LEFT":
+			dirX=-1;
+			break;
+		case "UP":
+			dirY=-1;
+			break;
+		case "DOWN":
+			dirY=1;
+			break;
+		default:
+			break;
+		}
+		int[] tab = {dirX,dirY};
+		return tab;
+	}
+	
+	
+	
+	public boolean canImove( String directionactuel, Map map, Position position){
+		
+		int [] intDir = convertDirectionIntoInt(directionactuel);
+		
+		if(map.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]] == nothing){
+			return true;
+		}
+		else{
+			return false;
+		
+		}
+	
+	}
+	
+	private void rotationTab(){
+		String temp = directionmonstre[0];
+		directionmonstre[0]= directionmonstre[1];
+		directionmonstre[1]= directionmonstre[2];
+		directionmonstre[2]= directionmonstre[3];
+		directionmonstre[1]=temp;
 		
 	}
-}
+	}

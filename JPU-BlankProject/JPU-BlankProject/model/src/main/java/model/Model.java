@@ -9,8 +9,7 @@ import Utility.ElementFactory;
 import contract.IModel;
 import element.Element;
 import entity.EntityPosition;
-import entity.EntityPosition;
-import entity.HelloWorld;
+
 
 /**
  * The Class Model.
@@ -38,32 +37,12 @@ public final class Model extends Observable implements IModel {
 		
 		loadEntityPosition(level);
 		creationMap(Tab);
-		System.out.println(Arrays.deepToString(Map));
+		System.out.println(Arrays.deepToString(Map2));
 		
 		//System.out.println(Tab);
 		//System.out.println(Tab.get(0)[0];
 	}
 
-	/**
-     * Gets the hello world.
-     *
-     * @return the hello world
-     */
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IModel#getMessage()
-	 */
-	public ArrayList<EntityPosition> getTab() {
-		return this.Tab;
-	}
-
-	/**
-     * Sets the hello world.
-     *
-     * @param helloWorld
-     *            the new hello world
-     */
 	private void setEntityPosition(final ArrayList<EntityPosition> Tab) {
 		this.Tab = Tab;
 		this.setChanged();
@@ -125,7 +104,7 @@ public final class Model extends Observable implements IModel {
 				int y = t.getCoordY()-1;				
 				String element = t.getElement();
 				setOntheMap(x, y, element);
-				// this.Map2[x-1][y-1] = t.getElement();
+			    //this.Map2[x][y] = t.getElement();
 				//i++;
 				// System.out.println(x + "    " +y + "   " + element + "     "+i);
 				
