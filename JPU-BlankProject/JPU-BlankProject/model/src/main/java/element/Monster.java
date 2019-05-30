@@ -27,6 +27,7 @@ public class Monster extends Element implements IMotion, IExplode{
 
 						map.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getX()+i].interaction(Direction.NO, map, null);
 					}
+					map.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getX()+j].getPositionElement().setTaken(false);
 					map.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getX()+j]=new Diamond();
 				}
 			}
@@ -41,7 +42,7 @@ public class Monster extends Element implements IMotion, IExplode{
 		for (int k =-1; k<=1; k++){
 			for (int l = -1; l<=1; l++){		
 				if (isNotOutOfBounds(map,k, l)){
-					if (map.getNiveau()[this.getPositionElement().getX()+k][this.getPositionElement().getX()+l].canIFall(null)&&
+					if (((FallingElement) map.getNiveau()[this.getPositionElement().getX()+k][this.getPositionElement().getX()+l]).canIStartToFall(null)&&
 							!(bag.getPosition()[k][l].isTaken())){
 						ArrayList<Position> pos = new ArrayList<Position>();
 						pos.add(bag.getPosition()[k][l]);
@@ -55,12 +56,7 @@ public class Monster extends Element implements IMotion, IExplode{
 		}
 	}
 	
-	private boolean isNotOutOfBounds(Map map, int i, int j) {
-		return this.getPositionElement().getX()+i >=0 &&
-				this.getPositionElement().getX()+i < map.getX() &&
-				this.getPositionElement().getY()+j >=0 &&
-				this.getPositionElement().getY()+j <map.getY();
-	}
+
 
 	@Override
 	public void move(ArrayList<Position> position, Map map, Direction direction) {

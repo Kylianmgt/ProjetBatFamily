@@ -12,7 +12,10 @@ public class BagOfPossiblePositions {
 		this.position=new Position[x][y];
 		for (int i = 0; i<x; i++){
 			for (int j = 0; j<y; j++){
-				this.position[i][j]=new Position();
+				Position pos = new Position();
+				pos.setX(i);
+				pos.setY(j);
+				this.position[i][j]=pos;
 			}
 		}
 	}

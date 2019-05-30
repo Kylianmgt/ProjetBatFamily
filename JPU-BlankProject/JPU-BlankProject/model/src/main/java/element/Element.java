@@ -12,18 +12,15 @@ public class Element implements IElement{
 	protected Path cheminSprite;
 	protected char Sprite;
 	protected Position positionElement=new Position();
+	protected boolean isNotOutOfBounds(Map map, int i, int j) {
+		return this.getPositionElement().getX()+i >=0 &&
+				this.getPositionElement().getX()+i < map.getX() &&
+				this.getPositionElement().getY()+j >=0 &&
+				this.getPositionElement().getY()+j <map.getY();
+	}
 	
 	
-	public boolean canIFall(Position position){
-		return false;
-		
-	}
-	@Override
-	public boolean tryToFall(ArrayList<Position> position) {
-		// TODO Auto-generated method stub
-		return false;
-		
-	}
+
 
 	
 	
