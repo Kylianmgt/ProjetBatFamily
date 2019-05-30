@@ -12,11 +12,7 @@ public interface IBehavior {
 	public default boolean interaction( Direction direction, Map map, BagOfPossiblePositions bag){
 		return true;		
 	}
-	public default boolean tryToFall(ArrayList<Position> position) {
-		// TODO Auto-generated method stub
-		return false;
-		
-	}
+	
 
 
 }

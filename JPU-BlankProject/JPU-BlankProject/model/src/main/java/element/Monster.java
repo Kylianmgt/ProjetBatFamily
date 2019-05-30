@@ -59,7 +59,7 @@ public class Monster extends Element implements IMotion, IExplode{
 
 
 	@Override
-	public void move(ArrayList<Position> position, Map map, Direction direction) {
+	public void move(ArrayList<Position> position, Map map, Direction direction, BagOfPossiblePositions bag) {
 		// TODO Auto-generated method stub
 
 	}

@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import Behaviors.IBlock;
+import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import Utility.Position;
 import element.Block;
@@ -22,6 +23,7 @@ public class PlayerTest {
 	Player player= new Player();
 	ArrayList<Position> position = new ArrayList<Position>();
 	Direction direction;
+	BagOfPossiblePositions bag = new BagOfPossiblePositions(5, 5);
 	@Before
 	public void setUp(){
 
@@ -33,7 +35,7 @@ public class PlayerTest {
 		map.getNiveau()[1][0]=player;
 		player.getPositionElement().setX(1);
 		player.getPositionElement().setY(0);
-		player.move(position, map, Direction.LEFT);
+		player.move(position, map, Direction.LEFT, bag);
 		assertEquals( Nothing.class, map.getNiveau()[1][0].getClass());
 		assertEquals(player.getClass(), map.getNiveau()[0][0].getClass());
 		
@@ -46,7 +48,7 @@ public class PlayerTest {
 		map.getNiveau()[0][0]=player;
 		player.getPositionElement().setX(0);
 		player.getPositionElement().setY(0);
-		player.move(position, map, Direction.RIGHT);
+		player.move(position, map, Direction.RIGHT, bag);
 		assertEquals(map.getNiveau()[0][0].getClass(), Nothing.class);
 		assertEquals(map.getNiveau()[1][0].getClass(), player.getClass());
 
@@ -55,10 +57,11 @@ public class PlayerTest {
 	@Test
 	public void testMoveDroiteWithBlockedPlayer() {
 		map.getNiveau()[0][0]=player;
+		
 		map.getNiveau()[1][0]=new Block();
 		player.getPositionElement().setX(0);
 		player.getPositionElement().setY(0);		
-		player.move(position, map, Direction.RIGHT);		
+		player.move(position, map, Direction.RIGHT, bag);		
 		
 		assertEquals(false, player.canIMove(Direction.RIGHT, map));
 		assertEquals( player.getClass(), map.getNiveau()[0][0].getClass());

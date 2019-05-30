@@ -12,6 +12,8 @@ import Behaviors.IExplode;
 
 public class FallingElement extends Element implements IFall, ISlip {
 	ArrayList<Direction> direction = new ArrayList<Direction>();
+	Position posInitiale = new Position();
+	Nothing nothing;
 
 
 	@Override
@@ -23,38 +25,52 @@ public class FallingElement extends Element implements IFall, ISlip {
 	}
 
 	@Override
-	public boolean tryToFall(ArrayList<Position> position, BagOfPossiblePositions Bag, Map map) {
-		if (this.canIStartToFall(map)){
-			if (this.canIFallDown(map)){
-				this.fallDown(map);
+	public boolean tryToFall(ArrayList<Position> position, BagOfPossiblePositions bag, Map map) {
 
-			}else{
-				if (direction.size()>1){
+		posInitiale=this.getPositionElement();
+
+
+
+		if (canIContinueToFallDown(map)){
+			this.fallDown(map, bag);
+		}else {
+			this.canISlip(map);
+
+			if(!(this.direction.isEmpty())){
+
+				if (this.direction.size()>1){
+
+
 					if (Math.random()>0.5){
-						this.slip(Direction.RIGHT, map);
-					}else{
 						this.slip(Direction.LEFT, map);
+					}else{
+						this.slip(Direction.RIGHT, map);
+
 					}
-
+				}else{
+					this.slip(this.direction.get(0), map);
 				}
-
-			}
-
-		}else{
-			if (canIContinueToFallDown(map)){
-				this.fallDown(map);
-			}else if(canIContinueToSlip(map)){
-				this.slip( null, map);
-
+			}else{
+				return false;
 			}
 		}
+		changeItsPosition(position, bag);
+		
 
+		return true;
 
-
-
-
-		return false;
 	}
+
+	private void changeItsPosition(ArrayList<Position> position, BagOfPossiblePositions bag) {
+		position.remove(bag.getPosition()[posInitiale.getX()][posInitiale.getY()]);
+		if (!(position.contains(bag.getPosition()[this.getPositionElement().getX()][this.getPositionElement().getY()]))){
+			position.add(bag.getPosition()[this.getPositionElement().getX()][this.getPositionElement().getY()]);
+		}
+	}
+
+
+
+
 
 
 
@@ -118,23 +134,33 @@ public class FallingElement extends Element implements IFall, ISlip {
 		}
 	}
 
+	
 	@Override
-	public boolean canIContinueToSlip(Map map) {
-		return false;
+	public void fallDown(Map map, BagOfPossiblePositions bag) {		
+			map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].interaction(Direction.NO, map, bag);
+		
 
-
-	}
-
-	@Override
-	public void fallDown(Map map) {
-
-
+		map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
+		map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()+1]=this;
+		this.getPositionElement().setY(this.getPositionElement().getY()+1);
 	}
 
 	@Override
 	public void slip(Direction direction, Map map) {
-		// 
+		int[] VectDir=convertDirectionIntoInt(direction);
+		map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
+		map.getNiveau()[this.getPositionElement().getX()+VectDir[0]][this.getPositionElement().getY()]=this;
+		
+		 
+		
 
+	}
+	public void makeTheFollowingIFallFalling(ArrayList<Position> position, BagOfPossiblePositions bag, Map map){
+		int index=position.indexOf(this.getPositionElement());
+		if (index+1<position.size()){
+			Position positionIFall= position.get(index+1);
+			((IFall) map.getNiveau()[positionIFall.getX()][positionIFall.getY()]).tryToFall(position, bag, map);
+		}
 	}
 
 }

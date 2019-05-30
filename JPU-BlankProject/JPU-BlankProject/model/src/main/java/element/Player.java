@@ -1,6 +1,7 @@
 package element;
 
 import java.util.ArrayList;
+import Behaviors.IFall;
 
 
 import Behaviors.IBlock;
@@ -30,7 +31,7 @@ public class Player extends Element implements IMotion, IExplode{
 
 
 	@Override
-	public void move(ArrayList<Position> position, Map map, Direction direction) {
+	public void move(ArrayList<Position> position, Map map, Direction direction, BagOfPossiblePositions bag) {
 		// TODO Auto-generated method stub
 		int [] vecteurDir=convertDirectionIntoInt(direction);
 		ArrayList<Direction> amIOnALedge = amIOnALedge(map);
@@ -55,7 +56,7 @@ public class Player extends Element implements IMotion, IExplode{
 				return;
 			}		
 		}
-		tellRocksToFall(position, map);
+		tellRocksToFall(position, map, bag);
 		this.getPositionElement().setX(this.getPositionElement().getX()+vecteurDir[0]);
 		this.getPositionElement().setY(this.getPositionElement().getY()+vecteurDir[1]);
 		
@@ -64,41 +65,26 @@ public class Player extends Element implements IMotion, IExplode{
 	}
 
 
-	private void tellRocksToFall(ArrayList<Position> position, Map map) {
+	private void tellRocksToFall(ArrayList<Position> position, Map map, BagOfPossiblePositions bag) {
 		if (this.getPositionElement().getY()-1>=0){
-			for (int i = -1; i<=1;i++){
+			for (int i = -1; i<=0;i++){
 				if (this.getPositionElement().getX()+i>=0 && this.getPositionElement().getX()+i< map.getX()){
 
-					map.getNiveau()[this.getPositionElement().getY()-1][this.getPositionElement().getX()+i].tryToFall(position);
+					if (map.getNiveau()[this.getPositionElement().getY()-1][this.getPositionElement().getX()+i].getClass()==IFall.class){
+						if (((IFall) map.getNiveau()[this.getPositionElement().getY()-1][this.getPositionElement().getX()+i]).canIStartToFall(map)
+								&& !(bag.getPosition()[this.getPositionElement().getY()-1][this.getPositionElement().getX()+i].isTaken())){
+							position.add(bag.getPosition()[this.getPositionElement().getY()-1][this.getPositionElement().getX()+i]);
+							bag.getPosition()[this.getPositionElement().getY()-1][this.getPositionElement().getX()+i].setTaken(true);
+						}
+						
+					}
 
 				}
 
 			}
 		}
 	}
-	public int[] convertDirectionIntoInt(Direction direction){
-		int dirX = 0;
-		int dirY = 0;
-		switch (direction){
-		case RIGHT:
-			dirX=1;
-			break;
-		case LEFT:
-			dirX=-1;
-			break;
-		case UP:
-			dirY=-1;
-			break;
-		case DOWN:
-			dirY=1;
-			break;
-		default:
-			break;
-		}
-		int[] tab = {dirX,dirY};
-		return tab;
-
-	}
+	
 	public ArrayList<Direction> amIOnALedge(Map map){
 		ArrayList<Direction> ledges=new ArrayList<Direction>();
 		if (this.getPositionElement().getX()==0 ){

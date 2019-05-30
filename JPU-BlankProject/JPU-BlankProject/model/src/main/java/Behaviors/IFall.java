@@ -11,10 +11,9 @@ public interface IFall extends IBehavior{
 	public boolean canIStartToFall( Map map);
 	public boolean canIFallDown(Map map);
 	public boolean canIContinueToFallDown(Map map);
-	public boolean canIContinueToSlip(Map map);
 	public void canISlip(Map map);
 	
-	public void fallDown(Map map);
+	public void fallDown(Map map, BagOfPossiblePositions bag);
 	public void slip(Direction direction, Map map);
 
 
