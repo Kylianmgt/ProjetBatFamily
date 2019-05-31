@@ -85,6 +85,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 		bag.getPosition()[posInitiale.getX()][posInitiale.getY()].setTaken(false);
 		if (!(position.contains(bag.getPosition()[this.getPositionElement().getX()][this.getPositionElement().getY()]))){
 			position.add(bag.getPosition()[this.getPositionElement().getX()][this.getPositionElement().getY()]);
+			bag.getPosition()[this.getPositionElement().getX()][this.getPositionElement().getY()].setTaken(true);
 		}
 	}
 

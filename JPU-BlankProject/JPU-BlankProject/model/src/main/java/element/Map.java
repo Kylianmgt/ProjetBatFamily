@@ -1,5 +1,7 @@
 package element;
 
+import Utility.Position;
+
 public class Map {
 	private final int X=5;	
 	private final int Y=5;
@@ -16,8 +18,13 @@ public class Map {
 	public Element[][] getNiveau() {
 		return Niveau;
 	}
-	public void setNiveau(Element[][] niveau) {
-		Niveau = niveau;
+	
+
+	public void setNiveau(Element Elm, Position pos) {
+		if(pos.isTaken()){
+			this.getNiveau()[pos.getX()][pos.getY()]=Elm;
+		}
+		
 	}
 	public int getY() {
 		return Y;

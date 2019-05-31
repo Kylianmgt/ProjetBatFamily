@@ -10,7 +10,6 @@ import org.junit.Test;
 import Utility.BagOfPossiblePositions;
 import Utility.Position;
 import element.Diamond;
-import element.Element;
 import element.Map;
 import element.Monster;
 import element.Nothing;
@@ -24,7 +23,7 @@ public class MonsterTest {
 	public void setUp(){
 		this.map=new Map();
 		this.nothing=new Nothing();
-		map.setNiveau(new Element[5][5]);
+		map.setNiveau(null, null);
 		for (int i = 0; i<5 ; i++){
 			for (int j = 0; j<5; j++){
 				map.getNiveau()[i][j]=nothing;

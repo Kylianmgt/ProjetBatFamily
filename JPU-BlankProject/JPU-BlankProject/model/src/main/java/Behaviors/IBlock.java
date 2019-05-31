@@ -1,10 +1,9 @@
 package Behaviors;
 
-import java.util.ArrayList;
+
 
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
-import Utility.Position;
 import element.Map;
 
 

@@ -13,6 +13,7 @@ import Utility.Position;
 
 public class Player extends Element implements IMotion, IExplode{
 	Nothing nothing=new Nothing();
+	Position initialPosition = new Position();
 
 	int score = 0;
 
@@ -33,6 +34,7 @@ public class Player extends Element implements IMotion, IExplode{
 	@Override
 	public void move(ArrayList<Position> position, Map map, Direction direction, BagOfPossiblePositions bag) {
 		// TODO Auto-generated method stub
+		this.initialPosition=this.getPositionElement();
 		int [] vecteurDir=convertDirectionIntoInt(direction);
 		ArrayList<Direction> amIOnALedge = amIOnALedge(map);
 
@@ -56,35 +58,36 @@ public class Player extends Element implements IMotion, IExplode{
 				return;
 			}		
 		}
-		tellRocksToFall(position, map, bag);
+		tellIFallToFall(position, map, bag);
 		this.getPositionElement().setX(this.getPositionElement().getX()+vecteurDir[0]);
 		this.getPositionElement().setY(this.getPositionElement().getY()+vecteurDir[1]);
-		
+
 
 
 	}
 
 
-	private void tellRocksToFall(ArrayList<Position> position, Map map, BagOfPossiblePositions bag) {
-		if (this.getPositionElement().getY()-1>=0){
-			for (int i = -1; i<=0;i++){
-				if (this.getPositionElement().getX()+i>=0 && this.getPositionElement().getX()+i< map.getX()){
+	private void tellIFallToFall(ArrayList<Position> position, Map map, BagOfPossiblePositions bag) {
+		for (int i = -1; i<=1;i++){
+			for (int j=-1; j<=0; j++){
+				if (isNotOutOfBounds(map, initialPosition.getX()+i, initialPosition.getY()+j)){
 
-					if (map.getNiveau()[this.getPositionElement().getY()-1][this.getPositionElement().getX()+i].getClass()==IFall.class){
-						if (((IFall) map.getNiveau()[this.getPositionElement().getY()-1][this.getPositionElement().getX()+i]).canIStartToFall(map)
-								&& !(bag.getPosition()[this.getPositionElement().getY()-1][this.getPositionElement().getX()+i].isTaken())){
-							position.add(bag.getPosition()[this.getPositionElement().getY()-1][this.getPositionElement().getX()+i]);
-							bag.getPosition()[this.getPositionElement().getY()-1][this.getPositionElement().getX()+i].setTaken(true);
+					if (map.getNiveau()[this.initialPosition.getY()-1][this.initialPosition.getX()+i].getClass()==IFall.class){
+						if (((IFall) map.getNiveau()[this.initialPosition.getY()-1][this.initialPosition.getX()+i]).canIStartToFall(map)
+								&& !(bag.getPosition()[this.initialPosition.getY()-1][this.initialPosition.getX()+i].isTaken())){
+							position.add(bag.getPosition()[this.initialPosition.getY()-1][this.initialPosition.getX()+i]);
+							bag.getPosition()[this.initialPosition.getY()-1][this.initialPosition.getX()+i].setTaken(true);
 						}
-						
+
 					}
 
 				}
-
 			}
+
 		}
 	}
-	
+
+
 	public ArrayList<Direction> amIOnALedge(Map map){
 		ArrayList<Direction> ledges=new ArrayList<Direction>();
 		if (this.getPositionElement().getX()==0 ){
