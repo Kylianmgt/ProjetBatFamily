@@ -55,14 +55,34 @@ public class FallingElement extends Element implements IFall, ISlip {
 			}
 		}
 		changeItsPosition(position, bag);
-		
+		makeTheFollowingIFallFalling(position, bag, map);
+		subscribeFallableIFall(position, bag, map);
+
 
 		return true;
 
 	}
 
+	private void subscribeFallableIFall(ArrayList<Position> position, BagOfPossiblePositions bag, Map map) {
+		// TODO Auto-generated method stub
+		for (int i=-1; i<=1; i++){
+			if (isNotOutOfBounds(map, posInitiale.getX()+i, posInitiale.getY()-1)){
+				if(map.getNiveau()[posInitiale.getX()+i][posInitiale.getY()-1].getClass()==IFall.class){
+					if(((IFall) map.getNiveau()[posInitiale.getX()+i][posInitiale.getY()-1]).canIStartToFall(map) &&
+							!(position.contains(bag.getPosition()[posInitiale.getX()+i][posInitiale.getY()-1]))){
+						position.add(bag.getPosition()[posInitiale.getX()+i][posInitiale.getY()-1]);
+
+					}
+				}
+
+			}
+		}
+
+	}
+
 	private void changeItsPosition(ArrayList<Position> position, BagOfPossiblePositions bag) {
 		position.remove(bag.getPosition()[posInitiale.getX()][posInitiale.getY()]);
+		bag.getPosition()[posInitiale.getX()][posInitiale.getY()].setTaken(false);
 		if (!(position.contains(bag.getPosition()[this.getPositionElement().getX()][this.getPositionElement().getY()]))){
 			position.add(bag.getPosition()[this.getPositionElement().getX()][this.getPositionElement().getY()]);
 		}
@@ -134,11 +154,11 @@ public class FallingElement extends Element implements IFall, ISlip {
 		}
 	}
 
-	
+
 	@Override
 	public void fallDown(Map map, BagOfPossiblePositions bag) {		
-			map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].interaction(Direction.NO, map, bag);
-		
+		map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].interaction(Direction.NO, map, bag);
+
 
 		map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
 		map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()+1]=this;
@@ -150,9 +170,9 @@ public class FallingElement extends Element implements IFall, ISlip {
 		int[] VectDir=convertDirectionIntoInt(direction);
 		map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
 		map.getNiveau()[this.getPositionElement().getX()+VectDir[0]][this.getPositionElement().getY()]=this;
-		
-		 
-		
+
+
+
 
 	}
 	public void makeTheFollowingIFallFalling(ArrayList<Position> position, BagOfPossiblePositions bag, Map map){
