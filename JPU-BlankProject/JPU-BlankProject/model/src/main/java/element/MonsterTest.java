@@ -46,7 +46,7 @@ public class MonsterTest {
 		map.getLevel()[2][1]= monster;
 		monster.getElementPosition().setX(1);
 		monster.getElementPosition().setY(0);
-		monster.move(position, model, direction, bag);
+		monster.move(position, Model, directionmonstre, bag);
 	}
 
 	@Test

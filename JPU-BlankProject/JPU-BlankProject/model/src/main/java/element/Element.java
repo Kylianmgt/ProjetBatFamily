@@ -1,13 +1,13 @@
 package element;
 
-import java.nio.file.Path;
+
 import Behaviors.IElement;
 import Utility.Direction;
 import Utility.Position;
 import model.Model;
 
 public class Element implements IElement{
-	protected Path cheminSprite;
+	protected String cheminSprite;
 	protected char Sprite;
 	protected Position positionElement=new Position();
 	
@@ -50,10 +50,10 @@ public class Element implements IElement{
 	
 	
 	
-	public Path getCheminSprite() {
+	public String getCheminSprite() {
 		return cheminSprite;
 	}
-	public void setCheminSprite(Path cheminSprite) {
+	public void setCheminSprite(String cheminSprite) {
 		this.cheminSprite = cheminSprite;
 	}
 	public char getSprite() {
@@ -68,6 +68,7 @@ public class Element implements IElement{
 	public void setElementPosition(Position positionElement) {
 		this.positionElement = positionElement;
 	}
+
 	
 	
 	

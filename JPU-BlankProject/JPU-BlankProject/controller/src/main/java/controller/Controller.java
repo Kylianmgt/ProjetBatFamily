@@ -3,6 +3,8 @@ package controller;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.text.View;
+
 import contract.ControllerOrder;
 import contract.IController;
 import contract.IModel;
@@ -12,8 +14,9 @@ public class Controller implements IController{
 	IView view;
 	IModel model;
 	public Controller(IView view, IModel model){
-		this.view = view;
 		this.model= model;
+		this.view = view;
+		
 	}
 
 	@Override

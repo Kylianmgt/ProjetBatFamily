@@ -11,7 +11,9 @@ import Utility.Position;
 import contract.IModel;
 import contract.IView;
 import element.Element;
+import element.Player;
 import entity.EntityPosition;
+
 
 
 /**
@@ -19,10 +21,10 @@ import entity.EntityPosition;
  *
  * @author Jean-Aymeric Diet
  */
-public final class Model extends Observable implements IModel {
+public  class Model extends Observable implements IModel {
 	
 	
-	
+	private Element player; 
 	private final int X= 25;
 	private final int Y= 25;
 	
@@ -45,8 +47,7 @@ public final class Model extends Observable implements IModel {
 	/**
 	 * Instantiates a new model.
 	 */
-	public Model(Observer view) {
-		this.addObserver(view);
+	public Model() {
 		Map = new Element[25][25];
 		Map2 = new String[25][25];
 		factory = new ElementFactory();
@@ -63,6 +64,8 @@ public final class Model extends Observable implements IModel {
 		this.Tab = Tab;
 		this.setChanged();
 		this.notifyObservers();
+		clearChanged();
+		
 	}
 
 	/**
@@ -139,14 +142,19 @@ public final class Model extends Observable implements IModel {
 		switch ("element"){
         case "O":
         	this.Map[x][y] = this.factory.createRock();
+        	this.Map[x][y].getElementPosition().setX(x);
+        	this.Map[x][y].getElementPosition().setY(y);
         break;
         
         case "D":
         	this.Map[x][y] = this.factory.createDiamond();
+        	this.Map[x][y].getElementPosition().setX(x);
+        	this.Map[x][y].getElementPosition().setY(y);
         break;
         
         case "t":
         	this.Map[x][y] = this.factory.createDirt();	
+ 
         break;
             
         case "M":
@@ -159,6 +167,10 @@ public final class Model extends Observable implements IModel {
         
         case "S":
         	this.Map[x][y] = this.factory.createPlayer();
+        	this.player=this.Map[x][y];
+        	player.getElementPosition().setX(x);
+        	player.getElementPosition().setY(y);
+        	
         break;
         
         case "P":
@@ -178,10 +190,18 @@ public final class Model extends Observable implements IModel {
 	public void setLevel(Element Elm, Position pos) {
 		if(pos.isTaken()){
 			this.Map[pos.getX()][pos.getY()]=Elm;
+			setChanged();
+			notifyObservers();
+			clearChanged();
 		}
 		
 	}
 	public Element[][] getLevel() {
 		return Map;
+	}
+
+	public Element getPlayerPosition() {
+		// TODO Auto-generated method stub
+		return this.player;
 	}
 }

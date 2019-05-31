@@ -7,7 +7,9 @@ package main;
 import contract.ControllerOrder;
 import controller.Controller;
 import model.Model;
+import view.InputListenner;
 import view.View;
+
 
 /**
  * The Class Main.
@@ -23,10 +25,12 @@ public abstract class Main {
      *            the arguments
      */
     public static void main(final String[] args) {
-        
-        final View view = new View();
-        final Model model = new Model(view);
+    	final Model model = new Model();
+        final View view = new View(model);
+       
+       
         final Controller controller = new Controller();
+        InputListenner ecouteur = new InputListenner(controller);
         view.setController(controller);
 
         controller.control();       

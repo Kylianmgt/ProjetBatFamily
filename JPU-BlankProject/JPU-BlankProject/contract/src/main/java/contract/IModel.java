@@ -2,8 +2,9 @@ package contract;
 
 import java.util.Observable;
 
+import element.Element;
 import entity.EntityPosition;
-import entity.HelloWorld;
+
 
 /**
  * The Interface IModel.
@@ -18,6 +19,10 @@ public interface IModel {
 	 * @return the helloworld entity
 	 */
 	EntityPosition getEntityPosition();
+	Element getPlayerPosition();
+	int getX();
+	int getY();
+	Element[][] getLevel();
 
 	/**
 	 * Load the message.
