@@ -1,11 +1,7 @@
 package element;
 
 import java.nio.file.Path;
-
-
-
 import Behaviors.IElement;
-import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import Utility.Position;
 

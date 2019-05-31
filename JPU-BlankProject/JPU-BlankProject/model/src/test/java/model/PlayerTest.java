@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import Behaviors.IBlock;
+
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import Utility.Position;
@@ -16,7 +16,7 @@ import element.Dirt;
 import element.Map;
 import element.Nothing;
 import element.Player;
-import element.Rock;
+
 
 public class PlayerTest {
 	Map map = new Map();
