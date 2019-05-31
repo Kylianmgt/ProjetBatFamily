@@ -16,7 +16,7 @@ public class Monster extends Element implements IMotion, IExplode{
 	
 private Nothing nothing  = new Nothing();
 private String[] directionmonstre = {"LEFT","DOWN","RIGHT","UP"};
-private String  directionactuel = directionmonstre[0];
+//private String  directionactuel = directionmonstre[0];
 
 
 
@@ -67,6 +67,7 @@ private String  directionactuel = directionmonstre[0];
 			int [] intDir=convertDirectionIntoInt(directionmonstre[1]);
 			map.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
 			map.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
+			rotationTab(1);
 			
 		}
 		
@@ -74,6 +75,7 @@ private String  directionactuel = directionmonstre[0];
 			int [] intDir=convertDirectionIntoInt(directionmonstre[0]);
 			map.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
 			map.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
+			
 		
 		}
 		
@@ -81,6 +83,7 @@ private String  directionactuel = directionmonstre[0];
 			int [] intDir=convertDirectionIntoInt(directionmonstre[3]);
 			map.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
 			map.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
+			rotationTab(3);
 			
 			rotationTab(2);
 		}else if (canImove(directionmonstre[2], map, positionElement)){
