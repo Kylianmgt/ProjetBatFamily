@@ -15,7 +15,7 @@ public class Monster extends Element implements IMotion, IExplode{
 
 	
 private Nothing nothing  = new Nothing();
-private String[] directionmonstre = {"LEFT","DOWN","RIGHT","UP"};
+private Direction[] directionmonstre = {Direction.LEFT,Direction.UP,Direction.RIGHT,Direction.DOWN};
 //private String  directionactuel = directionmonstre[0];
 
 
