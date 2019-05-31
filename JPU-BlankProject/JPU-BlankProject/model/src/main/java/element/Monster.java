@@ -63,7 +63,7 @@ private Direction[] directionmonstre = {Direction.LEFT,Direction.UP,Direction.RI
 		
 		
 		
-		if (this.canImove(directionmonstre[1], map, positionElement)){
+		if (this.canImove(directionmonstre[0], map, positionElement)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[1]);
 			map.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
 			map.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
@@ -71,7 +71,7 @@ private Direction[] directionmonstre = {Direction.LEFT,Direction.UP,Direction.RI
 			
 		}
 		
-		else if (canImove(directionmonstre[0], map, positionElement)){
+		else if (canImove(directionmonstre[1], map, positionElement)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[0]);
 			map.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
 			map.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
@@ -79,14 +79,14 @@ private Direction[] directionmonstre = {Direction.LEFT,Direction.UP,Direction.RI
 		
 		}
 		
-		else if (canImove(directionmonstre[3], map, positionElement)){
+		else if (canImove(directionmonstre[2], map, positionElement)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[3]);
 			map.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
 			map.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
 			rotationTab(3);
 			
 			rotationTab(2);
-		}else if (canImove(directionmonstre[2], map, positionElement)){
+		}else if (canImove(directionmonstre[3], map, positionElement)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[2]);
 			map.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
 			map.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
@@ -124,7 +124,7 @@ private Direction[] directionmonstre = {Direction.LEFT,Direction.UP,Direction.RI
 	
 	
 	
-	public boolean canImove( String directionactuel, Map map, Position position){
+	public boolean canImove( Direction directionactuel, Map map, Position position){
 		
 		int [] intDir = convertDirectionIntoInt(directionactuel);
 		
@@ -142,7 +142,7 @@ private Direction[] directionmonstre = {Direction.LEFT,Direction.UP,Direction.RI
 		
 		
 	for (int i=0; i<amount; i++){	
-		String temp = directionmonstre[0];
+		Direction temp = directionmonstre[0];
 		directionmonstre[0]= directionmonstre[1];
 		directionmonstre[1]= directionmonstre[2];
 		directionmonstre[2]= directionmonstre[3];
