@@ -7,6 +7,8 @@ import Behaviors.ISlip;
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import Utility.Position;
+import model.Model;
+
 import java.lang.Math;
 import Behaviors.IExplode;
 
@@ -17,24 +19,24 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 
 	@Override
-	public boolean canIStartToFall(Map map) {
-		this.canISlip(map);
+	public boolean canIStartToFall(Model model) {
+		this.canISlip(model);
 
 
-		return (canIFallDown(map)|| !(this.direction.isEmpty()));
+		return (canIFallDown(model)|| !(this.direction.isEmpty()));
 	}
 
 	@Override
-	public boolean tryToFall(ArrayList<Position> position, BagOfPossiblePositions bag, Map map) {
+	public boolean tryToFall(ArrayList<Position> position, BagOfPossiblePositions bag, Model model) {
 
 		posInitiale=this.getPositionElement();
 
 
 
-		if (canIContinueToFallDown(map)){
-			this.fallDown(map, bag);
+		if (canIContinueToFallDown(model)){
+			this.fallDown(model, bag);
 		}else {
-			this.canISlip(map);
+			this.canISlip(model);
 
 			if(!(this.direction.isEmpty())){
 
@@ -42,33 +44,33 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 
 					if (Math.random()>0.5){
-						this.slip(Direction.LEFT, map);
+						this.slip(Direction.LEFT, model);
 					}else{
-						this.slip(Direction.RIGHT, map);
+						this.slip(Direction.RIGHT, model);
 
 					}
 				}else{
-					this.slip(this.direction.get(0), map);
+					this.slip(this.direction.get(0), model);
 				}
 			}else{
 				return false;
 			}
 		}
 		changeItsPosition(position, bag);
-		makeTheFollowingIFallFalling(position, bag, map);
-		subscribeFallableIFall(position, bag, map);
+		makeTheFollowingIFallFalling(position, bag, model);
+		subscribeFallableIFall(position, bag, model);
 
 
 		return true;
 
 	}
 
-	private void subscribeFallableIFall(ArrayList<Position> position, BagOfPossiblePositions bag, Map map) {
+	private void subscribeFallableIFall(ArrayList<Position> position, BagOfPossiblePositions bag, Model model) {
 		// TODO Auto-generated method stub
 		for (int i=-1; i<=1; i++){
-			if (isNotOutOfBounds(map, posInitiale.getX()+i, posInitiale.getY()-1)){
-				if(map.getNiveau()[posInitiale.getX()+i][posInitiale.getY()-1].getClass()==IFall.class){
-					if(((IFall) map.getNiveau()[posInitiale.getX()+i][posInitiale.getY()-1]).canIStartToFall(map) &&
+			if (isNotOutOfBounds(model, posInitiale.getX()+i, posInitiale.getY()-1)){
+				if(model.getNiveau()[posInitiale.getX()+i][posInitiale.getY()-1].getClass()==IFall.class){
+					if(((IFall) model.getNiveau()[posInitiale.getX()+i][posInitiale.getY()-1]).canIStartToFall(model) &&
 							!(position.contains(bag.getPosition()[posInitiale.getX()+i][posInitiale.getY()-1]))){
 						position.add(bag.getPosition()[posInitiale.getX()+i][posInitiale.getY()-1]);
 
@@ -96,11 +98,11 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 
 	@Override
-	public void canISlip(Map map) {
+	public void canISlip(Model model) {
 		this.direction.clear();
-		if (isNotOutOfBounds(map,this.getPositionElement().getX(), this.getPositionElement().getY()+1)){
-			if (map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].getClass()==ISlip.class){
-				this.checkLeftAndRightIfSlip(map);
+		if (isNotOutOfBounds(model,this.getPositionElement().getX(), this.getPositionElement().getY()+1)){
+			if (model.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].getClass()==ISlip.class){
+				this.checkLeftAndRightIfSlip(model);
 			}
 
 		}
@@ -109,13 +111,13 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 	}
 
-	private void checkLeftAndRightIfSlip(Map map) {
+	private void checkLeftAndRightIfSlip(Model model) {
 
 		for (int i =-1; i<=1; i=i+2){
-			if (isNotOutOfBounds(map,this.getPositionElement().getX()+i, this.getPositionElement().getY()) &&
-					isNotOutOfBounds(map,this.getPositionElement().getX()+i, this.getPositionElement().getY()+1)	){
-				if (map.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()].getClass()==Nothing.class&&
-						map.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+1].getClass()==Nothing.class){
+			if (isNotOutOfBounds(model,this.getPositionElement().getX()+i, this.getPositionElement().getY()) &&
+					isNotOutOfBounds(model,this.getPositionElement().getX()+i, this.getPositionElement().getY()+1)	){
+				if (model.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()].getClass()==Nothing.class&&
+						model.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+1].getClass()==Nothing.class){
 
 					if (i==-1){
 						direction.add(Direction.LEFT);
@@ -133,23 +135,23 @@ public class FallingElement extends Element implements IFall, ISlip {
 	}
 
 	@Override
-	public boolean canIFallDown(Map map) {
+	public boolean canIFallDown(Model model) {
 
-		if (isNotOutOfBounds(map,this.getPositionElement().getX(), this.getPositionElement().getY()+1)){
+		if (isNotOutOfBounds(model,this.getPositionElement().getX(), this.getPositionElement().getY()+1)){
 
 
-			return (map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].getClass()==Nothing.class);
+			return (model.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].getClass()==Nothing.class);
 		}else {
 			return false;
 		}
 	}
 
 	@Override
-	public boolean canIContinueToFallDown(Map map) {
-		if (isNotOutOfBounds(map,this.getPositionElement().getX(), this.getPositionElement().getY()+1)){
+	public boolean canIContinueToFallDown(Model model) {
+		if (isNotOutOfBounds(model,this.getPositionElement().getX(), this.getPositionElement().getY()+1)){
 
 
-			return (canIFallDown(map) || map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].getClass()==IExplode.class);
+			return (canIFallDown(model) || model.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].getClass()==IExplode.class);
 		}else {
 			return false;
 		}
@@ -157,33 +159,33 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 
 	@Override
-	public void fallDown(Map map, BagOfPossiblePositions bag) {		
+	public void fallDown(Model model, BagOfPossiblePositions bag) {		
 
-		if (map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].interaction(Direction.NO, map, bag, null)){
+		if (model.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].interaction(Direction.NO, model, bag, null)){
 			
-			map.setNiveau(nothing, this.getPositionElement());
+			model.setNiveau(nothing, this.getPositionElement());
 			this.getPositionElement().setY(this.getPositionElement().getY()+1);
 
-			map.setNiveau(this, this.getPositionElement());
+			model.setNiveau(this, this.getPositionElement());
 		}
 	}
 
 	@Override
-	public void slip(Direction direction, Map map) {
+	public void slip(Direction direction, Model model) {
 		int[] VectDir=convertDirectionIntoInt(direction);
-		map.setNiveau(nothing,this.getPositionElement());
+		model.setNiveau(nothing,this.getPositionElement());
 		this.getPositionElement().setX(this.getPositionElement().getX()+VectDir[0]);
-		map.setNiveau(this, this.getPositionElement());
+		model.setNiveau(this, this.getPositionElement());
 
 
 
 
 	}
-	public void makeTheFollowingIFallFalling(ArrayList<Position> position, BagOfPossiblePositions bag, Map map){
+	public void makeTheFollowingIFallFalling(ArrayList<Position> position, BagOfPossiblePositions bag, Model model){
 		int index=position.indexOf(this.getPositionElement());
 		if (index+1<position.size()){
 			Position positionIFall= position.get(index+1);
-			((IFall) map.getNiveau()[positionIFall.getX()][positionIFall.getY()]).tryToFall(position, bag, map);
+			((IFall) model.getNiveau()[positionIFall.getX()][positionIFall.getY()]).tryToFall(position, bag, model);
 		}
 	}
 

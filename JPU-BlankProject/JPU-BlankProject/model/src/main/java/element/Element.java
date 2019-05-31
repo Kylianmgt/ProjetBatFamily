@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import Behaviors.IElement;
 import Utility.Direction;
 import Utility.Position;
+import model.Model;
 
 public class Element implements IElement{
 	protected Path cheminSprite;
@@ -13,11 +14,11 @@ public class Element implements IElement{
 	public Element(){
 		this.getPositionElement().setTaken(true);
 	}
-	protected boolean isNotOutOfBounds(Map map, int i, int j) {
+	protected boolean isNotOutOfBounds(Model model, int i, int j) {
 		return this.getPositionElement().getX()+i >=0 &&
-				this.getPositionElement().getX()+i < map.getX() &&
+				this.getPositionElement().getX()+i < model.getX() &&
 				this.getPositionElement().getY()+j >=0 &&
-				this.getPositionElement().getY()+j <map.getY();
+				this.getPositionElement().getY()+j <model.getY();
 	}
 	public int[] convertDirectionIntoInt(Direction direction){
 		int dirX = 0;

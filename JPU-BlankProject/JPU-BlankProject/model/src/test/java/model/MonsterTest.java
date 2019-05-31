@@ -10,18 +10,17 @@ import org.junit.Test;
 import Utility.BagOfPossiblePositions;
 import Utility.Position;
 import element.Diamond;
-import element.Map;
 import element.Monster;
 import element.Nothing;
 
 public class MonsterTest {
-	Map map;
+	Model map;
 	Nothing nothing;
 	ArrayList<Position> position = new ArrayList<Position>();
 	
 	@Before
 	public void setUp(){
-		this.map=new Map();
+		this.map=new Model();
 		this.nothing=new Nothing();
 		map.setNiveau(null, null);
 		for (int i = 0; i<5 ; i++){

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Observable;
 
 import Utility.ElementFactory;
+import Utility.Position;
 import contract.IModel;
 import element.Element;
 import entity.EntityPosition;
@@ -20,11 +21,23 @@ public final class Model extends Observable implements IModel {
 	
 	
 	
+	private final int X= 25;
+	private final int Y= 25;
+	
+	public int getX() {
+		return X;
+	}
+
+	public int getY() {
+		return Y;
+	}
 
 	private int level= 1;
 	private ArrayList<EntityPosition> Tab;
 	private Element[][] Map;
-	private String Map2[][];
+	
+
+	private String[][] Map2;
 	private ElementFactory factory;
 
 	/**
@@ -37,7 +50,7 @@ public final class Model extends Observable implements IModel {
 		
 		loadEntityPosition(level);
 		creationMap(Tab);
-		System.out.println(Arrays.deepToString(Map2));
+		System.out.println(Arrays.deepToString(Map));
 		
 		//System.out.println(Tab);
 		//System.out.println(Tab.get(0)[0];
@@ -156,5 +169,16 @@ public final class Model extends Observable implements IModel {
         break;
          
         }
+		
+	}
+
+	public void setNiveau(Element Elm, Position pos) {
+		if(pos.isTaken()){
+			this.Map[pos.getX()][pos.getY()]=Elm;
+		}
+		
+	}
+	public Element[][] getNiveau() {
+		return Map;
 	}
 }

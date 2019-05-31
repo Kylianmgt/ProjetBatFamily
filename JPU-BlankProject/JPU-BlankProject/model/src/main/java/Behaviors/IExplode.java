@@ -4,12 +4,13 @@ import java.util.ArrayList;
 
 import Utility.BagOfPossiblePositions;
 import Utility.Position;
-import element.Map;
+import model.Model;
+
 
 public interface IExplode extends IBehavior{
 
 	
-	public ArrayList<ArrayList<Position>> explode (BagOfPossiblePositions bag, Map map) ;
+	public ArrayList<ArrayList<Position>> explode (BagOfPossiblePositions bag, Model Model) ;
 	
 
 

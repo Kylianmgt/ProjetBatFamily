@@ -10,6 +10,7 @@ import Behaviors.IMotion;
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import Utility.Position;
+import model.Model;
 
 public class Player extends Element implements IMotion, IExplode{
 	Nothing nothing=new Nothing();
@@ -32,22 +33,22 @@ public class Player extends Element implements IMotion, IExplode{
 
 
 	@Override
-	public void move(ArrayList<Position> position, Map map, Direction direction, BagOfPossiblePositions bag) {
+	public void move(ArrayList<Position> position, Model model, Direction direction, BagOfPossiblePositions bag) {
 		// TODO Auto-generated method stub
 		this.initialPosition=this.getPositionElement();
 		int [] vecteurDir=convertDirectionIntoInt(direction);
-		ArrayList<Direction> amIOnALedge = amIOnALedge(map);
+		ArrayList<Direction> amIOnALedge = amIOnALedge(model);
 
 
-		if (this.canIMove(direction, map)){
-			map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
-			map.getNiveau()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]]=this;
+		if (this.canIMove(direction, model)){
+			model.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
+			model.getNiveau()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]]=this;
 
 		}else{
 			if (!amIOnALedge.contains(direction)){
-				if(map.getNiveau()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]].interaction(direction,map, null, null)){
-					map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
-					map.getNiveau()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]]=this;
+				if(model.getNiveau()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]].interaction(direction,model, null, null)){
+					model.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
+					model.getNiveau()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]]=this;
 				}else{
 					return;
 				}
@@ -58,7 +59,7 @@ public class Player extends Element implements IMotion, IExplode{
 				return;
 			}		
 		}
-		tellIFallToFall(position, map, bag);
+		tellIFallToFall(position, model, bag);
 		this.getPositionElement().setX(this.getPositionElement().getX()+vecteurDir[0]);
 		this.getPositionElement().setY(this.getPositionElement().getY()+vecteurDir[1]);
 
@@ -67,13 +68,13 @@ public class Player extends Element implements IMotion, IExplode{
 	}
 
 
-	private void tellIFallToFall(ArrayList<Position> position, Map map, BagOfPossiblePositions bag) {
+	private void tellIFallToFall(ArrayList<Position> position, Model model, BagOfPossiblePositions bag) {
 		for (int i = -1; i<=1;i++){
 			for (int j=-1; j<=0; j++){
-				if (isNotOutOfBounds(map, initialPosition.getX()+i, initialPosition.getY()+j)){
+				if (isNotOutOfBounds(model, initialPosition.getX()+i, initialPosition.getY()+j)){
 
-					if (map.getNiveau()[this.initialPosition.getY()-1][this.initialPosition.getX()+i].getClass()==IFall.class){
-						if (((IFall) map.getNiveau()[this.initialPosition.getY()-1][this.initialPosition.getX()+i]).canIStartToFall(map)
+					if (model.getNiveau()[this.initialPosition.getY()-1][this.initialPosition.getX()+i].getClass()==IFall.class){
+						if (((IFall) model.getNiveau()[this.initialPosition.getY()-1][this.initialPosition.getX()+i]).canIStartToFall(model)
 								&& !(bag.getPosition()[this.initialPosition.getY()-1][this.initialPosition.getX()+i].isTaken())){
 							position.add(bag.getPosition()[this.initialPosition.getY()-1][this.initialPosition.getX()+i]);
 							bag.getPosition()[this.initialPosition.getY()-1][this.initialPosition.getX()+i].setTaken(true);
@@ -88,19 +89,19 @@ public class Player extends Element implements IMotion, IExplode{
 	}
 
 
-	public ArrayList<Direction> amIOnALedge(Map map){
+	public ArrayList<Direction> amIOnALedge(Model model){
 		ArrayList<Direction> ledges=new ArrayList<Direction>();
 		if (this.getPositionElement().getX()==0 ){
 			ledges.add(Direction.LEFT);
 		}
-		if (this.getPositionElement().getX()==map.getX()-1){
+		if (this.getPositionElement().getX()==model.getX()-1){
 			ledges.add(Direction.RIGHT);
 		}
 		if (this.getPositionElement().getY()==0){
 			ledges.add(Direction.UP);
 
 		}
-		if (this.getPositionElement().getY()==map.getY()-1){
+		if (this.getPositionElement().getY()==model.getY()-1){
 			ledges.add(Direction.DOWN);
 		}
 		return ledges;
@@ -108,19 +109,19 @@ public class Player extends Element implements IMotion, IExplode{
 
 	}
 
-	public boolean canIMove(Direction direction, Map map) {
+	public boolean canIMove(Direction direction, Model model) {
 		// TODO Auto-generated method stub
 
 
 		int[] intDir = convertDirectionIntoInt(direction);
-		ArrayList<Direction> amIOnALedge=amIOnALedge( map);
+		ArrayList<Direction> amIOnALedge=amIOnALedge( model);
 
 		if (amIOnALedge.contains(direction)){
 			return false;
 
 		}else{
 
-			return !(map.getNiveau()[this.getPositionElement().getX()+intDir[0]][this.getPositionElement().getY()+intDir[1]] instanceof IBlock);
+			return !(model.getNiveau()[this.getPositionElement().getX()+intDir[0]][this.getPositionElement().getY()+intDir[1]] instanceof IBlock);
 
 
 
@@ -131,15 +132,15 @@ public class Player extends Element implements IMotion, IExplode{
 	}
 
 	@Override
-	public boolean interaction(Direction direction, Map map, BagOfPossiblePositions bag, Player player){
-		this.explode(bag, map);
+	public boolean interaction(Direction direction, Model model, BagOfPossiblePositions bag, Player player){
+		this.explode(bag, model);
 		return true;
 	}
 
 
 	@Override
-	public ArrayList<ArrayList<Position>> explode(BagOfPossiblePositions bag, Map map) {
-		map.setNiveau(nothing, this.getPositionElement());
+	public ArrayList<ArrayList<Position>> explode(BagOfPossiblePositions bag, Model model) {
+		model.setNiveau(nothing, this.getPositionElement());
 		this.getPositionElement().setTaken(false);
 		try {
 			Thread.sleep(1500);

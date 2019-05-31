@@ -7,6 +7,7 @@ import Behaviors.IMotion;
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import Utility.Position;
+import model.Model;
 
 
 
@@ -29,40 +30,40 @@ public class Monster extends Element implements IMotion, IExplode{
 
 
 
-	public boolean interaction(BagOfPossiblePositions bag, Direction direction, Map map){
-		this.explode(bag, map);
+	public boolean interaction(BagOfPossiblePositions bag, Direction direction, Model model){
+		this.explode(bag, model);
 		return true;		
 	}
 
-	public ArrayList<ArrayList<Position>> explode(BagOfPossiblePositions bag, Map map) {
+	public ArrayList<ArrayList<Position>> explode(BagOfPossiblePositions bag, Model model) {
 
 		for (int i =-1; i<=1; i++){
 			for (int j = -1; j<=1; j++){
-				if(isNotOutOfBounds(map, i, j)){
-					if (map.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j] instanceof IExplode &&
-							map.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j] != this){
+				if(isNotOutOfBounds(model, i, j)){
+					if (model.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j] instanceof IExplode &&
+							model.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j] != this){
 
-						map.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j].interaction(Direction.NO, map, null, null);
+						model.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j].interaction(Direction.NO, model, null, null);
 					}
-					map.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j].getPositionElement().setTaken(false);
+					model.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j].getPositionElement().setTaken(false);
 					this.explodePos.setX(this.getPositionElement().getX()+i);
 					this.explodePos.setY(this.getPositionElement().getY()+i);
 
-					map.setNiveau(new Diamond(), this.explodePos);
+					model.setNiveau(new Diamond(), this.explodePos);
 				}
 			}
 		}
-		refreshArrayArrayPos(bag, map);
+		refreshArrayArrayPos(bag, model);
 		return arrayArrayPos;
 	}
 
 
-	private void refreshArrayArrayPos(BagOfPossiblePositions bag, Map map) {
+	private void refreshArrayArrayPos(BagOfPossiblePositions bag, Model model) {
 		this.arrayArrayPos.clear();
 		for (int k =-1; k<=1; k++){
 			for (int l = -1; l<=1; l++){		
-				if (isNotOutOfBounds(map,k, l)){
-					if (((FallingElement) map.getNiveau()[this.getPositionElement().getX()+k][this.getPositionElement().getX()+l]).canIStartToFall(null)&&
+				if (isNotOutOfBounds(model,k, l)){
+					if (((FallingElement) model.getNiveau()[this.getPositionElement().getX()+k][this.getPositionElement().getX()+l]).canIStartToFall(null)&&
 							!(bag.getPosition()[k][l].isTaken())){
 						ArrayList<Position> pos = new ArrayList<Position>();
 						pos.add(bag.getPosition()[k][l]);
@@ -80,7 +81,7 @@ public class Monster extends Element implements IMotion, IExplode{
 
 	@Override
 
-	public void move(ArrayList<Position> position, Map map, Direction direction, BagOfPossiblePositions bag) {
+	public void move(ArrayList<Position> position, Model model, Direction direction, BagOfPossiblePositions bag) {
 		// TODO Auto-generated method stub
 
 
@@ -90,33 +91,33 @@ public class Monster extends Element implements IMotion, IExplode{
 
 
 
-		if (this.canImove(directionmonstre[0], map, positionElement)){
+		if (this.canImove(directionmonstre[0], model, positionElement)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[1]);
-			map.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
-			map.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
+			model.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
+			model.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
 			rotationTab(1);
 
 		}
 
-		else if (canImove(directionmonstre[1], map, positionElement)){
+		else if (canImove(directionmonstre[1], model, positionElement)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[0]);
-			map.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
-			map.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
+			model.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
+			model.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
 
 
 		}
 
-		else if (canImove(directionmonstre[2], map, positionElement)){
+		else if (canImove(directionmonstre[2], model, positionElement)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[3]);
-			map.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
-			map.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
+			model.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
+			model.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
 			rotationTab(3);
 
 			rotationTab(2);
-		}else if (canImove(directionmonstre[3], map, positionElement)){
+		}else if (canImove(directionmonstre[3], model, positionElement)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[2]);
-			map.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
-			map.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
+			model.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
+			model.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
 		}	rotationTab(3);
 
 	}
@@ -128,11 +129,11 @@ public class Monster extends Element implements IMotion, IExplode{
 
 
 
-	public boolean canImove( Direction directionactuel, Map map, Position position){
+	public boolean canImove( Direction directionactuel, Model model, Position position){
 
 		int [] intDir = convertDirectionIntoInt(directionactuel);
 
-		if(map.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]] == nothing){
+		if(model.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]] == nothing){
 			return true;
 		}
 		else{

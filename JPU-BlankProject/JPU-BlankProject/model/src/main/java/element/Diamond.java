@@ -2,10 +2,11 @@ package element;
 
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
+import model.Model;
 
 public class Diamond extends Element{
 	@Override
-	public boolean interaction( Direction direction, Map map, BagOfPossiblePositions bag, Player player){
+	public boolean interaction( Direction direction, Model Model, BagOfPossiblePositions bag, Player player){
 		return addToPlayerScore( player);		
 	}
 

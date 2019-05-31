@@ -9,7 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class MonsterTest {
-	private Element[][] map;
+	private Element[][] Model;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -21,8 +21,8 @@ public class MonsterTest {
 
 	@Before
 	public void setUp() throws Exception {
-	map = new Element[5][5];
-	creationMapTest();
+	Model = new Element[5][5];
+	creationModelTest();
 		
 		
 	}
@@ -45,13 +45,13 @@ public class MonsterTest {
 	public void testCanImove() {
 		fail("Not yet implemented");
 	}
-	public void creationMapTest(){
+	public void creationModelTest(){
 		for (int i = 0;i<5;i++){
 			for (int j = 0;j<5;j++){
-				map[i][j]= new Nothing();
+				Model[i][j]= new Nothing();
 			}
 		}
-		map[2][2] = new Dirt();
+		Model[2][2] = new Dirt();
 		
 	}
 }

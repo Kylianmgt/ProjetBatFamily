@@ -1,10 +1,11 @@
 package Behaviors;
 
 import Utility.Direction;
-import element.Map;
+import model.Model;
+
 
 public interface IBePushed extends IBehavior{
-	public boolean bePushed(Direction direction, Map map);
+	public boolean bePushed(Direction direction, Model Model);
 	
 
 }

@@ -3,23 +3,19 @@ package model;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-
 import org.junit.Before;
 import org.junit.Test;
-
-
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import Utility.Position;
 import element.Block;
 import element.Dirt;
-import element.Map;
 import element.Nothing;
 import element.Player;
 
 
 public class PlayerTest {
-	Map map = new Map();
+	Model map = new Model();
 	Player player= new Player();
 	ArrayList<Position> position = new ArrayList<Position>();
 	Direction direction;
@@ -38,7 +34,7 @@ public class PlayerTest {
 		player.move(position, map, Direction.LEFT, bag);
 		assertEquals( Nothing.class, map.getNiveau()[1][0].getClass());
 		assertEquals(player.getClass(), map.getNiveau()[0][0].getClass());
-		
+
 
 
 	}
@@ -57,17 +53,17 @@ public class PlayerTest {
 	@Test
 	public void testMoveDroiteWithBlockedPlayer() {
 		map.getNiveau()[0][0]=player;
-		
+
 		map.getNiveau()[1][0]=new Block();
 		player.getPositionElement().setX(0);
 		player.getPositionElement().setY(0);		
 		player.move(position, map, Direction.RIGHT, bag);		
-		
+
 		assertEquals(false, player.canIMove(Direction.RIGHT, map));
 		assertEquals( player.getClass(), map.getNiveau()[0][0].getClass());
 		assertEquals( Block.class, map.getNiveau()[1][0].getClass());
 		map.getNiveau()[1][0]=new Nothing();
-		
+
 
 
 	}

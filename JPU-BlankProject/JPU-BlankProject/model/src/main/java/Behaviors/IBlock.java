@@ -4,13 +4,14 @@ package Behaviors;
 
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
-import element.Map;
+
 import element.Player;
+import model.Model;
 
 
 public interface IBlock extends IBehavior {
 @Override
-public default boolean interaction( Direction direction, Map map, BagOfPossiblePositions bag, Player player){
+public default boolean interaction( Direction direction, Model Model, BagOfPossiblePositions bag, Player player){
 	return false;
 	
 }
