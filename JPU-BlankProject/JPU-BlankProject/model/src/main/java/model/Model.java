@@ -4,10 +4,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Observable;
+import java.util.Observer;
 
 import Utility.ElementFactory;
 import Utility.Position;
 import contract.IModel;
+import contract.IView;
 import element.Element;
 import entity.EntityPosition;
 
@@ -43,7 +45,8 @@ public final class Model extends Observable implements IModel {
 	/**
 	 * Instantiates a new model.
 	 */
-	public Model() {
+	public Model(Observer view) {
+		this.addObserver(view);
 		Map = new Element[25][25];
 		Map2 = new String[25][25];
 		factory = new ElementFactory();

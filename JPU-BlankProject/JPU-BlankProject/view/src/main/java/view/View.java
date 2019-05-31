@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.SwingUtilities;
 
@@ -17,7 +19,7 @@ import contract.IView;
  *
  * @author Jean-Aymeric Diet
  */
-public final class View implements IView, Runnable {
+public final class View implements IView, Observer, Runnable {
 
 	private static final int mapView = 10;
 
@@ -53,10 +55,10 @@ public final class View implements IView, Runnable {
 	/** The frame. */
 	private final ViewFrame viewFrame;
 
-	public View(final IMap map, final IMobile myplayer) throws IOException {
+	public View(/*final IMap map, final IMobile myplayer*/) throws IOException {
 		this.setView(mapView);
-		this.setMap(map);
-		this.setplayer(myplayer);
+	//	this.setMap(map);
+		//this.setplayer(myplayer);
 		this.getMyplayer().getSprite().loadImage();
 		this.setCloseView(new Rectangle(0, this.getMyplayer().getY(), this.getmap().getWidth(), mapView));
 		SwingUtilities.invokeLater(this);
@@ -168,5 +170,11 @@ public final class View implements IView, Runnable {
 
 	private void setView(final int view) {
 		this.view = view;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 }
