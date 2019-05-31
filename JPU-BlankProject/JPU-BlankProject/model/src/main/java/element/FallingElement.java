@@ -158,19 +158,22 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 	@Override
 	public void fallDown(Map map, BagOfPossiblePositions bag) {		
-		map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].interaction(Direction.NO, map, bag);
 
+		if (map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].interaction(Direction.NO, map, bag, null)){
+			
+			map.setNiveau(nothing, this.getPositionElement());
+			this.getPositionElement().setY(this.getPositionElement().getY()+1);
 
-		map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
-		map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()+1]=this;
-		this.getPositionElement().setY(this.getPositionElement().getY()+1);
+			map.setNiveau(this, this.getPositionElement());
+		}
 	}
 
 	@Override
 	public void slip(Direction direction, Map map) {
 		int[] VectDir=convertDirectionIntoInt(direction);
-		map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
-		map.getNiveau()[this.getPositionElement().getX()+VectDir[0]][this.getPositionElement().getY()]=this;
+		map.setNiveau(nothing,this.getPositionElement());
+		this.getPositionElement().setX(this.getPositionElement().getX()+VectDir[0]);
+		map.setNiveau(this, this.getPositionElement());
 
 
 

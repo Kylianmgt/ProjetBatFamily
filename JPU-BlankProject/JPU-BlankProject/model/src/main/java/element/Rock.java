@@ -13,7 +13,7 @@ import Utility.Direction;
 
 public class Rock extends FallingElement implements IBePushed{
 	@Override
-	public boolean interaction( Direction direction, Map map, BagOfPossiblePositions bag){
+	public boolean interaction( Direction direction, Map map, BagOfPossiblePositions bag, Player player){
 		int[] vecteurDir = this.convertDirectionIntoInt(direction);
 		
 	return true;		

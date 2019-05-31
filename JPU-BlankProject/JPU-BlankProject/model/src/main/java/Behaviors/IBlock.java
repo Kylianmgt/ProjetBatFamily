@@ -9,7 +9,7 @@ import element.Map;
 
 public interface IBlock extends IBehavior {
 @Override
-public default boolean interaction( Direction direction, Map map, BagOfPossiblePositions bag){
+public default boolean interaction( Direction direction, Map map, BagOfPossiblePositions bag, Player player){
 	return false;
 	
 }

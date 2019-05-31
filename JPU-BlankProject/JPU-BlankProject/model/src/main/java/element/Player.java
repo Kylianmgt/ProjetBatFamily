@@ -45,7 +45,7 @@ public class Player extends Element implements IMotion, IExplode{
 
 		}else{
 			if (!amIOnALedge.contains(direction)){
-				if(map.getNiveau()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]].interaction(direction,map, null)){
+				if(map.getNiveau()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]].interaction(direction,map, null, null)){
 					map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
 					map.getNiveau()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]]=this;
 				}else{
@@ -131,7 +131,7 @@ public class Player extends Element implements IMotion, IExplode{
 	}
 
 	@Override
-	public boolean interaction(Direction direction, Map map, BagOfPossiblePositions bag){
+	public boolean interaction(Direction direction, Map map, BagOfPossiblePositions bag, Player player){
 		this.explode(bag, map);
 		return true;
 	}
@@ -139,7 +139,8 @@ public class Player extends Element implements IMotion, IExplode{
 
 	@Override
 	public ArrayList<ArrayList<Position>> explode(BagOfPossiblePositions bag, Map map) {
-		map.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
+		map.setNiveau(nothing, this.getPositionElement());
+		this.getPositionElement().setTaken(false);
 		try {
 			Thread.sleep(1500);
 		} catch (InterruptedException e) {

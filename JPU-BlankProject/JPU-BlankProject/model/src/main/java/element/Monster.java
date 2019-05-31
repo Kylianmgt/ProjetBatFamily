@@ -3,7 +3,6 @@ package element;
 import java.util.ArrayList;
 
 import Behaviors.IExplode;
-import Behaviors.IFall;
 import Behaviors.IMotion;
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
@@ -11,6 +10,7 @@ import Utility.Position;
 
 public class Monster extends Element implements IMotion, IExplode{
 	ArrayList<ArrayList<Position>> arrayArrayPos=new ArrayList<ArrayList<Position>>();
+	Position explodePos = new Position();
 
 
 
@@ -22,13 +22,16 @@ public class Monster extends Element implements IMotion, IExplode{
 		for (int i =-1; i<=1; i++){
 			for (int j = -1; j<=1; j++){
 				if(isNotOutOfBounds(map, i, j)){
-					if (map.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getX()+i] instanceof IExplode &&
-							map.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getX()+i] != this){
+					if (map.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j] instanceof IExplode &&
+							map.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j] != this){
 
-						map.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getX()+i].interaction(Direction.NO, map, null);
+						map.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j].interaction(Direction.NO, map, null, null);
 					}
-					map.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getX()+j].getPositionElement().setTaken(false);
-					map.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getX()+j]=new Diamond();
+					map.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j].getPositionElement().setTaken(false);
+					this.explodePos.setX(this.getPositionElement().getX()+i);
+					this.explodePos.setY(this.getPositionElement().getY()+i);
+						
+					map.setNiveau(new Diamond(), this.explodePos);
 				}
 			}
 		}
