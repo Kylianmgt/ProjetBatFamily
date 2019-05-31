@@ -23,7 +23,7 @@ public final class Model extends Observable implements IModel {
 
 	private int level= 1;
 	private ArrayList<EntityPosition> Tab;
-	private Element Map[][];
+	private Element[][] Map;
 	private String Map2[][];
 	private ElementFactory factory;
 
