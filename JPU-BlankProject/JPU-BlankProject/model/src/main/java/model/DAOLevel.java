@@ -41,22 +41,13 @@ public class DAOLevel extends DAOEntity<EntityPosition>{
 			final String sql = "{call getMap(?)}";
 			final CallableStatement call = this.getConnection().prepareCall(sql);
 			call.setInt(1, id_level);
-			call.execute();
-			
-			final ResultSet resultSet = call.getResultSet();
-			int i = 0;
-			//if(resultSet.first()){
-				while(resultSet.next()){
-					//if (resultSet.getString("D")  != null){
-					Tab.add(new EntityPosition(resultSet.getString("D"), resultSet.getInt("X"), resultSet.getInt("Y")));
-					i++;
-					//System.out.println(i);		
-					
-					}
-				//}
-					
+			call.execute();			
+			final ResultSet resultSet = call.getResultSet();			
+				while(resultSet.next()){				
+					Tab.add(new EntityPosition(resultSet.getString("D"), resultSet.getInt("X"), resultSet.getInt("Y")));			
+					}				
 				return Tab;
-			//}
+			
 		} catch (final SQLException e) {
 			e.printStackTrace();
 		}

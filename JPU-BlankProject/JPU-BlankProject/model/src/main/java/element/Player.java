@@ -41,14 +41,14 @@ public class Player extends Element implements IMotion, IExplode{
 
 
 		if (this.canIMove(direction, model)){
-			model.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
-			model.getNiveau()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]]=this;
+			model.getLevel()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
+			model.getLevel()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]]=this;
 
 		}else{
 			if (!amIOnALedge.contains(direction)){
-				if(model.getNiveau()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]].interaction(direction,model, null, null)){
-					model.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
-					model.getNiveau()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]]=this;
+				if(model.getLevel()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]].interaction(direction,model, null, null)){
+					model.getLevel()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
+					model.getLevel()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]]=this;
 				}else{
 					return;
 				}
@@ -73,8 +73,8 @@ public class Player extends Element implements IMotion, IExplode{
 			for (int j=-1; j<=0; j++){
 				if (isNotOutOfBounds(model, initialPosition.getX()+i, initialPosition.getY()+j)){
 
-					if (model.getNiveau()[this.initialPosition.getY()-1][this.initialPosition.getX()+i].getClass()==IFall.class){
-						if (((IFall) model.getNiveau()[this.initialPosition.getY()-1][this.initialPosition.getX()+i]).canIStartToFall(model)
+					if (model.getLevel()[this.initialPosition.getY()-1][this.initialPosition.getX()+i].getClass()==IFall.class){
+						if (((IFall) model.getLevel()[this.initialPosition.getY()-1][this.initialPosition.getX()+i]).canIStartToFall(model)
 								&& !(bag.getPosition()[this.initialPosition.getY()-1][this.initialPosition.getX()+i].isTaken())){
 							position.add(bag.getPosition()[this.initialPosition.getY()-1][this.initialPosition.getX()+i]);
 							bag.getPosition()[this.initialPosition.getY()-1][this.initialPosition.getX()+i].setTaken(true);
@@ -121,7 +121,7 @@ public class Player extends Element implements IMotion, IExplode{
 
 		}else{
 
-			return !(model.getNiveau()[this.getPositionElement().getX()+intDir[0]][this.getPositionElement().getY()+intDir[1]] instanceof IBlock);
+			return !(model.getLevel()[this.getPositionElement().getX()+intDir[0]][this.getPositionElement().getY()+intDir[1]] instanceof IBlock);
 
 
 
@@ -140,7 +140,7 @@ public class Player extends Element implements IMotion, IExplode{
 
 	@Override
 	public ArrayList<ArrayList<Position>> explode(BagOfPossiblePositions bag, Model model) {
-		model.setNiveau(nothing, this.getPositionElement());
+		model.setLevel(nothing, this.getPositionElement());
 		this.getPositionElement().setTaken(false);
 		try {
 			Thread.sleep(1500);

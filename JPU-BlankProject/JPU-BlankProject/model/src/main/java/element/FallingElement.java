@@ -69,8 +69,8 @@ public class FallingElement extends Element implements IFall, ISlip {
 		// TODO Auto-generated method stub
 		for (int i=-1; i<=1; i++){
 			if (isNotOutOfBounds(model, posInitiale.getX()+i, posInitiale.getY()-1)){
-				if(model.getNiveau()[posInitiale.getX()+i][posInitiale.getY()-1].getClass()==IFall.class){
-					if(((IFall) model.getNiveau()[posInitiale.getX()+i][posInitiale.getY()-1]).canIStartToFall(model) &&
+				if(model.getLevel()[posInitiale.getX()+i][posInitiale.getY()-1].getClass()==IFall.class){
+					if(((IFall) model.getLevel()[posInitiale.getX()+i][posInitiale.getY()-1]).canIStartToFall(model) &&
 							!(position.contains(bag.getPosition()[posInitiale.getX()+i][posInitiale.getY()-1]))){
 						position.add(bag.getPosition()[posInitiale.getX()+i][posInitiale.getY()-1]);
 
@@ -101,7 +101,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 	public void canISlip(Model model) {
 		this.direction.clear();
 		if (isNotOutOfBounds(model,this.getPositionElement().getX(), this.getPositionElement().getY()+1)){
-			if (model.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].getClass()==ISlip.class){
+			if (model.getLevel()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].getClass()==ISlip.class){
 				this.checkLeftAndRightIfSlip(model);
 			}
 
@@ -116,8 +116,8 @@ public class FallingElement extends Element implements IFall, ISlip {
 		for (int i =-1; i<=1; i=i+2){
 			if (isNotOutOfBounds(model,this.getPositionElement().getX()+i, this.getPositionElement().getY()) &&
 					isNotOutOfBounds(model,this.getPositionElement().getX()+i, this.getPositionElement().getY()+1)	){
-				if (model.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()].getClass()==Nothing.class&&
-						model.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+1].getClass()==Nothing.class){
+				if (model.getLevel()[this.getPositionElement().getX()+i][this.getPositionElement().getY()].getClass()==Nothing.class&&
+						model.getLevel()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+1].getClass()==Nothing.class){
 
 					if (i==-1){
 						direction.add(Direction.LEFT);
@@ -140,7 +140,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 		if (isNotOutOfBounds(model,this.getPositionElement().getX(), this.getPositionElement().getY()+1)){
 
 
-			return (model.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].getClass()==Nothing.class);
+			return (model.getLevel()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].getClass()==Nothing.class);
 		}else {
 			return false;
 		}
@@ -151,7 +151,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 		if (isNotOutOfBounds(model,this.getPositionElement().getX(), this.getPositionElement().getY()+1)){
 
 
-			return (canIFallDown(model) || model.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].getClass()==IExplode.class);
+			return (canIFallDown(model) || model.getLevel()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].getClass()==IExplode.class);
 		}else {
 			return false;
 		}
@@ -161,21 +161,21 @@ public class FallingElement extends Element implements IFall, ISlip {
 	@Override
 	public void fallDown(Model model, BagOfPossiblePositions bag) {		
 
-		if (model.getNiveau()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].interaction(Direction.NO, model, bag, null)){
+		if (model.getLevel()[this.getPositionElement().getX()][this.getPositionElement().getY()+1].interaction(Direction.NO, model, bag, null)){
 			
-			model.setNiveau(nothing, this.getPositionElement());
+			model.setLevel(nothing, this.getPositionElement());
 			this.getPositionElement().setY(this.getPositionElement().getY()+1);
 
-			model.setNiveau(this, this.getPositionElement());
+			model.setLevel(this, this.getPositionElement());
 		}
 	}
 
 	@Override
 	public void slip(Direction direction, Model model) {
 		int[] VectDir=convertDirectionIntoInt(direction);
-		model.setNiveau(nothing,this.getPositionElement());
+		model.setLevel(nothing,this.getPositionElement());
 		this.getPositionElement().setX(this.getPositionElement().getX()+VectDir[0]);
-		model.setNiveau(this, this.getPositionElement());
+		model.setLevel(this, this.getPositionElement());
 
 
 
@@ -185,7 +185,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 		int index=position.indexOf(this.getPositionElement());
 		if (index+1<position.size()){
 			Position positionIFall= position.get(index+1);
-			((IFall) model.getNiveau()[positionIFall.getX()][positionIFall.getY()]).tryToFall(position, bag, model);
+			((IFall) model.getLevel()[positionIFall.getX()][positionIFall.getY()]).tryToFall(position, bag, model);
 		}
 	}
 

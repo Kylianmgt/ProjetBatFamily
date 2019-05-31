@@ -172,13 +172,13 @@ public final class Model extends Observable implements IModel {
 		
 	}
 
-	public void setNiveau(Element Elm, Position pos) {
+	public void setLevel(Element Elm, Position pos) {
 		if(pos.isTaken()){
 			this.Map[pos.getX()][pos.getY()]=Elm;
 		}
 		
 	}
-	public Element[][] getNiveau() {
+	public Element[][] getLevel() {
 		return Map;
 	}
 }

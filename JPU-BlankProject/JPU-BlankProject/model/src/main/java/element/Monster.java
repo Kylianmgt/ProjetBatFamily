@@ -40,16 +40,16 @@ public class Monster extends Element implements IMotion, IExplode{
 		for (int i =-1; i<=1; i++){
 			for (int j = -1; j<=1; j++){
 				if(isNotOutOfBounds(model, i, j)){
-					if (model.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j] instanceof IExplode &&
-							model.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j] != this){
+					if (model.getLevel()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j] instanceof IExplode &&
+							model.getLevel()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j] != this){
 
-						model.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j].interaction(Direction.NO, model, null, null);
+						model.getLevel()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j].interaction(Direction.NO, model, null, null);
 					}
-					model.getNiveau()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j].getPositionElement().setTaken(false);
+					model.getLevel()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j].getPositionElement().setTaken(false);
 					this.explodePos.setX(this.getPositionElement().getX()+i);
 					this.explodePos.setY(this.getPositionElement().getY()+i);
 
-					model.setNiveau(new Diamond(), this.explodePos);
+					model.setLevel(new Diamond(), this.explodePos);
 				}
 			}
 		}
@@ -63,7 +63,7 @@ public class Monster extends Element implements IMotion, IExplode{
 		for (int k =-1; k<=1; k++){
 			for (int l = -1; l<=1; l++){		
 				if (isNotOutOfBounds(model,k, l)){
-					if (((FallingElement) model.getNiveau()[this.getPositionElement().getX()+k][this.getPositionElement().getX()+l]).canIStartToFall(null)&&
+					if (((FallingElement) model.getLevel()[this.getPositionElement().getX()+k][this.getPositionElement().getX()+l]).canIStartToFall(null)&&
 							!(bag.getPosition()[k][l].isTaken())){
 						ArrayList<Position> pos = new ArrayList<Position>();
 						pos.add(bag.getPosition()[k][l]);
@@ -93,31 +93,31 @@ public class Monster extends Element implements IMotion, IExplode{
 
 		if (this.canImove(directionmonstre[0], model, positionElement)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[1]);
-			model.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
-			model.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
+			model.getLevel()[positionElement.getX()][positionElement.getY()]=nothing;
+			model.getLevel()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
 			rotationTab(1);
 
 		}
 
 		else if (canImove(directionmonstre[1], model, positionElement)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[0]);
-			model.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
-			model.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
+			model.getLevel()[positionElement.getX()][positionElement.getY()]=nothing;
+			model.getLevel()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
 
 
 		}
 
 		else if (canImove(directionmonstre[2], model, positionElement)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[3]);
-			model.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
-			model.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
+			model.getLevel()[positionElement.getX()][positionElement.getY()]=nothing;
+			model.getLevel()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
 			rotationTab(3);
 
 			rotationTab(2);
 		}else if (canImove(directionmonstre[3], model, positionElement)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[2]);
-			model.getNiveau()[positionElement.getX()][positionElement.getY()]=nothing;
-			model.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
+			model.getLevel()[positionElement.getX()][positionElement.getY()]=nothing;
+			model.getLevel()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
 		}	rotationTab(3);
 
 	}
@@ -133,7 +133,7 @@ public class Monster extends Element implements IMotion, IExplode{
 
 		int [] intDir = convertDirectionIntoInt(directionactuel);
 
-		if(model.getNiveau()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]] == nothing){
+		if(model.getLevel()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]] == nothing){
 			return true;
 		}
 		else{
