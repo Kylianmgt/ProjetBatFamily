@@ -6,9 +6,15 @@ import element.Dirt;
 import element.Monster;
 import element.Nothing;
 import element.Player;
+import element.Portal;
 import element.Rock;
 
 public class ElementFactory {
+	
+	//public Element createElement(String Sprite,int x,int y){
+		//return this.createElement(Sprite, x)
+	//}
+	
 	public Dirt createDirt(){
 		return new Dirt();		
 	}
@@ -31,4 +37,8 @@ public class ElementFactory {
 	public Diamond createDiamond(){
 		return new Diamond();
 	}
+	public Portal createPortal(){
+		return new Portal();
+	}
+	
 }

@@ -1,5 +1,5 @@
 package element;
 
-public class Portal {
-
+public class Portal extends Element {
+	 
 }
