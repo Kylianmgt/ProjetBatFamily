@@ -20,11 +20,11 @@ public class Rock extends FallingElement implements IBePushed{
 
 	public boolean bePushed(Direction direction, Model model) {
 		int[] vecteurDir = this.convertDirectionIntoInt(direction);
-		if (isNotOutOfBounds(model, this.getPositionElement().getX()+vecteurDir[0], this.getPositionElement().getY())){
-			if (model.getLevel()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()].getClass()==Nothing.class){
-				model.setLevel(new Nothing(), this.getPositionElement());
-				this.getPositionElement().setX(this.getPositionElement().getX()+vecteurDir[0]);
-				model.setLevel(this, this.getPositionElement());
+		if (isNotOutOfBounds(model, this.getElementPosition().getX()+vecteurDir[0], this.getElementPosition().getY())){
+			if (model.getLevel()[this.getElementPosition().getX()+vecteurDir[0]][this.getElementPosition().getY()].getClass()==Nothing.class){
+				model.setLevel(new Nothing(), this.getElementPosition());
+				this.getElementPosition().setX(this.getElementPosition().getX()+vecteurDir[0]);
+				model.setLevel(this, this.getElementPosition());
 				return true;
 			}
 		}

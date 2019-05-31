@@ -35,20 +35,20 @@ public class Player extends Element implements IMotion, IExplode{
 	@Override
 	public void move(ArrayList<Position> position, Model model, Direction direction, BagOfPossiblePositions bag) {
 		// TODO Auto-generated method stub
-		this.initialPosition=this.getPositionElement();
+		this.initialPosition=this.getElementPosition();
 		int [] vecteurDir=convertDirectionIntoInt(direction);
 		ArrayList<Direction> amIOnALedge = amIOnALedge(model);
 
 
 		if (this.canIMove(direction, model)){
-			model.getLevel()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
-			model.getLevel()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]]=this;
+			model.getLevel()[this.getElementPosition().getX()][this.getElementPosition().getY()]=nothing;
+			model.getLevel()[this.getElementPosition().getX()+vecteurDir[0]][this.getElementPosition().getY()+vecteurDir[1]]=this;
 
 		}else{
 			if (!amIOnALedge.contains(direction)){
-				if(model.getLevel()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]].interaction(direction,model, null, null)){
-					model.getLevel()[this.getPositionElement().getX()][this.getPositionElement().getY()]=nothing;
-					model.getLevel()[this.getPositionElement().getX()+vecteurDir[0]][this.getPositionElement().getY()+vecteurDir[1]]=this;
+				if(model.getLevel()[this.getElementPosition().getX()+vecteurDir[0]][this.getElementPosition().getY()+vecteurDir[1]].interaction(direction,model, null, null)){
+					model.getLevel()[this.getElementPosition().getX()][this.getElementPosition().getY()]=nothing;
+					model.getLevel()[this.getElementPosition().getX()+vecteurDir[0]][this.getElementPosition().getY()+vecteurDir[1]]=this;
 				}else{
 					return;
 				}
@@ -60,8 +60,8 @@ public class Player extends Element implements IMotion, IExplode{
 			}		
 		}
 		tellIFallToFall(position, model, bag);
-		this.getPositionElement().setX(this.getPositionElement().getX()+vecteurDir[0]);
-		this.getPositionElement().setY(this.getPositionElement().getY()+vecteurDir[1]);
+		this.getElementPosition().setX(this.getElementPosition().getX()+vecteurDir[0]);
+		this.getElementPosition().setY(this.getElementPosition().getY()+vecteurDir[1]);
 
 
 
@@ -91,17 +91,17 @@ public class Player extends Element implements IMotion, IExplode{
 
 	public ArrayList<Direction> amIOnALedge(Model model){
 		ArrayList<Direction> ledges=new ArrayList<Direction>();
-		if (this.getPositionElement().getX()==0 ){
+		if (this.getElementPosition().getX()==0 ){
 			ledges.add(Direction.LEFT);
 		}
-		if (this.getPositionElement().getX()==model.getX()-1){
+		if (this.getElementPosition().getX()==model.getX()-1){
 			ledges.add(Direction.RIGHT);
 		}
-		if (this.getPositionElement().getY()==0){
+		if (this.getElementPosition().getY()==0){
 			ledges.add(Direction.UP);
 
 		}
-		if (this.getPositionElement().getY()==model.getY()-1){
+		if (this.getElementPosition().getY()==model.getY()-1){
 			ledges.add(Direction.DOWN);
 		}
 		return ledges;
@@ -121,7 +121,7 @@ public class Player extends Element implements IMotion, IExplode{
 
 		}else{
 
-			return !(model.getLevel()[this.getPositionElement().getX()+intDir[0]][this.getPositionElement().getY()+intDir[1]] instanceof IBlock);
+			return !(model.getLevel()[this.getElementPosition().getX()+intDir[0]][this.getElementPosition().getY()+intDir[1]] instanceof IBlock);
 
 
 
@@ -140,8 +140,8 @@ public class Player extends Element implements IMotion, IExplode{
 
 	@Override
 	public ArrayList<ArrayList<Position>> explode(BagOfPossiblePositions bag, Model model) {
-		model.setLevel(nothing, this.getPositionElement());
-		this.getPositionElement().setTaken(false);
+		model.setLevel(nothing, this.getElementPosition());
+		this.getElementPosition().setTaken(false);
 		try {
 			Thread.sleep(1500);
 		} catch (InterruptedException e) {

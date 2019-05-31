@@ -12,13 +12,13 @@ public class Element implements IElement{
 	protected Position positionElement=new Position();
 	
 	public Element(){
-		this.getPositionElement().setTaken(true);
+		this.getElementPosition().setTaken(true);
 	}
 	protected boolean isNotOutOfBounds(Model model, int i, int j) {
-		return this.getPositionElement().getX()+i >=0 &&
-				this.getPositionElement().getX()+i < model.getX() &&
-				this.getPositionElement().getY()+j >=0 &&
-				this.getPositionElement().getY()+j <model.getY();
+		return this.getElementPosition().getX()+i >=0 &&
+				this.getElementPosition().getX()+i < model.getX() &&
+				this.getElementPosition().getY()+j >=0 &&
+				this.getElementPosition().getY()+j <model.getY();
 	}
 	public int[] convertDirectionIntoInt(Direction direction){
 		int dirX = 0;
@@ -62,10 +62,10 @@ public class Element implements IElement{
 	public void setSprite(char sprite) {
 		Sprite = sprite;
 	}
-	public Position getPositionElement() {
+	public Position getElementPosition() {
 		return positionElement;
 	}
-	public void setPositionElement(Position positionElement) {
+	public void setElementPosition(Position positionElement) {
 		this.positionElement = positionElement;
 	}
 	

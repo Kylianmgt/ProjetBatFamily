@@ -40,14 +40,14 @@ public class Monster extends Element implements IMotion, IExplode{
 		for (int i =-1; i<=1; i++){
 			for (int j = -1; j<=1; j++){
 				if(isNotOutOfBounds(model, i, j)){
-					if (model.getLevel()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j] instanceof IExplode &&
-							model.getLevel()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j] != this){
+					if (model.getLevel()[this.getElementPosition().getX()+i][this.getElementPosition().getY()+j] instanceof IExplode &&
+							model.getLevel()[this.getElementPosition().getX()+i][this.getElementPosition().getY()+j] != this){
 
-						model.getLevel()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j].interaction(Direction.NO, model, null, null);
+						model.getLevel()[this.getElementPosition().getX()+i][this.getElementPosition().getY()+j].interaction(Direction.NO, model, null, null);
 					}
-					model.getLevel()[this.getPositionElement().getX()+i][this.getPositionElement().getY()+j].getPositionElement().setTaken(false);
-					this.explodePos.setX(this.getPositionElement().getX()+i);
-					this.explodePos.setY(this.getPositionElement().getY()+i);
+					model.getLevel()[this.getElementPosition().getX()+i][this.getElementPosition().getY()+j].getElementPosition().setTaken(false);
+					this.explodePos.setX(this.getElementPosition().getX()+i);
+					this.explodePos.setY(this.getElementPosition().getY()+i);
 
 					model.setLevel(new Diamond(), this.explodePos);
 				}
@@ -63,7 +63,7 @@ public class Monster extends Element implements IMotion, IExplode{
 		for (int k =-1; k<=1; k++){
 			for (int l = -1; l<=1; l++){		
 				if (isNotOutOfBounds(model,k, l)){
-					if (((FallingElement) model.getLevel()[this.getPositionElement().getX()+k][this.getPositionElement().getX()+l]).canIStartToFall(null)&&
+					if (((FallingElement) model.getLevel()[this.getElementPosition().getX()+k][this.getElementPosition().getX()+l]).canIStartToFall(null)&&
 							!(bag.getPosition()[k][l].isTaken())){
 						ArrayList<Position> pos = new ArrayList<Position>();
 						pos.add(bag.getPosition()[k][l]);

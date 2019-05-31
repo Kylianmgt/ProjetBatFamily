@@ -35,8 +35,8 @@ public class MonsterTest {
 	public void testExplodeMonster() {
 		Monster monster = new Monster();
 		map.getLevel()[2][2]=monster;
-		monster.getPositionElement().setX(2);
-		monster.getPositionElement().setY(2);
+		monster.getElementPosition().setX(2);
+		monster.getElementPosition().setY(2);
 		
 		monster.explode(new BagOfPossiblePositions(5, 5),map);
 		assertEquals(Diamond.class, map.getLevel()[1][1].getClass());

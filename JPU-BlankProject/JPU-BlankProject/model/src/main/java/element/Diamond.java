@@ -12,7 +12,7 @@ public class Diamond extends Element{
 
 	private boolean addToPlayerScore( Player player) {
 	player.setScore(player.getScore()+1);
-	this.getPositionElement().setTaken(false);
+	this.getElementPosition().setTaken(false);
 		return true;
 	}
 

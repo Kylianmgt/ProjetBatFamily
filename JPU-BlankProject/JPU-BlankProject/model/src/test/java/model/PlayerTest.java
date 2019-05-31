@@ -29,8 +29,8 @@ public class PlayerTest {
 	@Test
 	public void testMoveGauche() {
 		map.getLevel()[1][0]=player;
-		player.getPositionElement().setX(1);
-		player.getPositionElement().setY(0);
+		player.getElementPosition().setX(1);
+		player.getElementPosition().setY(0);
 		player.move(position, map, Direction.LEFT, bag);
 		assertEquals( Nothing.class, map.getLevel()[1][0].getClass());
 		assertEquals(player.getClass(), map.getLevel()[0][0].getClass());
@@ -42,8 +42,8 @@ public class PlayerTest {
 	@Test
 	public void testMoveDroite() {
 		map.getLevel()[0][0]=player;
-		player.getPositionElement().setX(0);
-		player.getPositionElement().setY(0);
+		player.getElementPosition().setX(0);
+		player.getElementPosition().setY(0);
 		player.move(position, map, Direction.RIGHT, bag);
 		assertEquals(map.getLevel()[0][0].getClass(), Nothing.class);
 		assertEquals(map.getLevel()[1][0].getClass(), player.getClass());
@@ -55,8 +55,8 @@ public class PlayerTest {
 		map.getLevel()[0][0]=player;
 
 		map.getLevel()[1][0]=new Block();
-		player.getPositionElement().setX(0);
-		player.getPositionElement().setY(0);		
+		player.getElementPosition().setX(0);
+		player.getElementPosition().setY(0);		
 		player.move(position, map, Direction.RIGHT, bag);		
 
 		assertEquals(false, player.canIMove(Direction.RIGHT, map));
@@ -70,37 +70,37 @@ public class PlayerTest {
 	@Test
 	public void testCanIMoveDroiteWhenIAmFullDroite(){
 		map.getLevel()[map.getX()-1][0]=player;
-		player.getPositionElement().setX(map.getX()-1);
-		player.getPositionElement().setY(0);
+		player.getElementPosition().setX(map.getX()-1);
+		player.getElementPosition().setY(0);
 		assertEquals(player.canIMove(Direction.RIGHT, map), false);
 	}
 	@Test
 	public void testCanIMoveGaucheWhenIAmFullGauche(){
 		map.getLevel()[0][0]=player;
-		player.getPositionElement().setX(0);
-		player.getPositionElement().setY(0);
+		player.getElementPosition().setX(0);
+		player.getElementPosition().setY(0);
 		assertEquals(player.canIMove(Direction.LEFT, map), false);
 	}
 	@Test
 	public void testCanIMoveHautWhenIAmFullHaut(){
 		map.getLevel()[0][0]=player;
-		player.getPositionElement().setX(0);
-		player.getPositionElement().setY(0);
+		player.getElementPosition().setX(0);
+		player.getElementPosition().setY(0);
 		assertEquals(player.canIMove(Direction.UP, map), false);
 	}
 	@Test
 	public void testCanIBasHautWhenIAmFullBas(){
 		map.getLevel()[0][map.getY()-1]=player;
-		player.getPositionElement().setX(0);
-		player.getPositionElement().setY(map.getY()-1);
+		player.getElementPosition().setX(0);
+		player.getElementPosition().setY(map.getY()-1);
 		assertEquals(player.canIMove(Direction.DOWN, map), false);
 	}
 	@Test
 	public void testCanIMoveGaucheWhenGaucheIsEmpty(){
 		this.map.getLevel()[0][0]=new Nothing();
 		this.map.getLevel()[1][0]=new Player();
-		player.getPositionElement().setX(1);
-		player.getPositionElement().setY(0);
+		player.getElementPosition().setX(1);
+		player.getElementPosition().setY(0);
 		assertEquals(player.canIMove(Direction.LEFT,map), true);
 
 
@@ -109,8 +109,8 @@ public class PlayerTest {
 	public void testCanIMoveGaucheWhenGaucheIsDirt(){
 		this.map.getLevel()[0][0]=new Dirt();
 		this.map.getLevel()[1][0]=new Player();
-		player.getPositionElement().setX(1);
-		player.getPositionElement().setY(0);
+		player.getElementPosition().setX(1);
+		player.getElementPosition().setY(0);
 		assertEquals(true,player.canIMove(Direction.LEFT,map));
 
 
@@ -119,8 +119,8 @@ public class PlayerTest {
 	public void testCanIMoveDroiteWhenDroiteIsEmpty(){
 		this.map.getLevel()[0][1]=new Nothing();
 		this.map.getLevel()[0][0]=new Player();
-		player.getPositionElement().setX(0);
-		player.getPositionElement().setY(0);
+		player.getElementPosition().setX(0);
+		player.getElementPosition().setY(0);
 		assertEquals(player.canIMove(Direction.RIGHT,map), true);
 
 
@@ -129,8 +129,8 @@ public class PlayerTest {
 	public void testCanIMoveDroiteWhenDroiteIsDirt(){
 		this.map.getLevel()[0][1]=new Dirt();
 		this.map.getLevel()[0][0]=new Player();
-		player.getPositionElement().setX(0);
-		player.getPositionElement().setY(0);
+		player.getElementPosition().setX(0);
+		player.getElementPosition().setY(0);
 		assertEquals(player.canIMove(Direction.RIGHT,map), true);
 
 
@@ -139,8 +139,8 @@ public class PlayerTest {
 	public void testCanIMoveHautWhenHautIsEmpty(){
 		this.map.getLevel()[0][0]=new Nothing();
 		this.map.getLevel()[0][1]=new Player();
-		player.getPositionElement().setX(0);
-		player.getPositionElement().setY(1);
+		player.getElementPosition().setX(0);
+		player.getElementPosition().setY(1);
 		assertEquals(player.canIMove(Direction.UP,map), true);
 
 
@@ -149,8 +149,8 @@ public class PlayerTest {
 	public void testCanIMoveHautWhenHautIsDirt(){
 		this.map.getLevel()[0][0]=new Dirt();
 		this.map.getLevel()[0][1]=new Player();
-		player.getPositionElement().setX(0);
-		player.getPositionElement().setY(1);
+		player.getElementPosition().setX(0);
+		player.getElementPosition().setY(1);
 		assertEquals(player.canIMove(Direction.UP,map), true);
 
 
@@ -159,8 +159,8 @@ public class PlayerTest {
 	public void testCanIMoveBasWhenBasIsEmpty(){
 		this.map.getLevel()[0][1]=new Nothing();
 		this.map.getLevel()[0][0]=new Player();
-		player.getPositionElement().setX(0);
-		player.getPositionElement().setY(0);
+		player.getElementPosition().setX(0);
+		player.getElementPosition().setY(0);
 		assertEquals(player.canIMove(Direction.DOWN,map), true);
 
 
@@ -169,11 +169,11 @@ public class PlayerTest {
 	public void testCanIMoveBasWhenBasIsDirt(){
 		this.map.getLevel()[0][1]=new Dirt();
 		this.map.getLevel()[0][0]=new Player();
-		player.getPositionElement().setX(0);
-		player.getPositionElement().setY(0);
+		player.getElementPosition().setX(0);
+		player.getElementPosition().setY(0);
 		assertEquals(true, player.canIMove(Direction.DOWN,map));
 
 
 	}
-
+ 
 }
