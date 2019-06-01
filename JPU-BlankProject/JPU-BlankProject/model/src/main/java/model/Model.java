@@ -52,9 +52,7 @@ public  class Model extends Observable implements IModel {
 		//System.out.println(Tab);
 		//System.out.println(Tab.get(0)[0];
 	}
-	public void addObserver(Observer obs){
-		this.addObserver(obs);
-	}
+	
 
 	private void setEntityPosition(final ArrayList<EntityPosition> Tab) {
 		this.Tab = Tab;
@@ -115,7 +113,7 @@ public  class Model extends Observable implements IModel {
 	
 	private void setOntheMap(int x, int y, String element){
 		
-		switch ("element"){
+		switch (element){
         case "O":
         	this.Map[x][y] = this.factory.createRock();
         	this.Map[x][y].getElementPosition().setX(x);

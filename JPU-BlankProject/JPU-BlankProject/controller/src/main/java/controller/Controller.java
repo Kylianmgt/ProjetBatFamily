@@ -17,15 +17,16 @@ import element.Player;
 
 
 public class Controller implements  KeyListener{
-	private final static int SPEED=200;
+	private final static int SPEED=1000;
 	private Model model;
 	private Direction directionPlayer=Direction.NO;
 	private ArrayList<ArrayList<Position>> listIFall;
 	private BagOfPossiblePositions bag;
 	private ArrayList<Position> listIFall2;
+	private View view;
 
 	public Controller(View view, Model model){
-	
+this.view = view;
 		this.model= model;
 		this.listIFall=new ArrayList<ArrayList<Position>>();
 		this.listIFall2=new ArrayList<Position>();
@@ -44,12 +45,18 @@ public class Controller implements  KeyListener{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
-			((Player) model.getPlayerPosition()).move(listIFall2, model, directionPlayer, bag);
 			
+			if (this.directionPlayer!=Direction.NO){
+		
+
+				((Player) model.getPlayerPosition()).move(listIFall2, model, directionPlayer, bag);
+			}
 			refreshIFallArray();
 			//makeTheMonsterMove()
 			makeEmFall();
+			view.refreshView();
+		
+			
 		}
 
 
@@ -66,7 +73,7 @@ public class Controller implements  KeyListener{
 			ArrayList<Position> temp = new ArrayList<Position>();
 			temp=listIFall2;
 			listIFall.add(temp);
-		
+
 			listIFall2.clear();
 		}
 	}
@@ -103,6 +110,7 @@ public class Controller implements  KeyListener{
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
+
 		switch (arg0.getKeyCode()){
 		case 37:
 			this.directionPlayer=Direction.LEFT;
@@ -116,6 +124,7 @@ public class Controller implements  KeyListener{
 		case 40:
 			this.directionPlayer=Direction.DOWN;
 		}
+	
 	}
 
 	@Override
@@ -123,6 +132,7 @@ public class Controller implements  KeyListener{
 		if (arg0.getKeyCode()>=37 && arg0.getKeyCode()<=40){
 			this.directionPlayer=Direction.NO;
 		}
+
 		// TODO Auto-generated method stub
 
 	}

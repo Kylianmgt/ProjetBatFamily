@@ -42,13 +42,15 @@ public class Player extends Element implements IMotion, IExplode{
 		this.initialPosition=this.getElementPosition();
 		int [] vecteurDir=convertDirectionIntoInt(direction);
 		ArrayList<Direction> amIOnALedge = amIOnALedge(model);
+		
 
 
-		if (this.canIMove(direction, model)){
-			model.getLevel()[this.getElementPosition().getX()][this.getElementPosition().getY()]=nothing;
+		if (this.canIMove(direction, model)){			
+			model.setLevel(nothing, this.getElementPosition());
 			model.getLevel()[this.getElementPosition().getX()+vecteurDir[0]][this.getElementPosition().getY()+vecteurDir[1]]=this;
 
 		}else{
+			
 			if (!amIOnALedge.contains(direction)){
 				if(model.getLevel()[this.getElementPosition().getX()+vecteurDir[0]][this.getElementPosition().getY()+vecteurDir[1]].interaction(direction,model, null, null)){
 					model.getLevel()[this.getElementPosition().getX()][this.getElementPosition().getY()]=nothing;
@@ -125,7 +127,8 @@ public class Player extends Element implements IMotion, IExplode{
 
 		}else{
 
-			return !(model.getLevel()[this.getElementPosition().getX()+intDir[0]][this.getElementPosition().getY()+intDir[1]] instanceof IBlock);
+			return (model.getLevel()[this.getElementPosition().getX()+intDir[0]][this.getElementPosition().getY()+intDir[1]] instanceof Nothing ||
+					model.getLevel()[this.getElementPosition().getX()+intDir[0]][this.getElementPosition().getY()+intDir[1]] instanceof Dirt);
 
 
 

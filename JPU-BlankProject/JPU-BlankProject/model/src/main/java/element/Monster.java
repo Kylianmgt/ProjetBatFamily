@@ -17,7 +17,7 @@ public class Monster extends Element implements IMotion, IExplode{
 	
 	public Monster(){
 		super();
-		this.Sprite='♠';
+		this.Sprite='M';
 	}
 
 	public boolean interaction(BagOfPossiblePositions bag, Direction direction, Model model){

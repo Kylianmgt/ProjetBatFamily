@@ -1,7 +1,18 @@
 package view;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.TextArea;
+import java.awt.TextField;
 import java.awt.event.KeyListener;
+import java.awt.image.ImageObserver;
+import java.text.AttributedCharacterIterator;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -13,12 +24,13 @@ import contract.IModel;
 import contract.IView;
 import controller.Controller;
 import element.Element;
+import view.sprites.Graph;
 
 public class View implements IView, Observer{
 	IModel map;
 	JFrame fenetre = new JFrame();
 	JPanel panel  = new JPanel();
-	JLabel texte = new JLabel();
+	JLabel text = new JLabel();
 	
 	public View (IModel map){
 		this.map=map;
@@ -27,23 +39,30 @@ public class View implements IView, Observer{
 		fenetre.setVisible(true);
 		fenetre.add(panel);
 		fenetre.setDefaultCloseOperation(3);
-		fenetre.setSize(50, 50);
+		fenetre.setSize(500, 500);
 		panel.setLayout(new FlowLayout());
-		refreshView();
+		fenetre.setLocationRelativeTo(null);
 	}
 	
-	private void refreshView() {
+	public void refreshView() {
 		String str="";
 		for (int i = 0; i<map.getX();i++){
 			for (int j = 0 ; j<map.getY(); j++){
-				str+=map.getLevel()[i][j].getSprite();
+				System.out.print(map.getLevel()[j][i].getSprite());
+				str+=map.getLevel()[j][i].getSprite();
 				
 			}
+			System.out.println();
+		
 			str+='\n';
 		}
-		this.panel.remove(texte);
-		this.texte.setText(str);
-		this.panel.add(texte);
+		System.out.println();
+		this.panel.remove(text);
+		this.text.setText(str);
+		this.panel.add(text);
+	
+		
+		
 		
 	}
 	public void addListener(KeyListener listener){
