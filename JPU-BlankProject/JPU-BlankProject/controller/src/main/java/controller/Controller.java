@@ -2,71 +2,72 @@ package controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Observable;
-import java.util.Observer;
-import Utility.Direction;
-import javax.swing.text.View;
 
+import Utility.Direction;
+import Utility.Position;
 import contract.ControllerOrder;
 import contract.IController;
 import contract.IModel;
 import contract.IView;
+import element.Player;
 
-public class Controller implements IController, KeyListener{
-	private IView view;
-	private IModel model;
-	private Direction directionPlayer=Direction.NO;
-	public Controller(IView view, IModel model){
-		this.model= model;
+public class Controller implements IController, KeyListener {
+	private final IView view;
+	private final IModel model;
+	private Direction directionPlayer = Direction.NO;
+	Position position = this.model.getPlayerPosition().getElementPosition();
+
+	Player player = this.model.getMap()[this.position.getX()][this.position.getY()];
+
+	public Controller(final IView view, final IModel model) {
+		this.model = model;
 		this.view = view;
-		
+
 	}
 
 	@Override
 	public void control() {
-		
 
 	}
 
+	// test
 	@Override
-	public void orderPerform(ControllerOrder controllerOrder) {
+	public void keyPressed(final KeyEvent arg0) {
 		// TODO Auto-generated method stub
-
-	}
-//test
-	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		switch (arg0.getKeyCode()){
+		switch (arg0.getKeyCode()) {
 		case 37:
-			this.directionPlayer=Direction.LEFT;
+			this.directionPlayer = Direction.LEFT;
 			break;
 		case 38:
-			this.directionPlayer=Direction.UP;
+			this.directionPlayer = Direction.UP;
 			break;
 		case 39:
-			this.directionPlayer=Direction.RIGHT;
+			this.directionPlayer = Direction.RIGHT;
 			break;
 		case 40:
-			this.directionPlayer=Direction.DOWN;
+			this.directionPlayer = Direction.DOWN;
 		}
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		if (arg0.getKeyCode()>=37 && arg0.getKeyCode()<=40){
-			this.directionPlayer=Direction.NO;
+	public void keyReleased(final KeyEvent arg0) {
+		if ((arg0.getKeyCode() >= 37) && (arg0.getKeyCode() <= 40)) {
+			this.directionPlayer = Direction.NO;
 		}
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
+	public void keyTyped(final KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
+	@Override
+	public void orderPerform(final ControllerOrder controllerOrder) {
+		// TODO Auto-generated method stub
 
+	}
 
 }

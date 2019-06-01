@@ -22,4 +22,5 @@ public class viewtest {
 		final KeyEvent mKeyEvent = new KeyEvent(null, KeyEvent.VK_G, KeyEvent.VK_F, 5, scanCode);
 		assertEquals(scanCode, mKeyEvent.getKeyCode());
 	}
+
 }
