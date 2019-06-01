@@ -1,5 +1,7 @@
 package contract;
 
+import java.awt.event.KeyListener;
+
 /**
  * The Interface IView.
  *
@@ -15,4 +17,5 @@ public interface IView {
 	 * @param message the message
 	 */
 	void printMessage(final String message);
+	public void addListener(KeyListener listener);
 }

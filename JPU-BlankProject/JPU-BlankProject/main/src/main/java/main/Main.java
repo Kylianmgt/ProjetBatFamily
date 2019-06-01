@@ -31,9 +31,12 @@ public abstract class Main {
         final IView view = new View(model);
        
        
+
         final Controller controller = new Controller(view, model);
+
+
         InputListenner ecouteur = new InputListenner(controller);
-        view.setController(controller);
+        view.addListener(controller);
 
         controller.control();       
     }

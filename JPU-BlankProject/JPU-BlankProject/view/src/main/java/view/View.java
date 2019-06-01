@@ -40,9 +40,9 @@ public class View implements IView, Observer{
 			}
 			str+='\n';
 		}
-		this.fenetre.remove(texte);
+		this.panel.remove(texte);
 		this.texte.setText(str);
-		this.fenetre.add(texte);
+		this.panel.add(texte);
 		
 	}
 	public void addListener(KeyListener listener){
