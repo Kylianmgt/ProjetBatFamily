@@ -1,8 +1,8 @@
 package Behaviors;
 
-import model.Model;
+import contract.IModel;
 
 public interface IBeEaten extends IBehavior{
-	public void beEaten(Model map);
+	public void beEaten(IModel map);
 
 }

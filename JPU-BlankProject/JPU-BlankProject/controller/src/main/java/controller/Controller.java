@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import Utility.Direction;
@@ -11,6 +12,8 @@ import contract.ControllerOrder;
 import contract.IController;
 import contract.IModel;
 import contract.IView;
+import element.Element;
+import element.Monster;
 
 public class Controller implements IController, KeyListener{
 	private IView view;
@@ -67,6 +70,11 @@ public class Controller implements IController, KeyListener{
 		
 	}
 
-
+	private void makeMonsterMove(){
+		ArrayList<Monster> monsterlist = model.getMonsterlist();
+		for (Monster t:monsterlist){
+			t.move(null, model, t.getDirectionmonstre(), null);
+		}
+	}
 
 }

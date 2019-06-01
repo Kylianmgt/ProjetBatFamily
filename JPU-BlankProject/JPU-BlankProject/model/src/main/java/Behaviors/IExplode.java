@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 import Utility.BagOfPossiblePositions;
 import Utility.Position;
-import model.Model;
+import contract.IModel;
 
 
 public interface IExplode extends IBehavior{
 
 	
-	public ArrayList<ArrayList<Position>> explode (BagOfPossiblePositions bag, Model Model) ;
+	public ArrayList<ArrayList<Position>> explode (BagOfPossiblePositions bag, IModel Model) ;
 	
 
 

@@ -10,7 +10,7 @@ import Behaviors.IMotion;
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import Utility.Position;
-import model.Model;
+import contract.IModel;
 
 public class Player extends Element implements IMotion, IExplode{
 	Nothing nothing=new Nothing();
@@ -33,7 +33,7 @@ public class Player extends Element implements IMotion, IExplode{
 
 
 	@Override
-	public void move(ArrayList<Position> position, Model model, Direction direction, BagOfPossiblePositions bag) {
+	public void move(ArrayList<Position> position, IModel model, Direction direction, BagOfPossiblePositions bag) {
 		// TODO Auto-generated method stub
 		this.initialPosition=this.getElementPosition();
 		int [] vecteurDir=convertDirectionIntoInt(direction);
@@ -68,7 +68,7 @@ public class Player extends Element implements IMotion, IExplode{
 	}
 
 
-	private void tellIFallToFall(ArrayList<Position> position, Model model, BagOfPossiblePositions bag) {
+	private void tellIFallToFall(ArrayList<Position> position, IModel model, BagOfPossiblePositions bag) {
 		for (int i = -1; i<=1;i++){
 			for (int j=-1; j<=0; j++){
 				if (isNotOutOfBounds(model, initialPosition.getX()+i, initialPosition.getY()+j)){
@@ -89,7 +89,7 @@ public class Player extends Element implements IMotion, IExplode{
 	}
 
 
-	public ArrayList<Direction> amIOnALedge(Model model){
+	public ArrayList<Direction> amIOnALedge(IModel model){
 		ArrayList<Direction> ledges=new ArrayList<Direction>();
 		if (this.getElementPosition().getX()==0 ){
 			ledges.add(Direction.LEFT);
@@ -109,7 +109,7 @@ public class Player extends Element implements IMotion, IExplode{
 
 	}
 
-	public boolean canIMove(Direction direction, Model model) {
+	public boolean canIMove(Direction direction, IModel model) {
 		// TODO Auto-generated method stub
 
 
@@ -132,14 +132,14 @@ public class Player extends Element implements IMotion, IExplode{
 	}
 
 	@Override
-	public boolean interaction(Direction direction, Model model, BagOfPossiblePositions bag, Player player){
+	public boolean interaction(Direction direction, IModel model, BagOfPossiblePositions bag, Player player){
 		this.explode(bag, model);
 		return true;
 	}
 
 
 	@Override
-	public ArrayList<ArrayList<Position>> explode(BagOfPossiblePositions bag, Model model) {
+	public ArrayList<ArrayList<Position>> explode(BagOfPossiblePositions bag, IModel model) {
 		model.setLevel(nothing, this.getElementPosition());
 		this.getElementPosition().setTaken(false);
 		try {

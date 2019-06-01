@@ -4,7 +4,7 @@ package element;
 import Behaviors.IElement;
 import Utility.Direction;
 import Utility.Position;
-import model.Model;
+import contract.IModel;
 
 public class Element implements IElement{
 	protected String spritePath;
@@ -14,7 +14,7 @@ public class Element implements IElement{
 	public Element(){
 		this.getElementPosition().setTaken(true);
 	}
-	protected boolean isNotOutOfBounds(Model model, int i, int j) {
+	protected boolean isNotOutOfBounds(IModel model, int i, int j) {
 		return this.getElementPosition().getX()+i >=0 &&
 				this.getElementPosition().getX()+i < model.getX() &&
 				this.getElementPosition().getY()+j >=0 &&

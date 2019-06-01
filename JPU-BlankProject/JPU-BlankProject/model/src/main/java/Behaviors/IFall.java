@@ -5,18 +5,18 @@ import java.util.ArrayList;
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import Utility.Position;
-import model.Model;
+import contract.IModel;
 
 
 public interface IFall extends IBehavior{
-	public boolean canIStartToFall( Model Model);
-	public boolean canIFallDown(Model Model);
-	public boolean canIContinueToFallDown(Model Model);
-	public void canISlip(Model Model);
+	public boolean canIStartToFall( IModel Model);
+	public boolean canIFallDown(IModel Model);
+	public boolean canIContinueToFallDown(IModel Model);
+	public void canISlip(IModel Model);
 	
-	public void fallDown(Model Model, BagOfPossiblePositions bag);
-	public void slip(Direction direction, Model Model);
+	public void fallDown(IModel Model, BagOfPossiblePositions bag);
+	public void slip(Direction direction, IModel Model);
 
 
-	public boolean tryToFall(ArrayList<Position> position,BagOfPossiblePositions Bag, Model Model);
+	public boolean tryToFall(ArrayList<Position> position,BagOfPossiblePositions Bag, IModel Model);
 }

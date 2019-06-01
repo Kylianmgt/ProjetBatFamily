@@ -1,11 +1,11 @@
 package Behaviors;
 
 import Utility.Direction;
-import model.Model;
+import contract.IModel;
 
 
 public interface IBePushed extends IBehavior{
-	public boolean bePushed(Direction direction, Model Model);
+	public boolean bePushed(Direction direction, IModel Model);
 	
 
 }

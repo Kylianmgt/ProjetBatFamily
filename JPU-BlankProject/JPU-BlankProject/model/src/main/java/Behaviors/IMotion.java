@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import Utility.Position;
-import model.Model;
+import contract.IModel;
 
 
 public interface IMotion extends IBehavior{
-	public void move(ArrayList<Position> position, Model Model, Direction direction, BagOfPossiblePositions bag);
+	public void move(ArrayList<Position> position, IModel Model, Direction direction, BagOfPossiblePositions bag);
 }

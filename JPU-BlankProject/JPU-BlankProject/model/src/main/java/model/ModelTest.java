@@ -12,12 +12,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import contract.IModel;
 import element.Element;
 import entity.EntityPosition;
 
 public class ModelTest {
 <<<<<<< HEAD
-private Model model;
+private IModel model;
 private DAOLevel dao;
 private ArrayList<EntityPosition> position;
 private Element[][] maping;

@@ -7,7 +7,7 @@ import Behaviors.ISlip;
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import Utility.Position;
-import model.Model;
+import contract.IModel;
 
 import java.lang.Math;
 import Behaviors.IExplode;
@@ -19,7 +19,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 
 	@Override
-	public boolean canIStartToFall(Model model) {
+	public boolean canIStartToFall(IModel model) {
 		this.canISlip(model);
 
 
@@ -27,7 +27,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 	}
 
 	@Override
-	public boolean tryToFall(ArrayList<Position> position, BagOfPossiblePositions bag, Model model) {
+	public boolean tryToFall(ArrayList<Position> position, BagOfPossiblePositions bag, IModel model) {
 
 		posInitiale=this.getElementPosition();
 
@@ -65,7 +65,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 	}
 
-	private void subscribeFallableIFall(ArrayList<Position> position, BagOfPossiblePositions bag, Model model) {
+	private void subscribeFallableIFall(ArrayList<Position> position, BagOfPossiblePositions bag, IModel model) {
 		// TODO Auto-generated method stub
 		for (int i=-1; i<=1; i++){
 			if (isNotOutOfBounds(model, posInitiale.getX()+i, posInitiale.getY()-1)){
@@ -98,7 +98,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 
 	@Override
-	public void canISlip(Model model) {
+	public void canISlip(IModel model) {
 		this.direction.clear();
 		if (isNotOutOfBounds(model,this.getElementPosition().getX(), this.getElementPosition().getY()+1)){
 			if (model.getLevel()[this.getElementPosition().getX()][this.getElementPosition().getY()+1].getClass()==ISlip.class){
@@ -111,7 +111,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 	}
 
-	private void checkLeftAndRightIfSlip(Model model) {
+	private void checkLeftAndRightIfSlip(IModel model) {
 
 		for (int i =-1; i<=1; i=i+2){
 			if (isNotOutOfBounds(model,this.getElementPosition().getX()+i, this.getElementPosition().getY()) &&
@@ -135,7 +135,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 	}
 
 	@Override
-	public boolean canIFallDown(Model model) {
+	public boolean canIFallDown(IModel model) {
 
 		if (isNotOutOfBounds(model,this.getElementPosition().getX(), this.getElementPosition().getY()+1)){
 
@@ -147,7 +147,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 	}
 
 	@Override
-	public boolean canIContinueToFallDown(Model model) {
+	public boolean canIContinueToFallDown(IModel model) {
 		if (isNotOutOfBounds(model,this.getElementPosition().getX(), this.getElementPosition().getY()+1)){
 
 
@@ -159,7 +159,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 
 	@Override
-	public void fallDown(Model model, BagOfPossiblePositions bag) {		
+	public void fallDown(IModel model, BagOfPossiblePositions bag) {		
 
 		if (model.getLevel()[this.getElementPosition().getX()][this.getElementPosition().getY()+1].interaction(Direction.NO, model, bag, null)){
 			
@@ -171,7 +171,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 	}
 
 	@Override
-	public void slip(Direction direction, Model model) {
+	public void slip(Direction direction, IModel model) {
 		int[] VectDir=convertDirectionIntoInt(direction);
 		model.setLevel(nothing,this.getElementPosition());
 		this.getElementPosition().setX(this.getElementPosition().getX()+VectDir[0]);
@@ -181,7 +181,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 
 	}
-	public void makeTheFollowingIFallFalling(ArrayList<Position> position, BagOfPossiblePositions bag, Model model){
+	public void makeTheFollowingIFallFalling(ArrayList<Position> position, BagOfPossiblePositions bag, IModel model){
 		int index=position.indexOf(this.getElementPosition());
 		if (index+1<position.size()){
 			Position positionIFall= position.get(index+1);

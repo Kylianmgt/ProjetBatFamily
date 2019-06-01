@@ -10,12 +10,13 @@ import org.junit.Test;
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import Utility.Position;
+import contract.IModel;
 import element.Diamond;
 import element.Monster;
 import element.Nothing;
 
 public class MonsterTest {
-	Model map;
+	IModel map;
 	Nothing nothing;
 	ArrayList<Position> position = new ArrayList<Position>();
 	Direction[] directionmonstre = {Direction.LEFT,Direction.UP,Direction.RIGHT,Direction.DOWN};

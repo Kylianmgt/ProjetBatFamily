@@ -4,13 +4,12 @@ package Behaviors;
 
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
-
+import contract.IModel;
 import element.Player;
-import model.Model;
 
 
 public interface IBehavior {
-	public default boolean interaction( Direction direction, Model map, BagOfPossiblePositions bag, Player player){
+	public default boolean interaction( Direction direction, IModel map, BagOfPossiblePositions bag, Player player){
 		return true;		
 	}
 	
