@@ -14,11 +14,13 @@ public class Element implements IElement{
 	public Element(){
 		this.getElementPosition().setTaken(true);
 	}
+	
+
 	protected boolean isNotOutOfBounds(Model model, int i, int j) {
-		return this.getElementPosition().getX()+i >=0 &&
-				this.getElementPosition().getX()+i < model.getX() &&
-				this.getElementPosition().getY()+j >=0 &&
-				this.getElementPosition().getY()+j <model.getY();
+		return i >=0 &&
+				i < model.getX() &&
+				j >=0 &&
+			j <model.getY();
 	}
 	public int[] convertDirectionIntoInt(Direction direction){
 		int dirX = 0;

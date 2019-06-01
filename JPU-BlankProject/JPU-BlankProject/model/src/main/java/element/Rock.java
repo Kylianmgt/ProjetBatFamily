@@ -6,13 +6,14 @@ package element;
 
 
 import Behaviors.IBePushed;
+import Behaviors.IFall;
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import model.Model;
 
 
 
-public class Rock extends FallingElement implements IBePushed{
+public class Rock extends FallingElement implements IBePushed, IFall{
 	public Rock(){
 		super();
 		this.Sprite='O';

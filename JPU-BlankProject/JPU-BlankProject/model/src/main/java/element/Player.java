@@ -78,12 +78,17 @@ public class Player extends Element implements IMotion, IExplode{
 		for (int i = -1; i<=1;i++){
 			for (int j=-1; j<=0; j++){
 				if (isNotOutOfBounds(model, initialPosition.getX()+i, initialPosition.getY()+j)){
-
-					if (model.getLevel()[this.initialPosition.getY()-1][this.initialPosition.getX()+i].getClass()==IFall.class){
-						if (((IFall) model.getLevel()[this.initialPosition.getY()-1][this.initialPosition.getX()+i]).canIStartToFall(model)
-								&& !(bag.getPosition()[this.initialPosition.getY()-1][this.initialPosition.getX()+i].isTaken())){
-							position.add(bag.getPosition()[this.initialPosition.getY()-1][this.initialPosition.getX()+i]);
-							bag.getPosition()[this.initialPosition.getY()-1][this.initialPosition.getX()+i].setTaken(true);
+					//IFall.class.isAssignableFrom(model.getLevel()[this.initialPosition.getX()+i][this.initialPosition.getY()-1].getClass())
+					
+					if (model.getLevel()[this.initialPosition.getX()+i][this.initialPosition.getY()-1] instanceof IFall && 
+							!(model.getLevel()[this.initialPosition.getX()+i][this.initialPosition.getY()-1] instanceof Player)){
+						System.out.println("test");
+						
+					
+						if (((IFall) model.getLevel()[this.initialPosition.getX()+i][this.initialPosition.getY()+j]).canIStartToFall(model)
+								&& !(bag.getPosition()[this.initialPosition.getX()+i][this.initialPosition.getY()+j].isTaken())){
+							position.add(bag.getPosition()[this.initialPosition.getX()+i][this.initialPosition.getY()+j]);
+							bag.getPosition()[this.initialPosition.getX()+i][this.initialPosition.getY()+j].setTaken(true);
 						}
 
 					}

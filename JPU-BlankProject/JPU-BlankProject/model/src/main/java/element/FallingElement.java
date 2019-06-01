@@ -20,9 +20,8 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 	@Override
 	public boolean canIStartToFall(Model model) {
+		
 		this.canISlip(model);
-
-
 		return (canIFallDown(model)|| !(this.direction.isEmpty()));
 	}
 

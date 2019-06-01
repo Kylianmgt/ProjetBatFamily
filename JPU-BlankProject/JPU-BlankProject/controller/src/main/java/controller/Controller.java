@@ -4,8 +4,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
-
+import Behaviors.IBeEaten;
 import Behaviors.IFall;
+import Behaviors.ISlip;
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import Utility.Position;
@@ -16,7 +17,7 @@ import element.Player;
 
 
 
-public class Controller implements  KeyListener{
+public class Controller implements  KeyListener, ISlip{
 	private final static int SPEED=1000;
 	private Model model;
 	private Direction directionPlayer=Direction.NO;
@@ -69,7 +70,9 @@ this.view = view;
 
 
 	private void refreshIFallArray() {
+		
 		if(!(listIFall2.isEmpty())){
+		
 			ArrayList<Position> temp = new ArrayList<Position>();
 			temp=listIFall2;
 			listIFall.add(temp);
@@ -81,13 +84,15 @@ this.view = view;
 	private void makeEmFall() {
 		// TODO Auto-generated method stub
 
-
+		
 		for (ArrayList<Position> listPos : this.listIFall){
 			boolean test = false;
 
 
 			while (!test){
-				if (!(this.listIFall.isEmpty())){					
+				
+				if (!(this.listIFall.isEmpty())){
+					System.out.println("test");
 					if(!((IFall) model.getLevel()[listPos.get(0).getX()][listPos.get(0).getY()]).tryToFall(listPos, bag, model) &&
 							!(listPos.get(0).isTaken())){
 						listPos.remove(bag.getPosition()[listPos.get(0).getX()][listPos.get(0).getY()]);
