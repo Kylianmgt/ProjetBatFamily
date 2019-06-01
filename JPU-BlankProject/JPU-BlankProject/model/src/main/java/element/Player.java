@@ -52,8 +52,8 @@ public class Player extends Element implements IMotion, IExplode{
 		}else{
 			
 			if (!amIOnALedge.contains(direction)){
-				if(model.getLevel()[this.getElementPosition().getX()+vecteurDir[0]][this.getElementPosition().getY()+vecteurDir[1]].interaction(direction,model, null, null)){
-					model.getLevel()[this.getElementPosition().getX()][this.getElementPosition().getY()]=nothing;
+				if(model.getLevel()[this.getElementPosition().getX()+vecteurDir[0]][this.getElementPosition().getY()+vecteurDir[1]].interaction(direction,model, null, this)){
+					model.setLevel(nothing, this.getElementPosition());
 					model.getLevel()[this.getElementPosition().getX()+vecteurDir[0]][this.getElementPosition().getY()+vecteurDir[1]]=this;
 				}else{
 					return;
