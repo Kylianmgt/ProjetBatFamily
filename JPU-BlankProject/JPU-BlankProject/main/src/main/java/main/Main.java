@@ -5,6 +5,8 @@
 package main;
 
 import contract.ControllerOrder;
+import contract.IModel;
+import contract.IView;
 import controller.Controller;
 import model.Model;
 import view.InputListenner;
@@ -25,13 +27,13 @@ public abstract class Main {
      *            the arguments
      */
     public static void main(final String[] args) {
-    	final Model model = new Model();
-        final View view = new View(model);
+    	final IModel model = new Model();
+        final IView view = new View(model);
        
        
-        final Controller controller = new Controller();
+        final Controller controller = new Controller(view ,model);
         InputListenner ecouteur = new InputListenner(controller);
-        view.setController(controller);
+        view.addListener(controller);
 
         controller.control();       
     }
