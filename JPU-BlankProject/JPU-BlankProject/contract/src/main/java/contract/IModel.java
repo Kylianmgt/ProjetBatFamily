@@ -8,6 +8,7 @@ import element.Element;
 import element.Monster;
 import entity.EntityPosition;
 
+
 public interface IModel {
 
 	/* (non-Javadoc)

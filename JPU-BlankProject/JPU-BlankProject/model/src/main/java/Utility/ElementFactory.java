@@ -8,8 +8,9 @@ import element.Nothing;
 import element.Player;
 import element.Portal;
 import element.Rock;
+import model.IElement;
 
-public class ElementFactory {
+public class ElementFactory implements IElement {
 	
 	//public Element createElement(String Sprite,int x,int y){
 		//return this.createElement(Sprite, x)

@@ -17,7 +17,7 @@ import entity.EntityPosition;
 
 
 
-public  class Model extends Observable implements IModel, IModel{
+public  class Model extends Observable implements IModel{
 	
 	
 	private Element player; 
@@ -242,49 +242,29 @@ public  class Model extends Observable implements IModel, IModel{
 		}
 		
 	}
-	/* (non-Javadoc)
-	 * @see model.IModel#getLevel()
-	 */
-	/* (non-Javadoc)
-	 * @see model.IModel#getLevel()
-	 */
-	@Override
-	public Element[][] getLevel() {
-		return Map;
-	}
 
-	/* (non-Javadoc)
-	 * @see model.IModel#getPlayerPosition()
-	 */
-	/* (non-Javadoc)
-	 * @see model.IModel#getPlayerPosition()
-	 */
 	@Override
 	public Element getPlayerPosition() {
 		// TODO Auto-generated method stub
 		return this.player;
 	}
-	
-	
-	/* (non-Javadoc)
-	 * @see model.IModel#getMap()
-	 */
-	/* (non-Javadoc)
-	 * @see model.IModel#getMap()
-	 */
+
+
 	@Override
-	public Element[][] getMap() {
-		return Map;
+	public Element[][] getLevel() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see model.IModel#setMap(element.Element[][])
-	 */
-	/* (non-Javadoc)
-	 * @see model.IModel#setMap(element.Element[][])
-	 */
+	@Override
+	public Element[][] getMap() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public void setMap(Element[][] map) {
-		Map = map;
+		// TODO Auto-generated method stub
+		
 	}
 }
