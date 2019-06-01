@@ -88,29 +88,33 @@ public class Monster extends Element implements IMotion, IExplode{
 			model.getLevel()[elementPosition.getX()][elementPosition.getY()]=nothing;
 			model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;
 			rotationTab(1);
-
+			this.getElementPosition().setX(this.getElementPosition().getX()+intDir[0]);
+			this.getElementPosition().setY(this.getElementPosition().getY()+intDir[1]);
 		}
 
 		else if (canImove(directionmonstre[1], model, elementPosition)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[0]);
 			model.getLevel()[elementPosition.getX()][elementPosition.getY()]=nothing;
 			model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;
-
-
+			this.getElementPosition().setX(this.getElementPosition().getX()+intDir[0]);
+			this.getElementPosition().setY(this.getElementPosition().getY()+intDir[1]);
 		}
-
 		else if (canImove(directionmonstre[2], model, elementPosition)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[3]);
 			model.getLevel()[elementPosition.getX()][elementPosition.getY()]=nothing;
-			model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;
-			rotationTab(3);
-
+			model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;	
+			this.getElementPosition().setX(this.getElementPosition().getX()+intDir[0]);
+			this.getElementPosition().setY(this.getElementPosition().getY()+intDir[1]);
 			rotationTab(2);
-		}else if (canImove(directionmonstre[3], model, elementPosition)){
+		}
+		else if (canImove(directionmonstre[3], model, elementPosition)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[2]);
 			model.getLevel()[elementPosition.getX()][elementPosition.getY()]=nothing;
-			model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;
-		}	rotationTab(3);
+			model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;		
+			this.getElementPosition().setX(this.getElementPosition().getX()+intDir[0]);
+			this.getElementPosition().setY(this.getElementPosition().getY()+intDir[1]);
+			rotationTab(3);
+		}
 
 	}
 

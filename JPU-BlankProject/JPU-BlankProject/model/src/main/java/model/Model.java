@@ -16,11 +16,6 @@ import entity.EntityPosition;
 
 
 
-/**
- * The Class Model.
- *
- * @author Jean-Aymeric Diet
- */
 public  class Model extends Observable implements IModel {
 	
 	
