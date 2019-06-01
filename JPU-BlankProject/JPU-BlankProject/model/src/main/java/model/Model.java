@@ -52,6 +52,9 @@ public  class Model extends Observable implements IModel {
 		//System.out.println(Tab);
 		//System.out.println(Tab.get(0)[0];
 	}
+	public void addObserver(Observer obs){
+		this.addObserver(obs);
+	}
 
 	private void setEntityPosition(final ArrayList<EntityPosition> Tab) {
 		this.Tab = Tab;

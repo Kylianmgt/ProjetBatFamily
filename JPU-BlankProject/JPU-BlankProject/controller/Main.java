@@ -24,11 +24,12 @@ public abstract class Main {
      *            the arguments
      */
     public static void main(final String[] args) {
-    	Model model = new Model();
+     	Model model = new Model();
         View view = new View(model);
         Controller controller = new Controller(view, model);
-        model.addObserver(view);
         view.addListener(controller);
-        controller.control();  
+        model.addObserver(view);
+
+        controller.control();       
     }
 }

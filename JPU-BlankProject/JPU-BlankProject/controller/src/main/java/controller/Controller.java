@@ -2,38 +2,104 @@ package controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.ArrayList;
+
+
+import Behaviors.IFall;
+import Utility.BagOfPossiblePositions;
 import Utility.Direction;
-import javax.swing.text.View;
+import Utility.Position;
+import view.View;
+import model.Model;
+import element.Player;
 
-import contract.ControllerOrder;
-import contract.IController;
-import contract.IModel;
-import contract.IView;
 
-public class Controller implements IController, KeyListener{
-	private IView view;
-	private IModel model;
+
+
+public class Controller implements  KeyListener{
+	private final static int SPEED=200;
+	private Model model;
 	private Direction directionPlayer=Direction.NO;
-	public Controller(IView view, IModel model){
+	private ArrayList<ArrayList<Position>> listIFall;
+	private BagOfPossiblePositions bag;
+	private ArrayList<Position> listIFall2;
+
+	public Controller(View view, Model model){
+	
 		this.model= model;
-		this.view = view;
-		
+		this.listIFall=new ArrayList<ArrayList<Position>>();
+		this.listIFall2=new ArrayList<Position>();
+		this.bag=new BagOfPossiblePositions(model.getX(), model.getY());
+
 	}
 
-	@Override
+
+
+
 	public void control() {
+		for(;;){
+			try {
+				Thread.sleep(SPEED);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
+			((Player) model.getPlayerPosition()).move(listIFall2, model, directionPlayer, bag);
+			
+			refreshIFallArray();
+			//makeTheMonsterMove()
+			makeEmFall();
+		}
+
+
+
+
+
 
 	}
 
-	@Override
-	public void orderPerform(ControllerOrder controllerOrder) {
+
+
+	private void refreshIFallArray() {
+		if(!(listIFall2.isEmpty())){
+			ArrayList<Position> temp = new ArrayList<Position>();
+			temp=listIFall2;
+			listIFall.add(temp);
+		
+			listIFall2.clear();
+		}
+	}
+
+	private void makeEmFall() {
 		// TODO Auto-generated method stub
 
+
+		for (ArrayList<Position> listPos : this.listIFall){
+			boolean test = false;
+
+
+			while (!test){
+				if (!(this.listIFall.isEmpty())){					
+					if(!((IFall) model.getLevel()[listPos.get(0).getX()][listPos.get(0).getY()]).tryToFall(listPos, bag, model) &&
+							!(listPos.get(0).isTaken())){
+						listPos.remove(bag.getPosition()[listPos.get(0).getX()][listPos.get(0).getY()]);
+					}else{
+						test= true;
+					}
+
+				}else{
+					listIFall.remove(listPos);
+					test=true;
+				}
+			}
+		}
+
 	}
-//test
+
+
+
+
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
@@ -58,13 +124,13 @@ public class Controller implements IController, KeyListener{
 			this.directionPlayer=Direction.NO;
 		}
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 

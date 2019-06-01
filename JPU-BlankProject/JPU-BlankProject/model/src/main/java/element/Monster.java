@@ -86,8 +86,8 @@ public class Monster extends Element implements IMotion, IExplode{
 			this.getElementPosition().setX(this.getElementPosition().getX()+intDir[0]);
 			this.getElementPosition().setY(this.getElementPosition().getY()+intDir[1]);
 
-			model.getLevel()[positionElement.getX()][positionElement.getY()]=nothing;
-			model.getLevel()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
+			model.getLevel()[elementPosition.getX()][elementPosition.getY()]=nothing;
+			model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;
 
 		}
 
@@ -99,8 +99,8 @@ public class Monster extends Element implements IMotion, IExplode{
 			this.getElementPosition().setX(this.getElementPosition().getX()+intDir[0]);
 			this.getElementPosition().setY(this.getElementPosition().getY()+intDir[1]);
 
-			model.getLevel()[positionElement.getX()][positionElement.getY()]=nothing;
-			model.getLevel()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
+			model.getLevel()[elementPosition.getX()][elementPosition.getY()]=nothing;
+			model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;
 
 			rotationTab(2);
 		}

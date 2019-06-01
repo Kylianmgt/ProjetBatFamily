@@ -22,7 +22,6 @@ public class MonsterTest {
 	public void setUp(){
 		this.map=new Model();
 		this.nothing=new Nothing();
-		map.setLevel(null, null);
 		for (int i = 0; i<5 ; i++){
 			for (int j = 0; j<5; j++){
 				map.getLevel()[i][j]=nothing;

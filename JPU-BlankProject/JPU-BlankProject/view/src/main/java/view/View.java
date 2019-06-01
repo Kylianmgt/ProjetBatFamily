@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import contract.IModel;
 import contract.IView;
+import controller.Controller;
 import element.Element;
 
 public class View implements IView, Observer{
@@ -66,6 +67,7 @@ public class View implements IView, Observer{
 		this.refreshView();
 		
 	}
+
 	
 
 	
