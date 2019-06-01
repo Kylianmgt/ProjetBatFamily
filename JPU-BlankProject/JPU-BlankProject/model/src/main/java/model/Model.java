@@ -41,10 +41,9 @@ public  class Model extends Observable implements IModel {
 	 * Instantiates a new model.
 	 */
 	public Model() {
-		Map = new Element[25][25];
-		Map2 = new String[25][25];
-		factory = new ElementFactory();
-		
+		this.Map = new Element[25][25];
+		this.Map2 = new String[25][25];
+		this.factory = new ElementFactory();
 		loadEntityPosition(level);
 		makeMap(Tab);
 		System.out.println(Arrays.deepToString(Map));

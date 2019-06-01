@@ -60,9 +60,9 @@ public class Monster extends Element implements IMotion, IExplode{
 		}
 	}
 
-	@Override
+	
 
-	public void move(ArrayList<Position> position, Model model, Direction direction, BagOfPossiblePositions bag) {
+	public void move(ArrayList<Position> position, Model model, Direction[] direction, BagOfPossiblePositions bag) {
 
 		
 		if (this.canImove(directionmonstre[0], model, elementPosition)){

@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import Utility.BagOfPossiblePositions;
+import Utility.Direction;
 import Utility.Position;
 import element.Diamond;
 import element.Monster;
@@ -17,19 +18,20 @@ public class MonsterTest {
 	Model map;
 	Nothing nothing;
 	ArrayList<Position> position = new ArrayList<Position>();
+	Direction[] directionmonstre = {Direction.LEFT,Direction.UP,Direction.RIGHT,Direction.DOWN};
 	
 	@Before
 	public void setUp(){
+		
 		this.map=new Model();
 		this.nothing=new Nothing();
-		map.setLevel(null, null);
+		
 		for (int i = 0; i<5 ; i++){
 			for (int j = 0; j<5; j++){
 				map.getLevel()[i][j]=nothing;
 			}
 		}
-	}
-	
+	}	
 
 	@Test
 	public void testExplodeMonster() {
@@ -53,4 +55,18 @@ public class MonsterTest {
 	
 	}
 
+	@Test
+	public void testMove() {
+		Monster monster = new Monster();
+		map.getLevel()[2][1]=monster;
+		monster.getElementPosition().setX(2);
+		monster.getElementPosition().setY(1);
+		monster.move(null, map, directionmonstre, null);
+		int expectedMonsterX = 1; 
+		int expectedMonsterY = 2; 
+		
+		assertEquals(expectedMonsterX, monster.getElementPosition().getX());
+		assertEquals(expectedMonsterY, monster.getElementPosition().getY());
+	}
+	
 }

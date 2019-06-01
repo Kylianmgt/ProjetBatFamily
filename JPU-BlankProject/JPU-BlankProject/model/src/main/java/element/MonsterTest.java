@@ -9,15 +9,16 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
+import model.Model;
+import element.Monster;
 import Utility.Direction;
 import Utility.Position;
 
 public class MonsterTest {
-	private Element[][] Model;
+	Model Model;
 	Map map = new Map();
 	Monster monster= new Monster();
-	Position positionMonster = new Position();
+	monster.getPositionElement
 	ArrayList<Position> position = new ArrayList<Position>();
 	Direction[] directionmonstre = {Direction.LEFT,Direction.UP,Direction.RIGHT,Direction.DOWN};
 
