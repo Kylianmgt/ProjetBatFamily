@@ -82,42 +82,34 @@ public class Monster extends Element implements IMotion, IExplode{
 	@Override
 
 	public void move(ArrayList<Position> position, Model model, Direction direction, BagOfPossiblePositions bag) {
-		// TODO Auto-generated method stub
-
-
-
-
-
-
-
-
-		if (this.canImove(directionmonstre[0], model, positionElement)){
+		
+		if (this.canImove(directionmonstre[0], model, elementPosition)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[1]);
-			model.getLevel()[positionElement.getX()][positionElement.getY()]=nothing;
-			model.getLevel()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
+			model.getLevel()[elementPosition.getX()][elementPosition.getY()]=nothing;
+			model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;
 			rotationTab(1);
 
 		}
 
-		else if (canImove(directionmonstre[1], model, positionElement)){
+		else if (canImove(directionmonstre[1], model, elementPosition)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[0]);
-			model.getLevel()[positionElement.getX()][positionElement.getY()]=nothing;
-			model.getLevel()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
+			model.getLevel()[elementPosition.getX()][elementPosition.getY()]=nothing;
+			model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;
 
 
 		}
 
-		else if (canImove(directionmonstre[2], model, positionElement)){
+		else if (canImove(directionmonstre[2], model, elementPosition)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[3]);
-			model.getLevel()[positionElement.getX()][positionElement.getY()]=nothing;
-			model.getLevel()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
+			model.getLevel()[elementPosition.getX()][elementPosition.getY()]=nothing;
+			model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;
 			rotationTab(3);
 
 			rotationTab(2);
-		}else if (canImove(directionmonstre[3], model, positionElement)){
+		}else if (canImove(directionmonstre[3], model, elementPosition)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[2]);
-			model.getLevel()[positionElement.getX()][positionElement.getY()]=nothing;
-			model.getLevel()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]]=this;
+			model.getLevel()[elementPosition.getX()][elementPosition.getY()]=nothing;
+			model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;
 		}	rotationTab(3);
 
 	}
@@ -133,7 +125,7 @@ public class Monster extends Element implements IMotion, IExplode{
 
 		int [] intDir = convertDirectionIntoInt(directionactuel);
 
-		if(model.getLevel()[positionElement.getX()+intDir[0]][positionElement.getY()+intDir[1]] == nothing){
+		if(model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]] == nothing){
 			return true;
 		}
 		else{

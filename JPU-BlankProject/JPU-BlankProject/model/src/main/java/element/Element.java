@@ -7,9 +7,9 @@ import Utility.Position;
 import model.Model;
 
 public class Element implements IElement{
-	protected String cheminSprite;
+	protected String spritePath;
 	protected char Sprite;
-	protected Position positionElement=new Position();
+	protected Position elementPosition=new Position();
 	
 	public Element(){
 		this.getElementPosition().setTaken(true);
@@ -51,10 +51,10 @@ public class Element implements IElement{
 	
 	
 	public String getCheminSprite() {
-		return cheminSprite;
+		return spritePath;
 	}
 	public void setCheminSprite(String cheminSprite) {
-		this.cheminSprite = cheminSprite;
+		this.spritePath = cheminSprite;
 	}
 	public char getSprite() {
 		return Sprite;
@@ -63,10 +63,10 @@ public class Element implements IElement{
 		Sprite = sprite;
 	}
 	public Position getElementPosition() {
-		return positionElement;
+		return elementPosition;
 	}
 	public void setElementPosition(Position positionElement) {
-		this.positionElement = positionElement;
+		this.elementPosition = positionElement;
 	}
 
 	

@@ -29,9 +29,6 @@ public class DAOLevel extends DAOEntity<EntityPosition>{
 		}
 	
 	
-	
-	
-	
 	@Override
 	public ArrayList<EntityPosition> find( final int id_level){
 		

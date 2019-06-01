@@ -39,8 +39,6 @@ public  class Model extends Observable implements IModel {
 	private int level= 1;
 	private ArrayList<EntityPosition> Tab;
 	private Element[][] Map;
-	
-
 	private String[][] Map2;
 	private ElementFactory factory;
 
@@ -53,7 +51,7 @@ public  class Model extends Observable implements IModel {
 		factory = new ElementFactory();
 		
 		loadEntityPosition(level);
-		creationMap(Tab);
+		makeMap(Tab);
 		System.out.println(Arrays.deepToString(Map));
 		
 		//System.out.println(Tab);
@@ -68,17 +66,6 @@ public  class Model extends Observable implements IModel {
 		
 	}
 
-	/**
-     * Load hello world.
-     *
-     * @param code
-     *            the code
-     */
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IModel#getMessage(java.lang.String)
-	 */
 	public void loadEntityPosition(final int level) {
 		try {
 			final DAOLevel daolevel = new DAOLevel(DBConnection.getInstance().getConnection());
@@ -88,16 +75,7 @@ public  class Model extends Observable implements IModel {
 		}
 	}
 
-	/**
-     * Gets the observable.
-     *
-     * @return the observable
-     */
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IModel#getObservable()
-	 */
+
 	public Observable getObservable() {
 		return this;
 	}
@@ -114,7 +92,7 @@ public  class Model extends Observable implements IModel {
 		
 	}
 	
-	public void creationMap(ArrayList<EntityPosition> Tab){
+	public void makeMap(ArrayList<EntityPosition> Tab){
 		//int i =0;
 			//for(i=0; i<625; i++)
 		for (EntityPosition t:Tab){
@@ -203,5 +181,14 @@ public  class Model extends Observable implements IModel {
 	public Element getPlayerPosition() {
 		// TODO Auto-generated method stub
 		return this.player;
+	}
+	
+	
+	public Element[][] getMap() {
+		return Map;
+	}
+
+	public void setMap(Element[][] map) {
+		Map = map;
 	}
 }
