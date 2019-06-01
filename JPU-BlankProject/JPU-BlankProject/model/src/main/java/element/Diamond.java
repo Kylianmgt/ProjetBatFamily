@@ -5,6 +5,11 @@ import Utility.Direction;
 import model.Model;
 
 public class Diamond extends Element{
+
+	public Diamond(){
+		super();
+		this.Sprite='+';
+	}
 	@Override
 	public boolean interaction( Direction direction, Model Model, BagOfPossiblePositions bag, Player player){
 		return addToPlayerScore( player);		

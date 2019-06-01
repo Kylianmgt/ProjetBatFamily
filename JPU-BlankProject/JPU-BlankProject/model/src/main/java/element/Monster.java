@@ -14,6 +14,11 @@ public class Monster extends Element implements IMotion, IExplode{
 	Position explodePos = new Position();
 	private Nothing nothing  = new Nothing();
 	private Direction[] directionmonstre = {Direction.LEFT,Direction.UP,Direction.RIGHT,Direction.DOWN};
+	
+	public Monster(){
+		super();
+		this.Sprite='♠';
+	}
 
 	public boolean interaction(BagOfPossiblePositions bag, Direction direction, Model model){
 		this.explode(bag, model);

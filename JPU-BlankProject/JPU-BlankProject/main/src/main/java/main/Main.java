@@ -15,7 +15,7 @@ import view.View;
  *
  * @author Jean-Aymeric Diet
  */
-public abstract class Main {
+public class Main {
 
     /**
      * The main method.
@@ -23,7 +23,7 @@ public abstract class Main {
      * @param args
      *            the arguments
      */
-    public static void main(final String[] args) {
+    public static void main(String[] args) {
     	Model model = new Model();
         View view = new View(model);
         Controller controller = new Controller(view, model);

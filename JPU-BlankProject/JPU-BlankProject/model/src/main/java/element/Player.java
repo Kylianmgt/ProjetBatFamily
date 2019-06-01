@@ -17,6 +17,10 @@ public class Player extends Element implements IMotion, IExplode{
 	Position initialPosition = new Position();
 
 	int score = 0;
+	public Player(){
+		super();
+		this.Sprite='☺';
+	}
 
 
 	public int getScore() {

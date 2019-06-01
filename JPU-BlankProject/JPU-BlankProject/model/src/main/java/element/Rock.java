@@ -13,6 +13,10 @@ import model.Model;
 
 
 public class Rock extends FallingElement implements IBePushed{
+	public Rock(){
+		super();
+		this.Sprite='O';
+	}
 	@Override
 	public boolean interaction( Direction direction, Model model, BagOfPossiblePositions bag, Player player){
 		return bePushed(direction, model);		
