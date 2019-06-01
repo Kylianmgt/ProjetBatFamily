@@ -49,7 +49,7 @@ public  class Model extends Observable implements IModel{
 	private int level= 1;
 	private ArrayList<EntityPosition> Tab;
 	private Element[][] Map;
-	private String[][] Map2;
+	//private String[][] Map2;
 	private ElementFactory factory;
 	private ArrayList<Monster> monsterlist;
 
@@ -74,7 +74,7 @@ public  class Model extends Observable implements IModel{
 	 */
 	public Model() {
 		this.Map = new Element[25][25];
-		this.Map2 = new String[25][25];
+		//this.Map2 = new String[25][25];
 		this.factory = new ElementFactory();
 		this.monsterlist = new ArrayList<Monster>();
 		loadEntityPosition(level);
