@@ -1,10 +1,11 @@
 package element;
 
+import Behaviors.IFall;
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import model.Model;
 
-public class Diamond extends Element{
+public class Diamond extends FallingElement implements IFall{
 
 	public Diamond(){
 		super();
