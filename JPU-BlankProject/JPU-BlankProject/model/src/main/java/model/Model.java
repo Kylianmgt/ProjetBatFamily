@@ -94,8 +94,7 @@ public  class Model extends Observable implements IModel{
 	private void setEntityPosition(final ArrayList<EntityPosition> Tab) {
 		this.Tab = Tab;
 		this.setChanged();
-		this.notifyObservers();
-		clearChanged();
+		
 		
 	}
 

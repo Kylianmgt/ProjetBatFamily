@@ -41,8 +41,6 @@ public class FallingElement extends Element implements IFall, ISlip {
 			
 
 			if(!(this.direction.isEmpty())){
-				System.out.println("test");
-
 				if (this.direction.size()>1){
 
 

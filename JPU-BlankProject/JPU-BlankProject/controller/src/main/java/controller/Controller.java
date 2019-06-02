@@ -17,13 +17,14 @@ import element.Monster;
 
 
 public class Controller implements  KeyListener, ISlip{
-	private final static int SPEED=100;
+	private final static int SPEED=150;
 	private Model model;
 	private Direction directionPlayer=Direction.NO;
 	private ArrayList<ArrayList<Position>> listIFall;
 	private BagOfPossiblePositions bag;
 	private ArrayList<Position> listIFall2;
 	private View view;
+	private final int scoreWin = 5;
 
 	public Controller(View view, Model model){
 		this.view = view;
@@ -79,7 +80,7 @@ public class Controller implements  KeyListener, ISlip{
 			makeMonsterMove();
 
 			view.refreshView();
-			if (model.getPlayerPosition().getScore()>5){
+			if (model.getPlayerPosition().getScore()>this.scoreWin){
 				model.portalAppear();
 			}
 
@@ -116,7 +117,7 @@ public class Controller implements  KeyListener, ISlip{
 		for(Integer indexInt : index){
 			this.listIFall.remove((int) indexInt);
 		}
-		System.out.println(listIFall.size());
+		
 	}
 
 
