@@ -154,7 +154,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 		if (isNotOutOfBounds(model,this.getElementPosition().getX(), this.getElementPosition().getY()+1)){
 
 
-			return (canIFallDown(model) || model.getLevel()[this.getElementPosition().getX()][this.getElementPosition().getY()+1].getClass()==IExplode.class);
+			return (canIFallDown(model) || model.getLevel()[this.getElementPosition().getX()][this.getElementPosition().getY()+1]instanceof IExplode);
 		}else {
 			return false;
 		}

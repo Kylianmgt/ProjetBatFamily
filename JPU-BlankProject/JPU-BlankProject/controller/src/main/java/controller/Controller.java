@@ -32,7 +32,27 @@ public class Controller implements  KeyListener, ISlip{
 		this.listIFall=new ArrayList<ArrayList<Position>>();
 		this.listIFall2=new ArrayList<Position>();
 		this.bag=new BagOfPossiblePositions(model.getX(), model.getY());
+		makeEverythingFall();
 
+	}
+
+
+
+
+	private void makeEverythingFall() {
+		// TODO Auto-generated method stub
+		for (int i =0; i< model.getX(); i++){
+			for (int j = 0; j<model.getY(); j++){
+				if (model.getLevel()[i][j] instanceof IFall){
+					if (((IFall) model.getLevel()[i][j]).canIStartToFall(model) &&
+							!(bag.getPosition()[i][j].isTaken())){
+						this.listIFall2.add(bag.getPosition()[i][j]);
+						bag.getPosition()[i][j].setTaken(true);
+						refreshIFallArray();
+					}
+				}
+			}
+		}
 	}
 
 
