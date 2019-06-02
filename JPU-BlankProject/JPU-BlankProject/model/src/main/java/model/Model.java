@@ -10,17 +10,21 @@ import Utility.ElementFactory;
 import Utility.Position;
 import contract.IModel;
 import contract.IView;
+import element.Dirt;
 import element.Element;
 import element.Monster;
+import element.Nothing;
 import element.Player;
+import element.Portal;
 import entity.EntityPosition;
 
 
 
 public  class Model extends Observable implements IModel{
 	
-	
-	private Element player; 
+	private boolean portalAppeared= false;
+	private Player player; 
+	private Portal portal;
 	private final int X= 25;
 	private final int Y= 25;
 	
@@ -207,21 +211,25 @@ public  class Model extends Observable implements IModel{
         
         case "S":
         	this.Map[x][y] = this.factory.createPlayer();
-        	this.player=this.Map[x][y];
+        	this.player=(Player) this.Map[x][y];
         	player.getElementPosition().setX(x);
         	player.getElementPosition().setY(y);
         	
         break;
         
         case "P":
-        	this.Map[x][y] = this.factory.createPortal();
+        	this.Map[x][y] = this.factory.createDirt();
+        	this.portal=new Portal();
+        	this.portal.getElementPosition().setX(x);
+        	this.portal.getElementPosition().setY(y);
+        	
         break;
         case "N":
         	this.Map[x][y] = this.factory.createBlock();
         break;
         case "X":
         	this.Map[x][y] = this.factory.createMonster();
-        	Monster monster = new Monster();
+        	Monster monster = this.factory.createMonster();
         	monster=(Monster)this.Map[x][y];
         	monster.getElementPosition().setX(x);
         	monster.getElementPosition().setY(y);
@@ -266,7 +274,7 @@ public  class Model extends Observable implements IModel{
 	 * @see model.IModel#getPlayerPosition()
 	 */
 	@Override
-	public Element getPlayerPosition() {
+	public Player getPlayerPosition() {
 		// TODO Auto-generated method stub
 		return this.player;
 	}
@@ -292,5 +300,16 @@ public  class Model extends Observable implements IModel{
 	@Override
 	public void setMap(Element[][] map) {
 		Map = map;
+	}
+
+	public void portalAppear() {
+		if (!this.portalAppeared){
+			setLevel(this.portal, this.portal.getElementPosition());
+			System.out.println("EXIT!!!");
+			this.portalAppeared=true;
+			
+		}
+		// TODO Auto-generated method stub
+		
 	}
 }

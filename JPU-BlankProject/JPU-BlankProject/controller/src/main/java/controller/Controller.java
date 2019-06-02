@@ -78,6 +78,9 @@ public class Controller implements  KeyListener, ISlip{
 			makeEmFall();
 
 			view.refreshView();
+			if (model.getPlayerPosition().getScore()>5){
+				model.portalAppear();
+			}
 
 			/*System.out.println(this.listIFall.size());
 			if (!(this.listIFall.isEmpty())){
