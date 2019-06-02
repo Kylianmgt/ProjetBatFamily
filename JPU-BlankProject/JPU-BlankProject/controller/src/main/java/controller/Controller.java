@@ -72,10 +72,11 @@ public class Controller implements  KeyListener, ISlip{
 				((Player) model.getPlayerPosition()).move(listIFall2, model, directionPlayer, bag);
 			}
 			refreshIFallArray();
-			makeMonsterMove();
+		
 		
 
 			makeEmFall();
+			makeMonsterMove();
 
 			view.refreshView();
 			if (model.getPlayerPosition().getScore()>5){

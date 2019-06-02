@@ -155,12 +155,7 @@ public class Player extends Element implements IMotion, IExplode{
 	public ArrayList<ArrayList<Position>> explode(BagOfPossiblePositions bag, Model model) {
 		model.setLevel(nothing, this.getElementPosition());
 		this.getElementPosition().setTaken(false);
-		try {
-			Thread.sleep(1500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		System.out.println("GameOver =(");
 		System.exit(0);
 		return new ArrayList<ArrayList<Position>>();
 		// TODO Auto-generated method stub

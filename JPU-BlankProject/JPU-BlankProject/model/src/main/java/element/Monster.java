@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import Behaviors.IExplode;
+import Behaviors.IFall;
 import Behaviors.IMotion;
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
@@ -45,17 +46,21 @@ public class Monster extends Element implements IMotion, IExplode{
 
 		for (int i =-1; i<=1; i++){
 			for (int j = -1; j<=1; j++){
-				if(isNotOutOfBounds(model, i, j)){
+
+				if(isNotOutOfBounds(model, this.getElementPosition().getX()+i, this.getElementPosition().getY()+j)){
 					if (model.getLevel()[this.getElementPosition().getX()+i][this.getElementPosition().getY()+j] instanceof IExplode &&
 							model.getLevel()[this.getElementPosition().getX()+i][this.getElementPosition().getY()+j] != this){
 
-						model.getLevel()[this.getElementPosition().getX()+i][this.getElementPosition().getY()+j].interaction(Direction.NO, model, null, null);
+						//	arrayArrayPos.addAll(((IExplode) model.getLevel()[this.getElementPosition().getX()+i][this.getElementPosition().getY()+j]).explode(Direction.NO, model, null, null));
 					}
 					model.getLevel()[this.getElementPosition().getX()+i][this.getElementPosition().getY()+j].getElementPosition().setTaken(false);
 					this.explodePos.setX(this.getElementPosition().getX()+i);
-					this.explodePos.setY(this.getElementPosition().getY()+i);
+					this.explodePos.setY(this.getElementPosition().getY()+j);
+					Diamond diamond = new Diamond();
+					diamond.getElementPosition().setX(this.getElementPosition().getX()+i);
+					diamond.getElementPosition().setY(this.getElementPosition().getY()+j);
 
-					model.setLevel(new Diamond(), this.explodePos);
+					model.setLevel(diamond, this.explodePos);
 				}
 			}
 		}
@@ -69,12 +74,14 @@ public class Monster extends Element implements IMotion, IExplode{
 		for (int k =-1; k<=1; k++){
 			for (int l = -1; l<=1; l++){		
 				if (isNotOutOfBounds(model,k, l)){
-					if (((FallingElement) model.getLevel()[this.getElementPosition().getX()+k][this.getElementPosition().getX()+l]).canIStartToFall(null)&&
-							!(bag.getPosition()[k][l].isTaken())){
-						ArrayList<Position> pos = new ArrayList<Position>();
-						pos.add(bag.getPosition()[k][l]);
-						bag.getPosition()[k][l].setTaken(true);
-						this.arrayArrayPos.add(pos);
+					if(model.getLevel()[this.getElementPosition().getX()+k][this.getElementPosition().getX()+l] instanceof IFall){
+						if (((FallingElement) model.getLevel()[this.getElementPosition().getX()+k][this.getElementPosition().getX()+l]).canIStartToFall(null)&&
+								!(bag.getPosition()[k][l].isTaken())){
+							ArrayList<Position> pos = new ArrayList<Position>();
+							pos.add(bag.getPosition()[k][l]);
+							bag.getPosition()[k][l].setTaken(true);
+							this.arrayArrayPos.add(pos);
+						}
 					}
 				}
 			}
@@ -84,14 +91,14 @@ public class Monster extends Element implements IMotion, IExplode{
 
 
 	public void move(ArrayList<Position> position, Model model, Direction direction, BagOfPossiblePositions bag) {
-		
+
 		if (this.canImove(directionmonstre[0], model, elementPosition)){
 
 			int [] intDir=convertDirectionIntoInt(directionmonstre[0]);
-			moveMonster(model, intDir);
+			moveMonster(model, intDir, bag);
 			rotationTab(3);
-			
-			
+
+
 
 		}
 
@@ -101,7 +108,7 @@ public class Monster extends Element implements IMotion, IExplode{
 
 			int [] intDir=convertDirectionIntoInt(directionmonstre[1]);
 
-			moveMonster(model, intDir);	
+			moveMonster(model, intDir, bag);	
 		}
 
 
@@ -109,41 +116,58 @@ public class Monster extends Element implements IMotion, IExplode{
 		else if (canImove(directionmonstre[2], model, elementPosition)){
 
 			int [] intDir=convertDirectionIntoInt(directionmonstre[2]);
-			moveMonster(model, intDir);
+			moveMonster(model, intDir, bag);
 			rotationTab(1);
 		}
 		else if (canImove(directionmonstre[3], model, elementPosition)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[3]);
-			moveMonster(model, intDir);
+			moveMonster(model, intDir, bag);
 			rotationTab(2);
 		}
 
 	}
 
-	private void moveMonster(Model model, int[] intDir) {
+	private void moveMonster(Model model, int[] intDir, BagOfPossiblePositions bag) {
 		model.getLevel()[elementPosition.getX()][elementPosition.getY()]=nothing;
 		model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;			
 		this.getElementPosition().setX(this.getElementPosition().getX()+intDir[0]);
 		this.getElementPosition().setY(this.getElementPosition().getY()+intDir[1]);
+		checkPlayer(model, bag);
+	}
+
+	private void checkPlayer(Model model, BagOfPossiblePositions bag) {
+		// TODO Auto-generated method stub
+		for (int i = -1 ; i <=1; i=i+2){
+			if (isNotOutOfBounds(model, this.getElementPosition().getX()+i, this.getElementPosition().getY())){
+				if (model.getLevel()[this.getElementPosition().getX()+i][this.getElementPosition().getY()] instanceof Player){
+					this.explode(bag, model);
+				}
+
+			}
+			if (isNotOutOfBounds(model, this.getElementPosition().getX(), this.getElementPosition().getY()+i)){
+
+			}
+		}
+
 	}
 
 	public boolean canImove( Direction directionactuel, Model model, Position position){
-		
-	
+
+
 
 		int [] intDir = convertDirectionIntoInt(directionactuel);
-		
+		if (isNotOutOfBounds(model, elementPosition.getX()+intDir[0], elementPosition.getY()+intDir[1])){	
+			if (model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]instanceof Nothing ||
+					model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]instanceof Player){
 
-		if (isNotOutOfBounds(model, elementPosition.getX()+intDir[0], elementPosition.getY()+intDir[1])){
-			
-		
-			return(model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]instanceof Nothing);
+				return(model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]].interaction(null, model, null, null));
+			}
 
 		}				
-		else{
-			
-			return false;
-		}
+
+
+		return false;
+
 	}
 
 	private void rotationTab(int amount){
