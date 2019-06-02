@@ -72,7 +72,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 		// TODO Auto-generated method stub
 		for (int i=-1; i<=1; i++){
 			if (isNotOutOfBounds(model, posInitiale.getX()+i, posInitiale.getY()-1)){
-				if(model.getLevel()[posInitiale.getX()+i][posInitiale.getY()-1].getClass()==IFall.class){
+				if(model.getLevel()[posInitiale.getX()+i][posInitiale.getY()-1] instanceof IFall){
 					if(((IFall) model.getLevel()[posInitiale.getX()+i][posInitiale.getY()-1]).canIStartToFall(model) &&
 							!(position.contains(bag.getPosition()[posInitiale.getX()+i][posInitiale.getY()-1]))){
 						position.add(bag.getPosition()[posInitiale.getX()+i][posInitiale.getY()-1]);
