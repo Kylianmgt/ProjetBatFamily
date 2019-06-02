@@ -15,12 +15,12 @@ import Behaviors.IExplode;
 public class FallingElement extends Element implements IFall, ISlip {
 	ArrayList<Direction> direction = new ArrayList<Direction>();
 	Position posInitiale = new Position();
-	Nothing nothing;
+	Nothing nothing=new Nothing();
 
 
 	@Override
 	public boolean canIStartToFall(Model model) {
-		
+
 		this.canISlip(model);
 		return (canIFallDown(model)|| !(this.direction.isEmpty()));
 	}
@@ -28,7 +28,10 @@ public class FallingElement extends Element implements IFall, ISlip {
 	@Override
 	public boolean tryToFall(ArrayList<Position> position, BagOfPossiblePositions bag, Model model) {
 
-		posInitiale=this.getElementPosition();
+		posInitiale.setX(this.getElementPosition().getX());
+		posInitiale.setY(this.getElementPosition().getY());
+		posInitiale.setTaken(this.getElementPosition().isTaken());
+		
 
 
 
@@ -161,7 +164,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 	public void fallDown(Model model, BagOfPossiblePositions bag) {		
 
 		if (model.getLevel()[this.getElementPosition().getX()][this.getElementPosition().getY()+1].interaction(Direction.NO, model, bag, null)){
-			
+
 			model.setLevel(nothing, this.getElementPosition());
 			this.getElementPosition().setY(this.getElementPosition().getY()+1);
 
@@ -184,7 +187,10 @@ public class FallingElement extends Element implements IFall, ISlip {
 		int index=position.indexOf(this.getElementPosition());
 		if (index+1<position.size()){
 			Position positionIFall= position.get(index+1);
-			((IFall) model.getLevel()[positionIFall.getX()][positionIFall.getY()]).tryToFall(position, bag, model);
+			if (positionIFall instanceof IFall){
+				System.out.println(positionIFall.getX() + "" + positionIFall.getY());
+				((IFall) model.getLevel()[positionIFall.getX()][positionIFall.getY()]).tryToFall(position, bag, model);
+			}
 		}
 	}
 

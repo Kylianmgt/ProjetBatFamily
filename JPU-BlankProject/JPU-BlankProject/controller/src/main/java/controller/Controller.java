@@ -18,7 +18,7 @@ import element.Player;
 
 
 public class Controller implements  KeyListener, ISlip{
-	private final static int SPEED=1000;
+	private final static int SPEED=100;
 	private Model model;
 	private Direction directionPlayer=Direction.NO;
 	private ArrayList<ArrayList<Position>> listIFall;
@@ -27,7 +27,7 @@ public class Controller implements  KeyListener, ISlip{
 	private View view;
 
 	public Controller(View view, Model model){
-this.view = view;
+		this.view = view;
 		this.model= model;
 		this.listIFall=new ArrayList<ArrayList<Position>>();
 		this.listIFall2=new ArrayList<Position>();
@@ -46,9 +46,9 @@ this.view = view;
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 			if (this.directionPlayer!=Direction.NO){
-		
+
 
 				((Player) model.getPlayerPosition()).move(listIFall2, model, directionPlayer, bag);
 			}
@@ -56,8 +56,13 @@ this.view = view;
 			//makeTheMonsterMove()
 			makeEmFall();
 			view.refreshView();
-		
-			
+			System.out.println(this.listIFall.size());
+			if (!(this.listIFall.isEmpty())){
+				System.out.println(this.listIFall.get(0).size());
+			}
+
+
+
 		}
 
 
@@ -70,38 +75,42 @@ this.view = view;
 
 
 	private void refreshIFallArray() {
-		
-		if(!(listIFall2.isEmpty())){
-		
-			ArrayList<Position> temp = new ArrayList<Position>();
-			temp=listIFall2;
-			listIFall.add(temp);
 
+		if(!(listIFall2.isEmpty())){
+
+
+			ArrayList<Position> temp=new ArrayList<Position>();
+			temp.addAll(listIFall2);
+			listIFall.add(temp);			
 			listIFall2.clear();
+
 		}
 	}
 
 	private void makeEmFall() {
 		// TODO Auto-generated method stub
 
-		
+
 		for (ArrayList<Position> listPos : this.listIFall){
 			boolean test = false;
 
 
 			while (!test){
 				
-				if (!(this.listIFall.isEmpty())){
-					System.out.println("test");
+
+				if (!(this.listIFall.isEmpty()) &&
+						model.getLevel()[listPos.get(0).getX()][listPos.get(0).getY()] instanceof IFall){
+					
+
 					if(!((IFall) model.getLevel()[listPos.get(0).getX()][listPos.get(0).getY()]).tryToFall(listPos, bag, model) &&
 							!(listPos.get(0).isTaken())){
 						listPos.remove(bag.getPosition()[listPos.get(0).getX()][listPos.get(0).getY()]);
+						
 					}else{
 						test= true;
 					}
 
 				}else{
-					listIFall.remove(listPos);
 					test=true;
 				}
 			}
@@ -129,7 +138,7 @@ this.view = view;
 		case 40:
 			this.directionPlayer=Direction.DOWN;
 		}
-	
+
 	}
 
 	@Override

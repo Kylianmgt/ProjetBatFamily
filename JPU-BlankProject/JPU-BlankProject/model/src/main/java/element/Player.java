@@ -80,9 +80,9 @@ public class Player extends Element implements IMotion, IExplode{
 				if (isNotOutOfBounds(model, initialPosition.getX()+i, initialPosition.getY()+j)){
 					//IFall.class.isAssignableFrom(model.getLevel()[this.initialPosition.getX()+i][this.initialPosition.getY()-1].getClass())
 					
-					if (model.getLevel()[this.initialPosition.getX()+i][this.initialPosition.getY()-1] instanceof IFall && 
-							!(model.getLevel()[this.initialPosition.getX()+i][this.initialPosition.getY()-1] instanceof Player)){
-						System.out.println("test");
+					if (model.getLevel()[this.initialPosition.getX()+i][this.initialPosition.getY()+j] instanceof IFall && 
+							!(model.getLevel()[this.initialPosition.getX()+i][this.initialPosition.getY()+j] instanceof Player)){
+					
 						
 					
 						if (((IFall) model.getLevel()[this.initialPosition.getX()+i][this.initialPosition.getY()+j]).canIStartToFall(model)
