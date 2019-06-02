@@ -40,8 +40,10 @@ public class FallingElement extends Element implements IFall, ISlip {
 			this.fallDown(model, bag);
 		}else {
 			this.canISlip(model);
+			
 
 			if(!(this.direction.isEmpty())){
+				System.out.println("test");
 
 				if (this.direction.size()>1){
 
@@ -104,7 +106,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 	public void canISlip(Model model) {
 		this.direction.clear();
 		if (isNotOutOfBounds(model,this.getElementPosition().getX(), this.getElementPosition().getY()+1)){
-			if (model.getLevel()[this.getElementPosition().getX()][this.getElementPosition().getY()+1].getClass()==ISlip.class){
+			if (model.getLevel()[this.getElementPosition().getX()][this.getElementPosition().getY()+1]instanceof ISlip){
 				this.checkLeftAndRightIfSlip(model);
 			}
 
@@ -119,8 +121,8 @@ public class FallingElement extends Element implements IFall, ISlip {
 		for (int i =-1; i<=1; i=i+2){
 			if (isNotOutOfBounds(model,this.getElementPosition().getX()+i, this.getElementPosition().getY()) &&
 					isNotOutOfBounds(model,this.getElementPosition().getX()+i, this.getElementPosition().getY()+1)	){
-				if (model.getLevel()[this.getElementPosition().getX()+i][this.getElementPosition().getY()].getClass()==Nothing.class&&
-						model.getLevel()[this.getElementPosition().getX()+i][this.getElementPosition().getY()+1].getClass()==Nothing.class){
+				if (model.getLevel()[this.getElementPosition().getX()+i][this.getElementPosition().getY()] instanceof Nothing &&
+						model.getLevel()[this.getElementPosition().getX()+i][this.getElementPosition().getY()+1]instanceof Nothing){
 
 					if (i==-1){
 						direction.add(Direction.LEFT);
@@ -175,6 +177,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 	@Override
 	public void slip(Direction direction, Model model) {
+		
 		int[] VectDir=convertDirectionIntoInt(direction);
 		model.setLevel(nothing,this.getElementPosition());
 		this.getElementPosition().setX(this.getElementPosition().getX()+VectDir[0]);
@@ -189,7 +192,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 		if (index+1<position.size()){
 			Position positionIFall= position.get(index+1);
 			if (positionIFall instanceof IFall){
-				System.out.println(positionIFall.getX() + "" + positionIFall.getY());
+				
 				((IFall) model.getLevel()[positionIFall.getX()][positionIFall.getY()]).tryToFall(position, bag, model);
 			}
 		}
