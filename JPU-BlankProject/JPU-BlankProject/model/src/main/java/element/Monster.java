@@ -1,11 +1,14 @@
 package element;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import Behaviors.IExplode;
 import Behaviors.IMotion;
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import Utility.Position;
+import contract.IModel;
 import model.Model;
 
 public class Monster extends Element implements IMotion, IExplode{
@@ -13,11 +16,24 @@ public class Monster extends Element implements IMotion, IExplode{
 	ArrayList<ArrayList<Position>> arrayArrayPos=new ArrayList<ArrayList<Position>>();
 	Position explodePos = new Position();
 	private Nothing nothing  = new Nothing();
-	private Direction[] directionmonstre = {Direction.LEFT,Direction.UP,Direction.RIGHT,Direction.DOWN};
-	
+	private Direction[] directionmonstre = new Direction[4];
+
 	public Monster(){
 		super();
 		this.Sprite='M';
+		this.directionmonstre[0]=Direction.LEFT;
+		this.directionmonstre[1]=Direction.UP;
+		this.directionmonstre[2]=Direction.RIGHT;
+		this.directionmonstre[3]=Direction.DOWN;
+
+	}
+
+	public Direction[] getDirectionmonstre() {
+		return directionmonstre;
+	}
+
+	public void setDirectionmonstre(Direction[] directionmonstre) {
+		this.directionmonstre = directionmonstre;
 	}
 
 	public boolean interaction(BagOfPossiblePositions bag, Direction direction, Model model){
@@ -65,69 +81,76 @@ public class Monster extends Element implements IMotion, IExplode{
 		}
 	}
 
-	@Override
+
 
 	public void move(ArrayList<Position> position, Model model, Direction direction, BagOfPossiblePositions bag) {
+		System.out.println(Arrays.deepToString(directionmonstre));
 
 		
 		if (this.canImove(directionmonstre[0], model, elementPosition)){
 
-			int [] intDir=convertDirectionIntoInt(directionmonstre[1]);
+			int [] intDir=convertDirectionIntoInt(directionmonstre[0]);
 			model.getLevel()[elementPosition.getX()][elementPosition.getY()]=nothing;
-			model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;
-			rotationTab(1);
+			model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;			
 			this.getElementPosition().setX(this.getElementPosition().getX()+intDir[0]);
 			this.getElementPosition().setY(this.getElementPosition().getY()+intDir[1]);
+			rotationTab(3);
+			
+			
 
 		}
 
 
 		else if (canImove(directionmonstre[1], model, elementPosition)){
 
-			int [] intDir=convertDirectionIntoInt(directionmonstre[0]);
+
+			int [] intDir=convertDirectionIntoInt(directionmonstre[1]);
 
 			model.getLevel()[elementPosition.getX()][elementPosition.getY()]=nothing;
 			model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;
 			this.getElementPosition().setX(this.getElementPosition().getX()+intDir[0]);
-			this.getElementPosition().setY(this.getElementPosition().getY()+intDir[1]);
-
-			model.getLevel()[elementPosition.getX()][elementPosition.getY()]=nothing;
-			model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;
-
+			this.getElementPosition().setY(this.getElementPosition().getY()+intDir[1]);	
 		}
+
+
 
 		else if (canImove(directionmonstre[2], model, elementPosition)){
 
-			int [] intDir=convertDirectionIntoInt(directionmonstre[3]);
+			int [] intDir=convertDirectionIntoInt(directionmonstre[2]);
 			model.getLevel()[elementPosition.getX()][elementPosition.getY()]=nothing;
 			model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;	
 			this.getElementPosition().setX(this.getElementPosition().getX()+intDir[0]);
 			this.getElementPosition().setY(this.getElementPosition().getY()+intDir[1]);
-
-			model.getLevel()[elementPosition.getX()][elementPosition.getY()]=nothing;
-			model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;
-
-			rotationTab(2);
+			rotationTab(1);
 		}
 		else if (canImove(directionmonstre[3], model, elementPosition)){
-			int [] intDir=convertDirectionIntoInt(directionmonstre[2]);
+			int [] intDir=convertDirectionIntoInt(directionmonstre[3]);
 			model.getLevel()[elementPosition.getX()][elementPosition.getY()]=nothing;
 			model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;		
 			this.getElementPosition().setX(this.getElementPosition().getX()+intDir[0]);
 			this.getElementPosition().setY(this.getElementPosition().getY()+intDir[1]);
-			rotationTab(3);
+			rotationTab(2);
 		}
 
 	}
 
 	public boolean canImove( Direction directionactuel, Model model, Position position){
+		
+	
 
 		int [] intDir = convertDirectionIntoInt(directionactuel);
+		
 
-		if(model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]] == nothing){
-			return true;
-		}
+		if (isNotOutOfBounds(model, elementPosition.getX()+intDir[0], elementPosition.getY()+intDir[1])){
+			
+			
+			System.out.println(elementPosition.getX()+intDir[0]);
+			System.out.println(elementPosition.getY()+intDir[1]);
+			return(model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]instanceof Nothing);
+
+		}				
 		else{
+			
 			return false;
 		}
 	}
@@ -138,8 +161,11 @@ public class Monster extends Element implements IMotion, IExplode{
 			directionmonstre[0]= directionmonstre[1];
 			directionmonstre[1]= directionmonstre[2];
 			directionmonstre[2]= directionmonstre[3];
-			directionmonstre[1]=temp;
+			directionmonstre[3]=temp;
 		}
 	}
+
+
+
 }
 

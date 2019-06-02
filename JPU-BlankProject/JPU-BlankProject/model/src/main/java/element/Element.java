@@ -4,6 +4,7 @@ package element;
 import Behaviors.IElement;
 import Utility.Direction;
 import Utility.Position;
+import contract.IModel;
 import model.Model;
 
 public class Element implements IElement{
@@ -14,6 +15,7 @@ public class Element implements IElement{
 	public Element(){
 		this.getElementPosition().setTaken(true);
 	}
+
 	
 
 	protected boolean isNotOutOfBounds(Model model, int i, int j) {
@@ -21,6 +23,7 @@ public class Element implements IElement{
 				i < model.getX() &&
 				j >=0 &&
 			j <model.getY();
+
 	}
 	public int[] convertDirectionIntoInt(Direction direction){
 		int dirX = 0;

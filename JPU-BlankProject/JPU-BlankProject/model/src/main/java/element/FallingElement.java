@@ -20,7 +20,6 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 	@Override
 	public boolean canIStartToFall(Model model) {
-
 		this.canISlip(model);
 		return (canIFallDown(model)|| !(this.direction.isEmpty()));
 	}
@@ -31,7 +30,6 @@ public class FallingElement extends Element implements IFall, ISlip {
 		posInitiale.setX(this.getElementPosition().getX());
 		posInitiale.setY(this.getElementPosition().getY());
 		posInitiale.setTaken(this.getElementPosition().isTaken());
-		
 		
 
 
@@ -176,8 +174,10 @@ public class FallingElement extends Element implements IFall, ISlip {
 	}
 
 	@Override
+
 	public void slip(Direction direction, Model model) {
 		
+
 		int[] VectDir=convertDirectionIntoInt(direction);
 		model.setLevel(nothing,this.getElementPosition());
 		this.getElementPosition().setX(this.getElementPosition().getX()+VectDir[0]);

@@ -8,6 +8,7 @@ import org.junit.Test;
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import Utility.Position;
+import contract.IModel;
 import element.Block;
 import element.Dirt;
 import element.Nothing;
@@ -15,7 +16,7 @@ import element.Player;
 
 
 public class PlayerTest {
-	Model map = new Model();
+	IModel map = new Model();
 	Player player= new Player();
 	ArrayList<Position> position = new ArrayList<Position>();
 	Direction direction;

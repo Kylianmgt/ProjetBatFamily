@@ -9,6 +9,8 @@ import model.Model;
 
 
 public interface IFall extends IBehavior{
+
+
 	public boolean canIStartToFall( Model Model);
 	public boolean canIFallDown(Model Model);
 	public boolean canIContinueToFallDown(Model Model);

@@ -3,8 +3,6 @@ package controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-
-import Behaviors.IBeEaten;
 import Behaviors.IFall;
 import Behaviors.ISlip;
 import Utility.BagOfPossiblePositions;
@@ -13,6 +11,7 @@ import Utility.Position;
 import view.View;
 import model.Model;
 import element.Player;
+import element.Monster;
 
 
 
@@ -73,7 +72,8 @@ public class Controller implements  KeyListener, ISlip{
 				((Player) model.getPlayerPosition()).move(listIFall2, model, directionPlayer, bag);
 			}
 			refreshIFallArray();
-			//makeTheMonsterMove()
+			makeMonsterMove();
+		
 
 			makeEmFall();
 
@@ -207,6 +207,12 @@ public class Controller implements  KeyListener, ISlip{
 
 	}
 
-
+	private void makeMonsterMove(){
+		ArrayList<Monster> monsterlist = model.getMonsterlist();
+		for (Monster t:monsterlist){
+			
+			t.move(null, model, Direction.NO, null);
+		}
+	}
 
 }

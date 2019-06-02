@@ -10,6 +10,7 @@ import Behaviors.IMotion;
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import Utility.Position;
+import contract.IModel;
 import model.Model;
 
 public class Player extends Element implements IMotion, IExplode{
@@ -100,7 +101,7 @@ public class Player extends Element implements IMotion, IExplode{
 	}
 
 
-	public ArrayList<Direction> amIOnALedge(Model model){
+	public ArrayList<Direction> amIOnALedge(IModel model){
 		ArrayList<Direction> ledges=new ArrayList<Direction>();
 		if (this.getElementPosition().getX()==0 ){
 			ledges.add(Direction.LEFT);
@@ -120,7 +121,7 @@ public class Player extends Element implements IMotion, IExplode{
 
 	}
 
-	public boolean canIMove(Direction direction, Model model) {
+	public boolean canIMove(Direction direction, IModel model) {
 		// TODO Auto-generated method stub
 
 

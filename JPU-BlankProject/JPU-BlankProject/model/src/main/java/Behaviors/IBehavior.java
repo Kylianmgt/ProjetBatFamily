@@ -4,7 +4,6 @@ package Behaviors;
 
 import Utility.BagOfPossiblePositions;
 import Utility.Direction;
-
 import element.Player;
 import model.Model;
 
