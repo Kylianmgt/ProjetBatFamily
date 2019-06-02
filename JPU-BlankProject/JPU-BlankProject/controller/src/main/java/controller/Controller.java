@@ -54,12 +54,15 @@ public class Controller implements  KeyListener, ISlip{
 			}
 			refreshIFallArray();
 			//makeTheMonsterMove()
+
 			makeEmFall();
+
 			view.refreshView();
-			System.out.println(this.listIFall.size());
+
+			/*System.out.println(this.listIFall.size());
 			if (!(this.listIFall.isEmpty())){
 				System.out.println(this.listIFall.get(0).size());
-			}
+			}*/
 
 
 
@@ -71,6 +74,27 @@ public class Controller implements  KeyListener, ISlip{
 
 
 	}
+
+
+
+	private void removeOldLists() {
+		// TODO Auto-generated method stub
+		ArrayList<Integer> index = new ArrayList<Integer>();
+		index.clear();
+		for (ArrayList<Position> listPos : this.listIFall){
+
+
+			if (listPos.isEmpty()){
+				index.add(listIFall.indexOf(listPos));
+				
+			}
+		}
+		for(Integer indexInt : index){
+			this.listIFall.remove((int) indexInt);
+		}
+		System.out.println(listIFall.size());
+	}
+
 
 
 
@@ -85,6 +109,9 @@ public class Controller implements  KeyListener, ISlip{
 			listIFall2.clear();
 
 		}
+		removeOldLists();
+
+
 	}
 
 	private void makeEmFall() {
@@ -96,19 +123,22 @@ public class Controller implements  KeyListener, ISlip{
 
 
 			while (!test){
-				
+
 
 				if (!(this.listIFall.isEmpty()) &&
 						model.getLevel()[listPos.get(0).getX()][listPos.get(0).getY()] instanceof IFall){
 					
-
 					if(!((IFall) model.getLevel()[listPos.get(0).getX()][listPos.get(0).getY()]).tryToFall(listPos, bag, model) &&
-							!(listPos.get(0).isTaken())){
+							(listPos.get(0).isTaken())){
+						bag.getPosition()[listPos.get(0).getX()][listPos.get(0).getY()].setTaken(false);
 						listPos.remove(bag.getPosition()[listPos.get(0).getX()][listPos.get(0).getY()]);
 						
-					}else{
-						test= true;
+						
+						
+						
 					}
+					test=true;
+
 
 				}else{
 					test=true;

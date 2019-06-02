@@ -27,10 +27,11 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 	@Override
 	public boolean tryToFall(ArrayList<Position> position, BagOfPossiblePositions bag, Model model) {
-
+		
 		posInitiale.setX(this.getElementPosition().getX());
 		posInitiale.setY(this.getElementPosition().getY());
 		posInitiale.setTaken(this.getElementPosition().isTaken());
+		
 		
 
 
