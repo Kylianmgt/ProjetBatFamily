@@ -1,6 +1,8 @@
 package element;
 
 
+import java.awt.Image;
+
 import Behaviors.IElement;
 import Utility.Direction;
 import Utility.Position;
@@ -8,12 +10,26 @@ import contract.IModel;
 import model.Model;
 
 public class Element implements IElement{
-	protected String spritePath;
-	protected char Sprite;
-	protected Position elementPosition=new Position();
 	
+
+	protected Position elementPosition=new Position();
+	protected Sprite sprite;
+	
+	public Sprite getSprite() {
+		return sprite;
+	}
+
+
+
+	public void setSprite(Sprite sprite) {
+		this.sprite = sprite;
+	}
+
+
+
 	public Element(){
 		this.getElementPosition().setTaken(true);
+		
 	}
 
 	
@@ -55,24 +71,17 @@ public class Element implements IElement{
 	
 	
 	
-	public String getCheminSprite() {
-		return spritePath;
-	}
-	public void setCheminSprite(String cheminSprite) {
-		this.spritePath = cheminSprite;
-	}
-	public char getSprite() {
-		return Sprite;
-	}
-	public void setSprite(char sprite) {
-		Sprite = sprite;
-	}
+
 	public Position getElementPosition() {
 		return elementPosition;
 	}
 	public void setElementPosition(Position positionElement) {
 		this.elementPosition = positionElement;
 	}
+
+
+
+
 
 	
 	

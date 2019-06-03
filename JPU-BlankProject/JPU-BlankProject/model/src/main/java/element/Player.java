@@ -20,7 +20,8 @@ public class Player extends Element implements IMotion, IExplode{
 	int score = 0;
 	public Player(){
 		super();
-		this.Sprite='☻';
+		//this.Sprite='☻';
+		this.sprite = new Sprite("/player.png");
 	}
 
 

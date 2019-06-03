@@ -9,7 +9,8 @@ public class Diamond extends FallingElement implements IFall{
 
 	public Diamond(){
 		super();
-		this.Sprite='+';
+		//this.Sprite='+';
+		this.sprite = new Sprite("/diamond.png");
 	}
 	@Override
 	public boolean interaction( Direction direction, Model Model, BagOfPossiblePositions bag, Player player){

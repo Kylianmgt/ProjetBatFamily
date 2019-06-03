@@ -16,6 +16,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 	ArrayList<Direction> direction = new ArrayList<Direction>();
 	Position posInitiale = new Position();
 	Nothing nothing=new Nothing();
+	//protected Sprite sprite;
 
 
 	@Override

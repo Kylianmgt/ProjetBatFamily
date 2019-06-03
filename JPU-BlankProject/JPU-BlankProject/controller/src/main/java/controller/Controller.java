@@ -79,7 +79,7 @@ public class Controller implements  KeyListener, ISlip{
 			makeEmFall();
 			makeMonsterMove();
 
-			view.refreshView();
+			//view.refreshView();
 			if (model.getPlayerPosition().getScore()>this.scoreWin){
 				model.portalAppear();
 			}
@@ -177,23 +177,8 @@ public class Controller implements  KeyListener, ISlip{
 
 
 	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-
-		switch (arg0.getKeyCode()){
-		case 37:
-			this.directionPlayer=Direction.LEFT;
-			break;
-		case 38:
-			this.directionPlayer=Direction.UP;
-			break;
-		case 39:
-			this.directionPlayer=Direction.RIGHT;
-			break;
-		case 40:
-			this.directionPlayer=Direction.DOWN;
-		}
-
+	public void keyPressed(KeyEvent arg0) {		
+		this.directionPlayer=	view.keyCodeToControllerOrder(arg0.getKeyCode());
 	}
 
 	@Override

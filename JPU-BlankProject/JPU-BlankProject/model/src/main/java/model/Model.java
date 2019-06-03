@@ -50,7 +50,7 @@ public  class Model extends Observable implements IModel{
 		return Y;
 	}
 
-	private int level= 4;
+	private int level= 2;
 	private ArrayList<EntityPosition> Tab;
 	private Element[][] Map;
 	private String[][] Map2;

@@ -16,7 +16,8 @@ import model.Model;
 public class Rock extends FallingElement implements IBePushed, IFall{
 	public Rock(){
 		super();
-		this.Sprite='O';
+		//this.Sprite='O';
+		this.sprite = new Sprite("/rock.png");
 	}
 	@Override
 	public boolean interaction( Direction direction, Model model, BagOfPossiblePositions bag, Player player){

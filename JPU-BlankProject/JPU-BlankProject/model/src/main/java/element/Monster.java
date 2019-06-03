@@ -21,11 +21,13 @@ public class Monster extends Element implements IMotion, IExplode{
 
 	public Monster(){
 		super();
-		this.Sprite='M';
+		//this.Sprite='M';
+		this.sprite = new Sprite("/monster.png");
 		this.directionmonstre[0]=Direction.LEFT;
 		this.directionmonstre[1]=Direction.UP;
 		this.directionmonstre[2]=Direction.RIGHT;
 		this.directionmonstre[3]=Direction.DOWN;
+		
 
 	}
 
