@@ -32,7 +32,7 @@ public class Monster extends Element implements IMotion, IExplode{
 		this.directionmonstre = directionmonstre;
 	}
 
-	public boolean interaction( Direction direction, Model model){
+	public boolean interaction( Direction direction, Model model, Player player){
 		this.explode(model);
 		this.getElementPosition().setTaken(false);
 		return true;		
@@ -47,6 +47,11 @@ public class Monster extends Element implements IMotion, IExplode{
 		for (int i =-1; i<=1; i++){
 			for (int j = -1; j<=1; j++){
 				if (isNotOutOfBounds(model, this.getElementPosition().getX()+i , this.getElementPosition().getY()+j)){
+					if (model.getLevel()[this.getElementPosition().getX()+i][ this.getElementPosition().getY()+j] instanceof IExplode &&
+							model.getLevel()[this.getElementPosition().getX()+i][ this.getElementPosition().getY()+j] != this){
+						model.getLevel()[this.getElementPosition().getX()+i][ this.getElementPosition().getY()+j].interaction(null, model, null);
+					}
+						
 					Position explodePos = new Position();
 					explodePos.setTaken(true);
 					explodePos.setX(this.getElementPosition().getX()+i);

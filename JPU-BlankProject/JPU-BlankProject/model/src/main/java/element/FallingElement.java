@@ -24,7 +24,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 		this.canISlip(model);
 		return (canIFallDown(model)|| !(this.direction.isEmpty()));
 	}
-	
+
 	@Override
 	public boolean tryToFall(Model Model) {
 		// TODO Auto-generated method stub
@@ -41,7 +41,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 				}else{
 					this.slip(direction.get(0), Model);
 				}
-				
+
 			}
 			this.setAmIFalling(true);
 		}
@@ -51,11 +51,11 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 	@Override
 	public boolean continueToFall(Model model) {
-		
+
 		posInitiale.setX(this.getElementPosition().getX());
 		posInitiale.setY(this.getElementPosition().getY());
 		posInitiale.setTaken(this.getElementPosition().isTaken());
-		
+
 
 
 
@@ -63,7 +63,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 			this.fallDown(model);
 		}else {
 			this.canISlip(model);
-			
+
 
 			if(!(this.direction.isEmpty())){
 				if (this.direction.size()>1){
@@ -81,7 +81,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 			}else{
 				this.setAmIFalling(false);
 				return false;
-				
+
 			}
 		}
 
@@ -90,7 +90,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 	}
 
-	
+
 
 
 	@Override
@@ -144,9 +144,9 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 	@Override
 	public boolean canIContinueToFallDown(Model model) {
-	
+
 		if (isNotOutOfBounds(model,this.getElementPosition().getX(), this.getElementPosition().getY()+1)){
-			
+
 
 
 			return (canIFallDown(model) || model.getLevel()[this.getElementPosition().getX()][this.getElementPosition().getY()+1]instanceof IExplode);
@@ -158,19 +158,21 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 	@Override
 	public void fallDown(Model model) {		
-	
+
 
 		if (model.getLevel()[this.getElementPosition().getX()][this.getElementPosition().getY()+1].interaction(Direction.NO, model, null)){
-			model.setLevel(nothing, this.getElementPosition());
-			this.getElementPosition().setY(this.getElementPosition().getY()+1);
-			model.setLevel(this, this.getElementPosition());
+			if (!(model.getLevel()[this.getElementPosition().getX()][this.getElementPosition().getY()+1] instanceof Diamond)){
+				model.setLevel(nothing, this.getElementPosition());
+				this.getElementPosition().setY(this.getElementPosition().getY()+1);
+				model.setLevel(this, this.getElementPosition());
+			}
 		}
 	}
 
 	@Override
 
 	public void slip(Direction direction, Model model) {
-		
+
 
 		int[] VectDir=convertDirectionIntoInt(direction);
 		model.setLevel(nothing,this.getElementPosition());
