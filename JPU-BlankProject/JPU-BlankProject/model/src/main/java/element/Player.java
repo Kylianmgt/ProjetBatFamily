@@ -7,7 +7,6 @@ import Behaviors.IFall;
 import Behaviors.IBlock;
 import Behaviors.IExplode;
 import Behaviors.IMotion;
-import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import Utility.Position;
 import contract.IModel;
@@ -38,7 +37,7 @@ public class Player extends Element implements IMotion, IExplode{
 
 
 	@Override
-	public void move(ArrayList<Position> position, Model model, Direction direction, BagOfPossiblePositions bag) {
+	public void move( Model model, Direction direction) {
 		// TODO Auto-generated method stub
 		this.initialPosition=this.getElementPosition();
 		int [] vecteurDir=convertDirectionIntoInt(direction);
@@ -53,7 +52,7 @@ public class Player extends Element implements IMotion, IExplode{
 		}else{
 			
 			if (!amIOnALedge.contains(direction)){
-				if(model.getLevel()[this.getElementPosition().getX()+vecteurDir[0]][this.getElementPosition().getY()+vecteurDir[1]].interaction(direction,model, null, this)){
+				if(model.getLevel()[this.getElementPosition().getX()+vecteurDir[0]][this.getElementPosition().getY()+vecteurDir[1]].interaction(direction,model,  this)){
 					model.setLevel(nothing, this.getElementPosition());
 					model.getLevel()[this.getElementPosition().getX()+vecteurDir[0]][this.getElementPosition().getY()+vecteurDir[1]]=this;
 				}else{
@@ -66,7 +65,6 @@ public class Player extends Element implements IMotion, IExplode{
 				return;
 			}		
 		}
-		tellIFallToFall(position, model, bag);
 		this.getElementPosition().setX(this.getElementPosition().getX()+vecteurDir[0]);
 		this.getElementPosition().setY(this.getElementPosition().getY()+vecteurDir[1]);
 
@@ -75,30 +73,7 @@ public class Player extends Element implements IMotion, IExplode{
 	}
 
 
-	private void tellIFallToFall(ArrayList<Position> position, Model model, BagOfPossiblePositions bag) {
-		for (int i = -1; i<=1;i++){
-			for (int j=-1; j<=0; j++){
-				if (isNotOutOfBounds(model, initialPosition.getX()+i, initialPosition.getY()+j)){
-					//IFall.class.isAssignableFrom(model.getLevel()[this.initialPosition.getX()+i][this.initialPosition.getY()-1].getClass())
-					
-					if (model.getLevel()[this.initialPosition.getX()+i][this.initialPosition.getY()+j] instanceof IFall && 
-							!(model.getLevel()[this.initialPosition.getX()+i][this.initialPosition.getY()+j] instanceof Player)){
-					
-						
-					
-						if (((IFall) model.getLevel()[this.initialPosition.getX()+i][this.initialPosition.getY()+j]).canIStartToFall(model)
-								&& !(bag.getPosition()[this.initialPosition.getX()+i][this.initialPosition.getY()+j].isTaken())){
-							position.add(bag.getPosition()[this.initialPosition.getX()+i][this.initialPosition.getY()+j]);
-							bag.getPosition()[this.initialPosition.getX()+i][this.initialPosition.getY()+j].setTaken(true);
-						}
 
-					}
-
-				}
-			}
-
-		}
-	}
 
 
 	public ArrayList<Direction> amIOnALedge(IModel model){
@@ -145,19 +120,19 @@ public class Player extends Element implements IMotion, IExplode{
 	}
 
 	@Override
-	public boolean interaction(Direction direction, Model model, BagOfPossiblePositions bag, Player player){
-		this.explode(bag, model);
+	public boolean interaction(Direction direction, Model model, Player player){
+		this.explode( model);
 		return true;
 	}
 
 
 	@Override
-	public ArrayList<ArrayList<Position>> explode(BagOfPossiblePositions bag, Model model) {
+	public void explode( Model model) {
+		
 		model.setLevel(nothing, this.getElementPosition());
 		this.getElementPosition().setTaken(false);
 		System.out.println("GameOver =(");
 		System.exit(0);
-		return new ArrayList<ArrayList<Position>>();
 		// TODO Auto-generated method stub
 
 	}

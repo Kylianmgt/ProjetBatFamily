@@ -7,7 +7,6 @@ package element;
 
 import Behaviors.IBePushed;
 import Behaviors.IFall;
-import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import model.Model;
 
@@ -19,7 +18,7 @@ public class Rock extends FallingElement implements IBePushed, IFall{
 		this.Sprite='O';
 	}
 	@Override
-	public boolean interaction( Direction direction, Model model, BagOfPossiblePositions bag, Player player){
+	public boolean interaction( Direction direction, Model model,  Player player){
 		return bePushed(direction, model);		
 	}
 

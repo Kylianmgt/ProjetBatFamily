@@ -5,7 +5,6 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import Behaviors.IFall;
 import Behaviors.ISlip;
-import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import Utility.Position;
 import view.View;
@@ -21,7 +20,6 @@ public class Controller implements  KeyListener, ISlip{
 	private Model model;
 	private Direction directionPlayer=Direction.NO;
 	private ArrayList<ArrayList<Position>> listIFall;
-	private BagOfPossiblePositions bag;
 	private ArrayList<Position> listIFall2;
 	private View view;
 	private final int scoreWin = 5;
@@ -31,7 +29,6 @@ public class Controller implements  KeyListener, ISlip{
 		this.model= model;
 		this.listIFall=new ArrayList<ArrayList<Position>>();
 		this.listIFall2=new ArrayList<Position>();
-		this.bag=new BagOfPossiblePositions(model.getX(), model.getY());
 		makeEverythingFall();
 
 	}
@@ -44,10 +41,8 @@ public class Controller implements  KeyListener, ISlip{
 		for (int i =0; i< model.getX(); i++){
 			for (int j = 0; j<model.getY(); j++){
 				if (model.getLevel()[i][j] instanceof IFall){
-					if (((IFall) model.getLevel()[i][j]).canIStartToFall(model) &&
-							!(bag.getPosition()[i][j].isTaken())){
-						this.listIFall2.add(bag.getPosition()[i][j]);
-						bag.getPosition()[i][j].setTaken(true);
+					if (((IFall) model.getLevel()[i][j]).canIStartToFall(model)){
+
 						refreshIFallArray();
 					}
 				}
@@ -66,18 +61,15 @@ public class Controller implements  KeyListener, ISlip{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			refreshIFallArray();	
+			makeMonsterMove();
 			if (this.directionPlayer!=Direction.NO){
 
 
-				((Player) model.getPlayerPosition()).move(listIFall2, model, directionPlayer, bag);
+				((Player) model.getPlayerPosition()).move( model, directionPlayer);
 			}
-			refreshIFallArray();
-		
-		
 
-			makeEmFall();
-			makeMonsterMove();
+
 
 			view.refreshView();
 			if (model.getPlayerPosition().getScore()>this.scoreWin){
@@ -102,46 +94,38 @@ public class Controller implements  KeyListener, ISlip{
 
 
 
-	private void removeOldLists() {
-		// TODO Auto-generated method stub
-		ArrayList<Integer> index = new ArrayList<Integer>();
-		index.clear();
-		for (ArrayList<Position> listPos : this.listIFall){
-
-
-			if (listPos.isEmpty()){
-				index.add(listIFall.indexOf(listPos));
-				
-			}
-		}
-		for(Integer indexInt : index){
-			this.listIFall.remove((int) indexInt);
-		}
-		
-	}
 
 
 
 
 	private void refreshIFallArray() {
+		for (int i = model.getX()-1 ; i>=0; i--){
+			for (int j =model.getY() -1;j>=0;j--){
+				if (model.getLevel()[i][j] instanceof IFall){
+					if ( ((IFall) model.getLevel()[i][j]).isAmIFalling() ){
+						((IFall) model.getLevel()[i][j]).continueToFall(model);
+					} else{
+						((IFall) model.getLevel()[i][j]).tryToFall(model);
 
-		if(!(listIFall2.isEmpty())){
-
-
-			ArrayList<Position> temp=new ArrayList<Position>();
-			temp.addAll(listIFall2);
-			listIFall.add(temp);			
-			listIFall2.clear();
-
+					}
+				}
+			}
 		}
-		removeOldLists();
+
+
 
 
 	}
 
 	private void makeEmFall() {
-		// TODO Auto-generated method stub
 
+
+
+
+
+
+		// TODO Auto-generated method stub
+		/*
 
 		for (ArrayList<Position> listPos : this.listIFall){
 			boolean test = false;
@@ -152,15 +136,15 @@ public class Controller implements  KeyListener, ISlip{
 
 				if (!(this.listIFall.isEmpty()) &&
 						model.getLevel()[listPos.get(0).getX()][listPos.get(0).getY()] instanceof IFall){
-					
-					if(!((IFall) model.getLevel()[listPos.get(0).getX()][listPos.get(0).getY()]).tryToFall(listPos, bag, model) &&
+
+					if(!((IFall) model.getLevel()[listPos.get(0).getX()][listPos.get(0).getY()]).tryToFall(model) &&
 							(listPos.get(0).isTaken())){
 						bag.getPosition()[listPos.get(0).getX()][listPos.get(0).getY()].setTaken(false);
 						listPos.remove(bag.getPosition()[listPos.get(0).getX()][listPos.get(0).getY()]);
-						
-						
-						
-						
+
+
+
+
 					}
 					test=true;
 
@@ -170,6 +154,7 @@ public class Controller implements  KeyListener, ISlip{
 				}
 			}
 		}
+		 */
 
 	}
 
@@ -213,10 +198,23 @@ public class Controller implements  KeyListener, ISlip{
 	}
 
 	private void makeMonsterMove(){
+		
 		ArrayList<Monster> monsterlist = model.getMonsterlist();
+		ArrayList<Integer> indexDel = new ArrayList<Integer>();
+		indexDel.clear();
 		for (Monster t:monsterlist){
+			if (t.getElementPosition().isTaken()){
+
+				t.move( model, Direction.NO);
+
 			
-			t.move(null, model, Direction.NO, null);
+				
+			}else{
+				indexDel.add(monsterlist.indexOf(t));
+			}
+		}
+		for (Integer index : indexDel){
+			monsterlist.remove(index);
 		}
 	}
 
