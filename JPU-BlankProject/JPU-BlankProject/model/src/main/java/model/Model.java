@@ -27,6 +27,11 @@ public  class Model extends Observable implements IModel{
 	private Portal portal;
 	private final int X= 25;
 	private final int Y= 25;
+	private int level= 1;
+	private ArrayList<EntityPosition> Tab;
+	private Element[][] Map;
+	private ElementFactory factory;
+	private ArrayList<Monster> monsterlist;
 	
 	/* (non-Javadoc)
 	 * @see model.IModel#getX()
@@ -50,13 +55,6 @@ public  class Model extends Observable implements IModel{
 		return Y;
 	}
 
-	private int level= 2;
-	private ArrayList<EntityPosition> Tab;
-	private Element[][] Map;
-	private String[][] Map2;
-	private ElementFactory factory;
-	private ArrayList<Monster> monsterlist;
-
 
 	/* (non-Javadoc)
 	 * @see model.IModel#getMonsterlist()
@@ -79,7 +77,6 @@ public  class Model extends Observable implements IModel{
 	 */
 	public Model() {
 		this.Map = new Element[25][25];
-		this.Map2 = new String[25][25];
 		this.factory = new ElementFactory();
 		this.monsterlist = new ArrayList<Monster>();
 		loadEntityPosition(level);

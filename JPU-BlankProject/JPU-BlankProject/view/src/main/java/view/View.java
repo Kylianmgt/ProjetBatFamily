@@ -2,6 +2,8 @@ package view;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.SwingUtilities;
 
@@ -19,7 +21,11 @@ import contract.IView;
 public final class View implements IView, Runnable {
 
 	/** The frame. */
-	private final ViewFrame viewFrame;
+	private ViewFrame viewFrame;
+
+	public ViewFrame getViewFrame() {
+		return this.viewFrame;
+	}
 
 	/**
 	 * Instantiates a new view.
@@ -39,19 +45,21 @@ public final class View implements IView, Runnable {
 	 *          the key code
 	 * @return the controller order
 	 */
-	public static  Direction keyCodeToControllerOrder(final int keyCode) {
+	public Direction keyCodeToControllerOrder(final int keyCode) {
 		switch (keyCode) {
-			case KeyEvent.VK_G:
+			case 37:
 				return Direction.LEFT;
-			case KeyEvent.VK_F:
+			case 39:
 				return Direction.RIGHT;
-			case KeyEvent.VK_D:
+			case 38:
 				return Direction.UP;
-			case KeyEvent.VK_I:
+			case 40:
 				return Direction.DOWN;
 			default:
-				return Direction.NO;
+				return null;
+					
 		}
+	
 	}
 	
 	
@@ -89,6 +97,9 @@ public final class View implements IView, Runnable {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
 
 	@Override
 	public void addListener(KeyListener listener) {

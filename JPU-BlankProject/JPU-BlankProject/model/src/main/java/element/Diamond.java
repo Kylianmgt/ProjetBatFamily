@@ -1,7 +1,6 @@
 package element;
 
 import Behaviors.IFall;
-import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import model.Model;
 
@@ -13,7 +12,7 @@ public class Diamond extends FallingElement implements IFall{
 		this.sprite = new Sprite("/diamond.png");
 	}
 	@Override
-	public boolean interaction( Direction direction, Model Model, BagOfPossiblePositions bag, Player player){
+	public boolean interaction( Direction direction, Model Model, Player player){
 		return addToPlayerScore( player);		
 	}
 

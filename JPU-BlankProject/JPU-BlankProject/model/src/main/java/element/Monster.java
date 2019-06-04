@@ -1,15 +1,10 @@
 package element;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import Behaviors.IExplode;
-import Behaviors.IFall;
 import Behaviors.IMotion;
-import Utility.BagOfPossiblePositions;
 import Utility.Direction;
 import Utility.Position;
-import contract.IModel;
 import model.Model;
 
 public class Monster extends Element implements IMotion, IExplode{
@@ -39,65 +34,56 @@ public class Monster extends Element implements IMotion, IExplode{
 		this.directionmonstre = directionmonstre;
 	}
 
-	public boolean interaction(BagOfPossiblePositions bag, Direction direction, Model model){
-		this.explode(bag, model);
+	public boolean interaction( Direction direction, Model model, Player player){
+		this.explode(model);
+		this.getElementPosition().setTaken(false);
 		return true;		
 	}
-
-	public ArrayList<ArrayList<Position>> explode(BagOfPossiblePositions bag, Model model) {
-
+@Override
+	public void explode(Model model) {
+	
+		
+		
+	
+		
 		for (int i =-1; i<=1; i++){
 			for (int j = -1; j<=1; j++){
-
-				if(isNotOutOfBounds(model, this.getElementPosition().getX()+i, this.getElementPosition().getY()+j)){
-					if (model.getLevel()[this.getElementPosition().getX()+i][this.getElementPosition().getY()+j] instanceof IExplode &&
-							model.getLevel()[this.getElementPosition().getX()+i][this.getElementPosition().getY()+j] != this){
-
-						//	arrayArrayPos.addAll(((IExplode) model.getLevel()[this.getElementPosition().getX()+i][this.getElementPosition().getY()+j]).explode(Direction.NO, model, null, null));
+				if (isNotOutOfBounds(model, this.getElementPosition().getX()+i , this.getElementPosition().getY()+j)){
+					if (model.getLevel()[this.getElementPosition().getX()+i][ this.getElementPosition().getY()+j] instanceof IExplode &&
+							model.getLevel()[this.getElementPosition().getX()+i][ this.getElementPosition().getY()+j] != this){
+						model.getLevel()[this.getElementPosition().getX()+i][ this.getElementPosition().getY()+j].interaction(null, model, null);
 					}
-					model.getLevel()[this.getElementPosition().getX()+i][this.getElementPosition().getY()+j].getElementPosition().setTaken(false);
-					this.explodePos.setX(this.getElementPosition().getX()+i);
-					this.explodePos.setY(this.getElementPosition().getY()+j);
+						
+					Position explodePos = new Position();
+					explodePos.setTaken(true);
+					explodePos.setX(this.getElementPosition().getX()+i);
+					explodePos.setY(this.getElementPosition().getY()+j);
 					Diamond diamond = new Diamond();
-					diamond.getElementPosition().setX(this.getElementPosition().getX()+i);
-					diamond.getElementPosition().setY(this.getElementPosition().getY()+j);
+					diamond.getElementPosition().setTaken(true);
+					diamond.setElementPosition(explodePos);
+					model.setLevel(diamond , explodePos);
+				
+				
+				
 
-					model.setLevel(diamond, this.explodePos);
 				}
 			}
 		}
-		refreshArrayArrayPos(bag, model);
-		return arrayArrayPos;
-	}
 
-
-	private void refreshArrayArrayPos(BagOfPossiblePositions bag, Model model) {
-		this.arrayArrayPos.clear();
-		for (int k =-1; k<=1; k++){
-			for (int l = -1; l<=1; l++){		
-				if (isNotOutOfBounds(model,k, l)){
-					if(model.getLevel()[this.getElementPosition().getX()+k][this.getElementPosition().getX()+l] instanceof IFall){
-						if (((FallingElement) model.getLevel()[this.getElementPosition().getX()+k][this.getElementPosition().getX()+l]).canIStartToFall(null)&&
-								!(bag.getPosition()[k][l].isTaken())){
-							ArrayList<Position> pos = new ArrayList<Position>();
-							pos.add(bag.getPosition()[k][l]);
-							bag.getPosition()[k][l].setTaken(true);
-							this.arrayArrayPos.add(pos);
-						}
-					}
-				}
-			}
-		}
 	}
 
 
 
-	public void move(ArrayList<Position> position, Model model, Direction direction, BagOfPossiblePositions bag) {
+
+
+
+
+	public void move( Model model, Direction direction) {
 
 		if (this.canImove(directionmonstre[0], model, elementPosition)){
 
 			int [] intDir=convertDirectionIntoInt(directionmonstre[0]);
-			moveMonster(model, intDir, bag);
+			moveMonster(model, intDir);
 			rotationTab(3);
 
 
@@ -110,7 +96,7 @@ public class Monster extends Element implements IMotion, IExplode{
 
 			int [] intDir=convertDirectionIntoInt(directionmonstre[1]);
 
-			moveMonster(model, intDir, bag);	
+			moveMonster(model, intDir);	
 		}
 
 
@@ -118,31 +104,31 @@ public class Monster extends Element implements IMotion, IExplode{
 		else if (canImove(directionmonstre[2], model, elementPosition)){
 
 			int [] intDir=convertDirectionIntoInt(directionmonstre[2]);
-			moveMonster(model, intDir, bag);
+			moveMonster(model, intDir);
 			rotationTab(1);
 		}
 		else if (canImove(directionmonstre[3], model, elementPosition)){
 			int [] intDir=convertDirectionIntoInt(directionmonstre[3]);
-			moveMonster(model, intDir, bag);
+			moveMonster(model, intDir);
 			rotationTab(2);
 		}
 
 	}
 
-	private void moveMonster(Model model, int[] intDir, BagOfPossiblePositions bag) {
+	private void moveMonster(Model model, int[] intDir) {
 		model.getLevel()[elementPosition.getX()][elementPosition.getY()]=nothing;
 		model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]=this;			
 		this.getElementPosition().setX(this.getElementPosition().getX()+intDir[0]);
 		this.getElementPosition().setY(this.getElementPosition().getY()+intDir[1]);
-		checkPlayer(model, bag);
+		checkPlayer(model);
 	}
 
-	private void checkPlayer(Model model, BagOfPossiblePositions bag) {
+	private void checkPlayer(Model model) {
 		// TODO Auto-generated method stub
 		for (int i = -1 ; i <=1; i=i+2){
 			if (isNotOutOfBounds(model, this.getElementPosition().getX()+i, this.getElementPosition().getY())){
 				if (model.getLevel()[this.getElementPosition().getX()+i][this.getElementPosition().getY()] instanceof Player){
-					this.explode(bag, model);
+					this.explode(model);
 				}
 
 			}
@@ -162,7 +148,7 @@ public class Monster extends Element implements IMotion, IExplode{
 			if (model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]instanceof Nothing ||
 					model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]]instanceof Player){
 
-				return(model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]].interaction(null, model, null, null));
+				return(model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]].interaction(null, model, null));
 			}
 
 		}				

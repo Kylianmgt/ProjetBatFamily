@@ -16,7 +16,7 @@ import element.Monster;
 import element.Nothing;
 
 public class MonsterTest {
-	IModel map;
+	Model map;
 	Nothing nothing;
 	ArrayList<Position> position = new ArrayList<Position>();
 	Direction[] directionmonstre = {Direction.LEFT,Direction.UP,Direction.RIGHT,Direction.DOWN};
@@ -40,7 +40,7 @@ public class MonsterTest {
 		monster.getElementPosition().setX(2);
 		monster.getElementPosition().setY(2);
 		
-		monster.explode(new BagOfPossiblePositions(5, 5),map);
+		monster.explode(map);
 		assertEquals(Diamond.class, map.getLevel()[1][1].getClass());
 		assertEquals(Diamond.class, map.getLevel()[1][2].getClass());
 		assertEquals(Diamond.class, map.getLevel()[1][3].getClass());

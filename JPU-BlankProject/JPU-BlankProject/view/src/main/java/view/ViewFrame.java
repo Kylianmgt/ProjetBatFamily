@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import contract.IController;
 import contract.IModel;
@@ -16,13 +17,18 @@ import contract.IModel;
  *
  * @author Jean-Aymeric Diet
  */
-class ViewFrame extends JFrame implements KeyListener {
+public class ViewFrame extends JFrame  {
 
 	/** The model. */
 	private IModel						model;
 
 	/** The controller. */
 	private IController				controller;
+	private ViewPanel pane = new ViewPanel(this);
+	public ViewPanel getPane() {
+		return pane;
+	}
+
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -697358409737458175L;
 
@@ -125,12 +131,12 @@ class ViewFrame extends JFrame implements KeyListener {
 	 * @param model
 	 *          the model
 	 */
-	private void buildViewFrame(final IModel model) {
+	public void buildViewFrame(final IModel model) {
 		this.setModel(model);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
-		this.addKeyListener(this);
-		this.setContentPane(new ViewPanel(this));
+		
+		this.setContentPane(pane);
 		this.setSize(1000, 1000);
 		this.setLocationRelativeTo(null);
 	}
@@ -144,31 +150,12 @@ class ViewFrame extends JFrame implements KeyListener {
 	public void printMessage(final String message) {
 		JOptionPane.showMessageDialog(null, message);
 	}
+	
 
 	/*
 	 * (non-Javadoc)
 	 *
 	 * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
 	 */
-	public void keyTyped(final KeyEvent e) {
 
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
-	 */
-	public void keyPressed(final KeyEvent e) {
-		this.getController().Direction(View.keyCodeToControllerOrder(e.getKeyCode()));
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
-	 */
-	public void keyReleased(final KeyEvent e) {
-
-	}
 }

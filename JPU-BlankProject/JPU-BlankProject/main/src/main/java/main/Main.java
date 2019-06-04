@@ -27,6 +27,7 @@ public abstract class Main {
      	Model model = new Model();
         View view = new View(model);
         Controller controller = new Controller(view, model);
+        view.getViewFrame().addKeyListener(controller);
        // view.addListener(controller);
         //model.addObserver(view);
 
