@@ -11,10 +11,10 @@ import element.Element;
 import element.Monster;
 import element.Player;
 import element.Portal;
-import entity.EntityPosition;
+import entity.EntityPosition;;
 
 
-public  class Model extends Observable implements IModel{
+public class Model extends Observable implements IModel{
 	
 	private boolean portalAppeared= false;
 	private Player player; 

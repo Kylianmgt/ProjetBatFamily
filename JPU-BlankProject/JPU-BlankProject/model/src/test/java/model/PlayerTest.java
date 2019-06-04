@@ -29,6 +29,7 @@ public class PlayerTest {
 	@Test
 	public void testMoveGauche() {
 		map2.getLevel()[1][0]=player;
+		map2.getLevel()[0][0]= new Nothing();
 		player.getElementPosition().setX(1);
 		player.getElementPosition().setY(0);
 		player.move( map2, Direction.LEFT);
@@ -42,11 +43,12 @@ public class PlayerTest {
 	@Test
 	public void testMoveDroite() {
 		map2.getLevel()[0][0]=player;
+		map2.getLevel()[1][0]=new Nothing();
 		player.getElementPosition().setX(0);
 		player.getElementPosition().setY(0);
 		player.move( map2, Direction.RIGHT);
-		assertEquals(map2.getLevel()[0][0].getClass(), Nothing.class);
-		assertEquals(map2.getLevel()[1][0].getClass(), player.getClass());
+		assertEquals(Nothing.class, map2.getLevel()[0][0].getClass());
+		assertEquals( player.getClass(), map2.getLevel()[1][0].getClass());
 
 
 	}
@@ -95,16 +97,8 @@ public class PlayerTest {
 		player.getElementPosition().setY(map2.getY()-1);
 		assertEquals(player.canIMove(Direction.DOWN, map2), false);
 	}
-	@Test
-	public void testCanIMoveGaucheWhenGaucheIsEmpty(){
-		this.map2.getLevel()[0][0]=new Nothing();
-		this.map2.getLevel()[1][0]=new Player();
-		player.getElementPosition().setX(1);
-		player.getElementPosition().setY(0);
-		assertEquals(player.canIMove(Direction.LEFT,map2), true);
 
 
-	}
 	@Test
 	public void testCanIMoveGaucheWhenGaucheIsDirt(){
 		this.map2.getLevel()[0][0]=new Dirt();
@@ -115,23 +109,14 @@ public class PlayerTest {
 
 
 	}
-	@Test
-	public void testCanIMoveDroiteWhenDroiteIsEmpty(){
-		this.map.getLevel()[0][1]=new Nothing();
-		this.map.getLevel()[0][0]=new Player();
-		player.getElementPosition().setX(0);
-		player.getElementPosition().setY(0);
-		assertEquals(player.canIMove(Direction.RIGHT,map), true);
 
-
-	}
 	@Test
 	public void testCanIMoveDroiteWhenDroiteIsDirt(){
-		this.map.getLevel()[0][1]=new Dirt();
+		this.map.getLevel()[1][0]=new Dirt();
 		this.map.getLevel()[0][0]=new Player();
 		player.getElementPosition().setX(0);
 		player.getElementPosition().setY(0);
-		assertEquals(player.canIMove(Direction.RIGHT,map), true);
+		assertEquals( true, player.canIMove(Direction.RIGHT,map));
 
 
 	}
@@ -175,5 +160,5 @@ public class PlayerTest {
 
 
 	}
- 
+
 }

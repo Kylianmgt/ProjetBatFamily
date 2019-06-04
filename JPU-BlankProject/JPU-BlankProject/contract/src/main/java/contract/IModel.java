@@ -8,7 +8,6 @@ import element.Element;
 import element.Monster;
 import element.Player;
 import entity.EntityPosition;
-
 public interface IModel {
 
 	
