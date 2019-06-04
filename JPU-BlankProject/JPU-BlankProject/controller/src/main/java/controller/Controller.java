@@ -16,13 +16,13 @@ import element.Monster;
 
 
 public class Controller implements  KeyListener, ISlip{
-	private final static int SPEED=150;
+	private final static int SPEED=200;
 	private Model model;
 	private Direction directionPlayer=Direction.NO;
 	private ArrayList<ArrayList<Position>> listIFall;
 	private ArrayList<Position> listIFall2;
 	private View view;
-	private final int scoreWin = 5;
+	private final int scoreWin = 10;
 
 	public Controller(View view, Model model){
 		this.view = view;
@@ -58,7 +58,6 @@ public class Controller implements  KeyListener, ISlip{
 			try {
 				Thread.sleep(SPEED);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			refreshIFallArray();	
@@ -117,7 +116,7 @@ public class Controller implements  KeyListener, ISlip{
 
 	}
 
-	private void makeEmFall() {
+	//private void makeEmFall() {
 
 
 
@@ -156,7 +155,7 @@ public class Controller implements  KeyListener, ISlip{
 		}
 		 */
 
-	}
+	//}
 
 
 
