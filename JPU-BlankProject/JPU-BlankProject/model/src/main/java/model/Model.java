@@ -11,7 +11,7 @@ import element.Element;
 import element.Monster;
 import element.Player;
 import element.Portal;
-import entity.EntityPosition;;
+import entity.EntityPosition;
 
 
 public class Model extends Observable implements IModel{
@@ -21,7 +21,7 @@ public class Model extends Observable implements IModel{
 	private Portal portal;
 	private final int X= 25;
 	private final int Y= 25;
-	private int level= 5;
+	private int level= 2;
 	private ArrayList<EntityPosition> Tab;
 	private Element[][] Map;
 	private ElementFactory factory;
