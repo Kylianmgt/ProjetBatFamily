@@ -20,3 +20,7 @@ Erreur Cycle
 window --> preferences --> java --> compiler --> Building --> circular dependencies (changer en Warning).
 
 
+Notre branche qui correspond au jeu jouable est "view +game"
+
+
+
