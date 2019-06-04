@@ -34,8 +34,7 @@ public class ViewFrame extends JFrame  {
 		BorderLayout layout = new BorderLayout();
 		this.setLayout(layout);
 		
-		this.setSize(50, 50);
-		this.setExtendedState(MAXIMIZED_VERT);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 	
 		this.setUndecorated(true);
 		this.buildViewFrame(model);
