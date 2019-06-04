@@ -8,13 +8,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import Utility.Direction;
 
 public class ControllerTest {
 	
-	private Direction directionPlayer=Direction.NO;
-	
-
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -33,7 +29,7 @@ public class ControllerTest {
 
 	@Test
 	public void testKeyPressedLeft() {
-	 String expected = "LEFT";
+		fail("Not yet implemented");
 	 
 	}
 	@Test
