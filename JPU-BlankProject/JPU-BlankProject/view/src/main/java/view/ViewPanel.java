@@ -9,14 +9,7 @@ import java.util.Observer;
 import javax.swing.JPanel;
 
 import contract.IModel;
-import element.Player;
-import model.Model;
 
-/**
- * The Class ViewPanel.
- *
- * @author Jean-Aymeric Diet
- */
 class ViewPanel extends JPanel implements Observer {
 	private IModel model;
 
@@ -60,44 +53,24 @@ class ViewPanel extends JPanel implements Observer {
 		this.viewFrame = viewFrame;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
-	 */
 	public void update(final Observable arg0, final Object arg1) {
 		this.repaint();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-	 */
 	@Override
 	protected void paintComponent(final Graphics graphics) {
 		graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
 		graphics.setFont(new Font("impact", Font.BOLD, 45));
 		graphics.setColor(new Color(255,0,0));
-		//graphics.drawString(this.getViewFrame().getModel().getHelloWorld().getMessage(), 10, 20);
 		
-		
-		
-		
-			for(int x=0;x<25;x++){
-		   
+			for(int x=0;x<25;x++){		   
 			for (int y=0;y<25;y++){
-				graphics.drawImage((this.getViewFrame().getModel().getLevel()[x][y].getSprite().getImage()), x*this.getWidth()/25, y*this.getHeight()/25,this.getWidth()/25, this.getHeight()/25, this);
-				if (x==24 && y == 1){
-					
-					 
-					graphics.drawString(intToString(model.getPlayerPosition().getScore()),  (x*this.getWidth()/25)-5,  (y*this.getHeight()/25)+30);
-				}
+				graphics.drawImage((this.getViewFrame().getModel().getLevel()[x][y].getSprite().getImage()), x*this.getWidth()/24, y*this.getHeight()/24,this.getWidth()/24, this.getHeight()/24, this);
 				
-			}
-			
+					
+							
+			}			
 		}
-		
-
+			graphics.drawString(intToString(model.getPlayerPosition().getScore()),  (24*this.getWidth()/25),  (1*this.getHeight()/25)+5);
 	}
 }

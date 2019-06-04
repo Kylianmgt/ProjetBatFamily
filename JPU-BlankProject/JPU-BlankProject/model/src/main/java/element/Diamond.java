@@ -8,7 +8,6 @@ public class Diamond extends FallingElement implements IFall{
 
 	public Diamond(){
 		super();
-		//this.Sprite='+';
 		this.sprite = new Sprite("/diamond.png");
 	}
 	@Override

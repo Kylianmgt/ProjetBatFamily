@@ -1,10 +1,6 @@
 package element;
 
 import java.util.ArrayList;
-import Behaviors.IFall;
-
-
-import Behaviors.IBlock;
 import Behaviors.IExplode;
 import Behaviors.IMotion;
 import Utility.Direction;
@@ -19,7 +15,6 @@ public class Player extends Element implements IMotion, IExplode{
 	int score = 0;
 	public Player(){
 		super();
-		//this.Sprite='☻';
 		this.sprite = new Sprite("/player.png");
 	}
 
@@ -39,7 +34,6 @@ public class Player extends Element implements IMotion, IExplode{
 
 	@Override
 	public void move( Model model, Direction direction) {
-		// TODO Auto-generated method stub
 		this.initialPosition=this.getElementPosition();
 		int [] vecteurDir=convertDirectionIntoInt(direction);
 		ArrayList<Direction> amIOnALedge = amIOnALedge(model);
@@ -59,9 +53,6 @@ public class Player extends Element implements IMotion, IExplode{
 				}else{
 					return;
 				}
-
-
-
 			}else{
 				return;
 			}		
@@ -69,13 +60,7 @@ public class Player extends Element implements IMotion, IExplode{
 		this.getElementPosition().setX(this.getElementPosition().getX()+vecteurDir[0]);
 		this.getElementPosition().setY(this.getElementPosition().getY()+vecteurDir[1]);
 
-
-
 	}
-
-
-
-
 
 	public ArrayList<Direction> amIOnALedge(IModel model){
 		ArrayList<Direction> ledges=new ArrayList<Direction>();
@@ -87,37 +72,22 @@ public class Player extends Element implements IMotion, IExplode{
 		}
 		if (this.getElementPosition().getY()==0){
 			ledges.add(Direction.UP);
-
 		}
 		if (this.getElementPosition().getY()==model.getY()-1){
 			ledges.add(Direction.DOWN);
 		}
 		return ledges;
-
-
 	}
 
 	public boolean canIMove(Direction direction, IModel model) {
-		// TODO Auto-generated method stub
-
-
 		int[] intDir = convertDirectionIntoInt(direction);
 		ArrayList<Direction> amIOnALedge=amIOnALedge( model);
-
 		if (amIOnALedge.contains(direction)){
 			return false;
-
 		}else{
-
 			return (model.getLevel()[this.getElementPosition().getX()+intDir[0]][this.getElementPosition().getY()+intDir[1]] instanceof Nothing ||
 					model.getLevel()[this.getElementPosition().getX()+intDir[0]][this.getElementPosition().getY()+intDir[1]] instanceof Dirt);
-
-
-
-
-
 		}
-
 	}
 
 	@Override
@@ -126,15 +96,12 @@ public class Player extends Element implements IMotion, IExplode{
 		return true;
 	}
 
-
 	@Override
 	public void explode( Model model) {
-		
-		model.setLevel(nothing, this.getElementPosition());
+				model.setLevel(nothing, this.getElementPosition());
 		this.getElementPosition().setTaken(false);
 		System.out.println("GameOver =(");
 		System.exit(0);
-		// TODO Auto-generated method stub
 
 	}
 

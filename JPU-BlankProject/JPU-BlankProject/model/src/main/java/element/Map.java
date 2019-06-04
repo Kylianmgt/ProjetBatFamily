@@ -11,11 +11,9 @@ public class Map {
 				this.Niveau[i][j]=new Nothing();
 			}
 			this.Niveau[2][2] = new Dirt();
-			
+		}	
 		}
-	}
-	
-	public Element[][] getLevel() {
+		public Element[][] getLevel() {
 		return Niveau;
 	}
 	public void setLevel(Element[][] niveau) {

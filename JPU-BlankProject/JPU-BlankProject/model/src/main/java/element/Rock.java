@@ -10,12 +10,9 @@ import Behaviors.IFall;
 import Utility.Direction;
 import model.Model;
 
-
-
 public class Rock extends FallingElement implements IBePushed, IFall{
 	public Rock(){
 		super();
-		//this.Sprite='O';
 		this.sprite = new Sprite("/rock.png");
 	}
 	@Override
@@ -36,8 +33,5 @@ public class Rock extends FallingElement implements IBePushed, IFall{
 
 		return false;
 	}
-
-
-
 
 }

@@ -18,9 +18,6 @@ public class FallingElement extends Element implements IFall, ISlip {
 
 	private boolean AmIFalling= false;
 
-
-
-
 	@Override
 	public boolean canIStartToFall(Model model) {
 		this.canISlip(model);
@@ -58,9 +55,6 @@ public class FallingElement extends Element implements IFall, ISlip {
 		posInitiale.setY(this.getElementPosition().getY());
 		posInitiale.setTaken(this.getElementPosition().isTaken());
 
-
-
-
 		if (canIContinueToFallDown(model)){
 			this.fallDown(model);
 		}else {
@@ -83,17 +77,10 @@ public class FallingElement extends Element implements IFall, ISlip {
 			}else{
 				this.setAmIFalling(false);
 				return false;
-
 			}
 		}
-
-
 		return true;
-
 	}
-
-
-
 
 	@Override
 	public void canISlip(Model model) {
@@ -102,12 +89,8 @@ public class FallingElement extends Element implements IFall, ISlip {
 			if (model.getLevel()[this.getElementPosition().getX()][this.getElementPosition().getY()+1]instanceof ISlip){
 				this.checkLeftAndRightIfSlip(model);
 			}
-
 		}
-
-
-
-	}
+}
 
 	private void checkLeftAndRightIfSlip(Model model) {
 
@@ -123,13 +106,8 @@ public class FallingElement extends Element implements IFall, ISlip {
 						direction.add(Direction.RIGHT);
 					}
 				}
-
 			}
-
-
 		}
-
-
 	}
 
 	@Override
@@ -180,12 +158,7 @@ public class FallingElement extends Element implements IFall, ISlip {
 		model.setLevel(nothing,this.getElementPosition());
 		this.getElementPosition().setX(this.getElementPosition().getX()+VectDir[0]);
 		model.setLevel(this, this.getElementPosition());
-
-
-
-
 	}
-
 
 	public boolean isAmIFalling() {
 		return AmIFalling;
@@ -194,6 +167,4 @@ public class FallingElement extends Element implements IFall, ISlip {
 	public void setAmIFalling(boolean amIFalling) {
 		AmIFalling = amIFalling;
 	}
-
-
 }

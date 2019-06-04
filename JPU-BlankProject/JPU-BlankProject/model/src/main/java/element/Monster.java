@@ -22,8 +22,7 @@ public class Monster extends Element implements IMotion, IExplode{
 		this.directionmonstre[1]=Direction.UP;
 		this.directionmonstre[2]=Direction.RIGHT;
 		this.directionmonstre[3]=Direction.DOWN;
-		
-
+	
 	}
 
 	public Direction[] getDirectionmonstre() {
@@ -42,10 +41,6 @@ public class Monster extends Element implements IMotion, IExplode{
 @Override
 	public void explode(Model model) {
 	
-		
-		
-	
-		
 		for (int i =-1; i<=1; i++){
 			for (int j = -1; j<=1; j++){
 				if (isNotOutOfBounds(model, this.getElementPosition().getX()+i , this.getElementPosition().getY()+j)){
@@ -62,21 +57,12 @@ public class Monster extends Element implements IMotion, IExplode{
 					diamond.getElementPosition().setTaken(true);
 					diamond.setElementPosition(explodePos);
 					model.setLevel(diamond , explodePos);
-				
-				
-				
-
+		
 				}
 			}
 		}
 
 	}
-
-
-
-
-
-
 
 	public void move( Model model, Direction direction) {
 
@@ -86,11 +72,7 @@ public class Monster extends Element implements IMotion, IExplode{
 			moveMonster(model, intDir);
 			rotationTab(3);
 
-
-
 		}
-
-
 		else if (canImove(directionmonstre[1], model, elementPosition)){
 
 
@@ -98,8 +80,6 @@ public class Monster extends Element implements IMotion, IExplode{
 
 			moveMonster(model, intDir);	
 		}
-
-
 
 		else if (canImove(directionmonstre[2], model, elementPosition)){
 
@@ -130,18 +110,14 @@ public class Monster extends Element implements IMotion, IExplode{
 				if (model.getLevel()[this.getElementPosition().getX()+i][this.getElementPosition().getY()] instanceof Player){
 					this.explode(model);
 				}
-
 			}
 			if (isNotOutOfBounds(model, this.getElementPosition().getX(), this.getElementPosition().getY()+i)){
 
 			}
 		}
-
 	}
 
 	public boolean canImove( Direction directionactuel, Model model, Position position){
-
-
 
 		int [] intDir = convertDirectionIntoInt(directionactuel);
 		if (isNotOutOfBounds(model, elementPosition.getX()+intDir[0], elementPosition.getY()+intDir[1])){	
@@ -150,12 +126,8 @@ public class Monster extends Element implements IMotion, IExplode{
 
 				return(model.getLevel()[elementPosition.getX()+intDir[0]][elementPosition.getY()+intDir[1]].interaction(null, model, null));
 			}
-
 		}				
-
-
 		return false;
-
 	}
 
 	private void rotationTab(int amount){
@@ -167,8 +139,5 @@ public class Monster extends Element implements IMotion, IExplode{
 			directionmonstre[3]=temp;
 		}
 	}
-
-
-
 }
 

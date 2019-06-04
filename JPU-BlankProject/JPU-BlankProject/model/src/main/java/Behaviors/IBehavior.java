@@ -1,7 +1,5 @@
 package Behaviors;
 
-
-
 import Utility.Direction;
 import element.Player;
 import model.Model;

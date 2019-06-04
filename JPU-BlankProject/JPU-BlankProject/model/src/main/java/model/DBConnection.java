@@ -4,25 +4,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * The Class DBConnection.
- *
- * @author Jean-Aymeric Diet
- */
 final class DBConnection {
 	/** The instance. */
 	private static DBConnection	INSTANCE	= null;
-
 	/** The connection. */
 	private Connection					connection;
-
 	/**
 	 * Instantiates a new DB connection.
 	 */
 	private DBConnection() {
 		this.open();
 	}
-
 	/**
 	 * Gets the single instance of DBConnection.
 	 *
@@ -34,7 +26,6 @@ final class DBConnection {
 		}
 		return DBConnection.INSTANCE;
 	}
-
 	/**
 	 * Open.
 	 *

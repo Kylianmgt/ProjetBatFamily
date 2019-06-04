@@ -2,34 +2,18 @@ package model;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
-import entity.Entity;
 import entity.EntityPosition;
-import entity.EntityResult;
-import model.DBConnection;
-
-
-
 
 public class DAOLevel extends DAOEntity<EntityPosition>{
-
-
-
-
-	
 	
 	public DAOLevel(final Connection connection) throws SQLException {
 		super(connection);
-		
 		}
-	
-	
-	@Override
+		@Override
 	public ArrayList<EntityPosition> find( final int id_level){
 		
 		ArrayList<EntityPosition> Tab = new ArrayList<EntityPosition>();
@@ -51,21 +35,11 @@ public class DAOLevel extends DAOEntity<EntityPosition>{
 		return null;
 	}
 
-	
-	
-	
-	
-	
-	
 	@Override
 	public boolean create(EntityPosition entity) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-
-
-
 
 	@Override
 	public boolean delete(EntityPosition entity) {
@@ -73,27 +47,18 @@ public class DAOLevel extends DAOEntity<EntityPosition>{
 		return false;
 	}
 
-
-
-
-
 	@Override
 	public boolean update(EntityPosition entity) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-
-
-
-
 	@Override
 	public EntityPosition find(String code) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-  
-}
+  }
 
 
 

@@ -2,30 +2,15 @@ package view;
 
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
-import java.awt.LayoutManager;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import contract.IController;
 import contract.IModel;
-import element.Player;
 
-/**
- * The Class ViewFrame.
- *
- * @author Jean-Aymeric Diet
- */
 public class ViewFrame extends JFrame  {
 
 	/** The model. */
 	private IModel						model;
-
-	/** The controller. */
-	private IController				controller;
 	private ViewPanel pane ;
 	public ViewPanel getPane() {
 		return pane;
@@ -45,6 +30,9 @@ public class ViewFrame extends JFrame  {
 	public ViewFrame(final IModel model) throws HeadlessException {
 		
 		this.pane = new ViewPanel(this, model);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+	
+		this.setUndecorated(true);
 		this.buildViewFrame(model);
 	}
 
@@ -92,22 +80,12 @@ public class ViewFrame extends JFrame  {
 	}
 
 	/**
-	 * Gets the controller.
-	 *
-	 * @return the controller
-	 */
-	private IController getController() {
-		return this.controller;
-	}
-
-	/**
 	 * Sets the controller.
 	 *
 	 * @param controller
 	 *          the new controller
 	 */
 	protected void setController(final IController controller) {
-		this.controller = controller;
 	}
 
 	/**
@@ -138,28 +116,16 @@ public class ViewFrame extends JFrame  {
 	public void buildViewFrame(final IModel model) {
 		this.setModel(model);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(true);
+		this.setResizable(false);
 
 		this.setContentPane(pane);
-		this.setSize(1000, 1000);
+	
+	
+		
 		this.setLocationRelativeTo(null);
 	}
 
-	/**
-	 * Prints the message.
-	 *
-	 * @param message
-	 *          the message
-	 */
 	public void printMessage(final String message) {
 		JOptionPane.showMessageDialog(null, message);
 	}
-	
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
-	 */
-
 }
