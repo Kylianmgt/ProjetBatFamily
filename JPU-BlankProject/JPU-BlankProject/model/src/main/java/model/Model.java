@@ -27,7 +27,7 @@ public  class Model extends Observable implements IModel{
 	private Portal portal;
 	private final int X= 25;
 	private final int Y= 25;
-	private int level= 1;
+	private int level= 5;
 	private ArrayList<EntityPosition> Tab;
 	private Element[][] Map;
 	private ElementFactory factory;

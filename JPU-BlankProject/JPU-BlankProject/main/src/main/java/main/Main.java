@@ -5,6 +5,7 @@
 package main;
 
 
+import contract.IModel;
 import controller.Controller;
 import model.Model;
 import view.View;

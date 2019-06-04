@@ -6,6 +6,7 @@ import java.util.Observable;
 import Utility.Position;
 import element.Element;
 import element.Monster;
+import element.Player;
 import entity.EntityPosition;
 
 public interface IModel {
@@ -62,7 +63,7 @@ public interface IModel {
 	/* (non-Javadoc)
 	 * @see model.IModel#getPlayerPosition()
 	 */
-	Element getPlayerPosition();
+	Player getPlayerPosition();
 
 	/* (non-Javadoc)
 	 * @see model.IModel#getMap()

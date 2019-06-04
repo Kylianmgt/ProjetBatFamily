@@ -2,6 +2,7 @@ package view;
 
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
+import java.awt.LayoutManager;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -11,6 +12,7 @@ import javax.swing.JPanel;
 
 import contract.IController;
 import contract.IModel;
+import element.Player;
 
 /**
  * The Class ViewFrame.
@@ -24,7 +26,7 @@ public class ViewFrame extends JFrame  {
 
 	/** The controller. */
 	private IController				controller;
-	private ViewPanel pane = new ViewPanel(this);
+	private ViewPanel pane ;
 	public ViewPanel getPane() {
 		return pane;
 	}
@@ -41,6 +43,8 @@ public class ViewFrame extends JFrame  {
 	 *           the headless exception
 	 */
 	public ViewFrame(final IModel model) throws HeadlessException {
+		
+		this.pane = new ViewPanel(this, model);
 		this.buildViewFrame(model);
 	}
 
@@ -134,8 +138,8 @@ public class ViewFrame extends JFrame  {
 	public void buildViewFrame(final IModel model) {
 		this.setModel(model);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(false);
-		
+		this.setResizable(true);
+
 		this.setContentPane(pane);
 		this.setSize(1000, 1000);
 		this.setLocationRelativeTo(null);
