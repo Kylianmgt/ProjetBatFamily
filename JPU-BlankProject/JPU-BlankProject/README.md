@@ -11,3 +11,9 @@ Erreur Maven. java.lang.classNotFound --> aller dans project editor--> Buil Path
 Erreur Cycle window --> preferences --> java --> compiler --> Building --> circular dependencies (changer en Warning).
 
 Notre branche qui correspond au jeu jouable est "view +game"
+
+
+Si il y a un problème lors du build compile, faire une succession de build compile/update project jussqu'a que tous soit en SUCCESS
+
+
+
