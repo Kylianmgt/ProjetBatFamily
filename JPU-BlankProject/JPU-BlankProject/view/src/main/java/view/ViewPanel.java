@@ -65,7 +65,7 @@ class ViewPanel extends JPanel implements Observer {
 		
 			for(int x=0;x<25;x++){		   
 			for (int y=0;y<25;y++){
-				graphics.drawImage((this.getViewFrame().getModel().getLevel()[x][y].getSprite().getImage()), x*this.getWidth()/24, y*this.getHeight()/24,this.getWidth()/24, this.getHeight()/24, this);
+				graphics.drawImage((this.getViewFrame().getModel().getLevel()[x][y].getSprite().getImage()), (x*this.getWidth()/25)+1, (y*this.getHeight()/25)+1,(this.getWidth()/25)+1, (this.getHeight()/25)+1, this);
 				
 					
 							

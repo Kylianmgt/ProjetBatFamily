@@ -101,6 +101,12 @@ public class Player extends Element implements IMotion, IExplode{
 				model.setLevel(nothing, this.getElementPosition());
 		this.getElementPosition().setTaken(false);
 		System.out.println("GameOver =(");
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.exit(0);
 
 	}
