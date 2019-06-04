@@ -1,0 +1,1 @@
+SELECT element.Diminutif AS D , position.x AS X, position.y AS Y FROM position JOIN element ON position.id_element = element.ID WHERE position.id_map = id_level
