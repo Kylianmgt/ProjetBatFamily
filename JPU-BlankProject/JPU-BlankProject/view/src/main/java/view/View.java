@@ -1,82 +1,94 @@
 package view;
 
-import java.awt.event.KeyEvent;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.TextArea;
+import java.awt.TextField;
+import java.awt.event.KeyListener;
+import java.awt.image.ImageObserver;
+import java.text.AttributedCharacterIterator;
+import java.util.Observable;
+import java.util.Observer;
 
-import javax.swing.SwingUtilities;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-import contract.ControllerOrder;
-import contract.IController;
 import contract.IModel;
 import contract.IView;
+import controller.Controller;
+import element.Element;
+import view.sprites.Graph;
 
-/**
- * The Class View.
- *
- * @author Jean-Aymeric Diet
- */
-public final class View implements IView, Runnable {
-
-	/** The frame. */
-	private final ViewFrame viewFrame;
-
-	/**
-	 * Instantiates a new view.
-	 *
-	 * @param model
-	 *          the model
-	 */
-	public View(final IModel model) {
-		this.viewFrame = new ViewFrame(model);
-		SwingUtilities.invokeLater(this);
+public class View implements IView, Observer{
+	IModel map;
+	JFrame fenetre = new JFrame();
+	JPanel panel  = new JPanel();
+	JLabel text = new JLabel();
+	
+	public View (IModel map){
+		this.map=map;
+		
+		fenetre.setTitle("BoulderDash");
+		fenetre.setVisible(true);
+		fenetre.add(panel);
+		fenetre.setDefaultCloseOperation(3);
+		fenetre.setSize(500, 500);
+		panel.setLayout(new FlowLayout());
+		fenetre.setLocationRelativeTo(null);
 	}
-
-	/**
-	 * Key code to controller order.
-	 *
-	 * @param keyCode
-	 *          the key code
-	 * @return the controller order
-	 */
-	protected static ControllerOrder keyCodeToControllerOrder(final int keyCode) {
-		switch (keyCode) {
-			case KeyEvent.VK_G:
-				return ControllerOrder.English;
-			case KeyEvent.VK_F:
-				return ControllerOrder.Francais;
-			case KeyEvent.VK_D:
-				return ControllerOrder.Deutsch;
-			case KeyEvent.VK_I:
-				return ControllerOrder.Indonesia;
-			default:
-				return ControllerOrder.English;
+	
+	public void refreshView() {
+		String str="";
+		for (int i = 0; i<map.getX();i++){
+			for (int j = 0 ; j<map.getY(); j++){
+				System.out.print(map.getLevel()[j][i].getSprite());
+				str+=map.getLevel()[j][i].getSprite();
+				
+			}
+			System.out.println();
+		
+			str+='\n';
 		}
+		System.out.println();
+		this.panel.remove(text);
+		this.text.setText(str);
+		this.panel.add(text);
+	
+		
+		
+		
+	}
+	public void addListener(KeyListener listener){
+		fenetre.addKeyListener(listener);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IView#printMessage(java.lang.String)
-	 */
-	public void printMessage(final String message) {
-		this.viewFrame.printMessage(message);
+	@Override
+	public void followMyplayer() {
+		// TODO Auto-generated method stub
+		
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Runnable#run()
-	 */
-	public void run() {
-		this.viewFrame.setVisible(true);
+	@Override
+	public void printMessage(String message) {
+		// TODO Auto-generated method stub
+		
 	}
 
-	/**
-	 * Sets the controller.
-	 *
-	 * @param controller
-	 *          the new controller
-	 */
-	public void setController(final IController controller) {
-		this.viewFrame.setController(controller);
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		this.refreshView();
+		
 	}
+
+	
+
+	
+
 }
